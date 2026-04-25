@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>経理インテグレート | IPO準備・経理内製化・内部監査</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;600;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Cormorant:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================================
+           RESET & BASE
+        ============================================================ */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --green: #00622f;
+            --olive: #7e7b56;
+            --text: #333333;
+            --white: #ffffff;
+        }
+
+        html { font-size: 16px; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--text);
+            background: #fff;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* ============================================================
+           ARROW ICON
+        ============================================================ */
+        .arrow-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+        .arrow-icon svg { width: 100%; height: 100%; }
+
+        .arrow-icon-lg {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+        }
+        .arrow-icon-lg svg { width: 100%; height: 100%; }
+
+        /* ============================================================
+           BUTTONS
+        ============================================================ */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--green);
+            color: #fff;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 0 32px;
+            height: 66px;
+            min-width: 245px;
+            letter-spacing: 0.03em;
+            transition: opacity .2s;
+        }
+        .btn-primary:hover { opacity: .85; }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: transparent;
+            color: var(--green);
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 0 32px;
+            height: 66px;
+            min-width: 245px;
+            border: 1.5px solid var(--green);
+            letter-spacing: 0.03em;
+            transition: background .2s, color .2s;
+        }
+        .btn-outline:hover { background: var(--green); color: #fff; }
+
+        .btn-text {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--green);
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 2px;
+            transition: border-color .2s;
+        }
+        .btn-text:hover { border-color: var(--green); }
+
+        .btn-text-sm {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--green);
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /* ============================================================
+           SECTION TITLE (inner component)
+        ============================================================ */
+        .section-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-header-left {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .section-title-ja {
+            font-family: 'Zen Old Mincho', serif;
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--green);
+            line-height: 1.4;
+        }
+
+        .section-title-ja.weight-500 { font-weight: 500; }
+
+        .section-title-en {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Cormorant', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--olive);
+        }
+
+        .en-deco {
+            display: block;
+            width: 11px;
+            height: 12px;
+            background: var(--olive);
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+
+        /* ============================================================
+           HEADER
+        ============================================================ */
+        #header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            background: #fff;
+            height: 70px;
+        }
+
+        .header-inner {
+            max-width: 1440px;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+        }
+
+        .header-logo {
+            display: block;
+            width: 290px;
+            height: 40px;
+        }
+        .header-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: left center;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-right: 40px;
+        }
+
+        .header-nav a {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--green);
+            letter-spacing: 0.02em;
+        }
+        .header-nav a:hover { opacity: .7; }
+
+        .header-cta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--green);
+            color: #fff;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 0 28px;
+            height: 70px;
+            letter-spacing: 0.03em;
+            transition: opacity .2s;
+        }
+        .header-cta:hover { opacity: .85; }
+
+        /* ============================================================
+           FV SECTION
+        ============================================================ */
+        #fv {
+            position: relative;
+            min-height: 797px;
+            padding-top: 70px;
+            overflow: hidden;
+        }
+
+        .fv-bg {
+            position: absolute;
+            inset: 15px 0 0 80px;
+            background-size: cover;
+            background-position: center top;
+            border-radius: 0 0 50px 50px;
+        }
+
+        /* decorative exclude circles */
+        .fv-deco {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            z-index: 3;
+            pointer-events: none;
+        }
+        .fv-deco::before, .fv-deco::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: var(--green);
+        }
+        .fv-deco::before {
+            width: 50px; height: 50px;
+            top: 0; left: 0;
+        }
+        .fv-deco::after {
+            width: 30px; height: 30px;
+            top: 10px; left: 10px;
+            background: #fff;
+        }
+        .fv-deco-1 { left: 79px; top: calc(70px + 275px); }
+        .fv-deco-2 { left: 763px; bottom: 47px; }
+
+        .fv-content {
+            position: relative;
+            z-index: 2;
+            min-height: 727px;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .fv-panel {
+            background: #fff;
+            width: 763px;
+            min-height: 402px;
+            padding: 48px 48px 52px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .fv-copy {
+            margin-bottom: 28px;
+        }
+
+        .fv-copy-sub {
+            font-family: 'Zen Old Mincho', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--green);
+            letter-spacing: 0.05em;
+            line-height: 1.4;
+            padding-left: 10px;
+        }
+
+        .fv-copy-main {
+            font-family: 'Zen Old Mincho', serif;
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--green);
+            letter-spacing: 0.05em;
+            line-height: 1.4;
+        }
+
+        .fv-divider {
+            height: 1px;
+            background: var(--green);
+            margin-bottom: 24px;
+            width: 100%;
+        }
+
+        .fv-body {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--text);
+            line-height: 1.8;
+            padding-left: 24px;
+            margin-bottom: 32px;
+        }
+
+        .fv-buttons {
+            display: flex;
+            gap: 28px;
+            padding-left: 24px;
+        }
+
+        /* ============================================================
+           MESSAGE SECTION
+        ============================================================ */
+        #message {
+            position: relative;
+            padding: 120px 0 100px;
+            overflow: hidden;
+        }
+
+        .message-bg {
+            position: absolute;
+            top: 139px;
+            left: 0; right: 0; bottom: 0;
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+
+        .message-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 130px;
+        }
+
+        .message-section-header {
+            margin-bottom: 60px;
+        }
+
+        .message-content {
+            display: flex;
+            gap: 60px;
+            align-items: flex-start;
+        }
+
+        .message-left {
+            flex: 0 0 710px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message-quote {
+            font-family: 'Zen Old Mincho', serif;
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--green);
+            line-height: 1.4;
+            margin-bottom: 32px;
+        }
+
+        .message-divider {
+            height: 1px;
+            background: var(--green);
+            margin-bottom: 32px;
+        }
+
+        .message-body {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--text);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .message-body:last-of-type { margin-bottom: 0; }
+
+        .message-link-row {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 32px;
+        }
+
+        .message-right {
+            flex: 1;
+            position: relative;
+        }
+
+        .message-photo-wrap {
+            position: relative;
+        }
+
+        .message-photo {
+            width: 370px;
+            height: 524px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .message-name-card {
+            position: absolute;
+            bottom: 0;
+            left: -28px;
+            background: #fff;
+            padding: 18px 24px 20px;
+            width: 245px;
+        }
+
+        .message-name-row {
+            display: flex;
+            align-items: baseline;
+            gap: 14px;
+            margin-bottom: 4px;
+        }
+
+        .name-role {
+            font-family: 'Zen Old Mincho', serif;
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .name-jp {
+            font-family: 'Zen Old Mincho', serif;
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .name-divider {
+            height: 1px;
+            background: var(--text);
+            margin: 8px 0;
+        }
+
+        .name-en {
+            font-family: 'Cormorant', serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: #555;
+        }
+
+        /* ============================================================
+           REASONS SECTION
+        ============================================================ */
+        #reasons {
+            padding: 120px 0;
+            background: #fff;
+        }
+
+        .reasons-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 130px;
+        }
+
+        .reasons-title {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 80px;
+        }
+
+        .reasons-title .section-title-ja {
+            text-align: center;
+        }
+
+        .reasons-cards {
+            display: flex;
+            gap: 0;
+            justify-content: space-between;
+        }
+
+        .reason-card {
+            flex: 0 0 353px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .reason-number-wrap {
+            position: relative;
+            height: 240px;
+        }
+
+        .reason-number {
+            position: absolute;
+            bottom: calc(100% + 0px);
+            left: 19px;
+            font-family: 'Zen Old Mincho', serif;
+            font-size: 52px;
+            font-weight: 500;
+            color: var(--green);
+            line-height: 1;
+            z-index: 2;
+        }
+
+        .reason-img {
+            width: 353px;
+            height: 240px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .reason-text {
+            padding: 24px 0 0;
+            flex: 1;
+        }
+
+        .reason-heading {
+            font-family: 'Zen Old Mincho', serif;
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--green);
+            line-height: 1.4;
+            margin-bottom: 16px;
+        }
+
+        .reason-divider {
+            height: 1px;
+            background: var(--green);
+            margin-bottom: 16px;
+        }
+
+        .reason-body {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        /* ============================================================
+           SERVICE SECTION
+        ============================================================ */
+        #service {
+            padding-top: 120px;
+        }
+
+        .service-container {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .service-title {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 80px;
+            padding: 0 130px;
+        }
+
+        .service-rows {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-row {
+            display: flex;
+            min-height: 500px;
+        }
+
+        .service-image {
+            flex: 0 0 50%;
+            background-size: cover;
+            background-position: center;
+            min-height: 500px;
+        }
+
+        .service-text-area {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding: 60px 80px;
+        }
+
+        .service-text-inner {
+            width: 100%;
+        }
+
+        .service-heading {
+            font-family: 'Zen Old Mincho', serif;
+            font-size: 32px;
+            font-weight: 500;
+            color: var(--green);
+            line-height: 1.4;
+            margin-bottom: 24px;
+        }
+
+        .service-divider {
+            height: 1px;
+            background: var(--green);
+            margin-bottom: 24px;
+        }
+
+        .service-body {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--text);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        .service-body:last-of-type { margin-bottom: 0; }
+
+        .service-link-row {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 32px;
+        }
+
+        /* ============================================================
+           LINKS BANNER SECTION
+        ============================================================ */
+        #links {
+            background: var(--green);
+            padding: 120px 0;
+        }
+
+        .links-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 130px;
+        }
+
+        .links-grid {
+            display: flex;
+            gap: 20px;
+        }
+
+        .link-card {
+            flex: 1;
+            background: var(--green);
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px 0 40px;
+            height: 136px;
+            color: #fff;
+            transition: background .2s;
+            cursor: pointer;
+        }
+        .link-card:hover { background: rgba(255, 255, 255, 0.1); }
+
+        .link-card-text {}
+
+        .link-card-ja {
+            font-family: 'Zen Old Mincho', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .link-card-en {
+            font-family: 'Cormorant', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* ============================================================
+           CTA SECTION
+        ============================================================ */
+        #cta {
+            position: relative;
+            padding: 100px 0;
+            background: var(--green);
+            overflow: hidden;
+        }
+
+        .cta-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+        .cta-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 98, 47, 0.75);
+            z-index: 1;
+        }
+
+        .cta-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 130px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cta-text {}
+
+        .cta-en {
+            font-family: 'Cormorant', serif;
+            font-size: 60px;
+            font-weight: 500;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .cta-ja {
+            font-family: 'Zen Old Mincho', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.4;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            color: #fff;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 20px;
+            font-weight: 500;
+            border: 1.5px solid #fff;
+            padding: 0 32px;
+            height: 60px;
+            letter-spacing: 0.03em;
+            transition: background .2s;
+            white-space: nowrap;
+        }
+        .cta-btn:hover { background: rgba(255,255,255,0.15); }
+
+        /* ============================================================
+           FOOTER
+        ============================================================ */
+        #footer {
+            background: #fff;
+            padding: 48px 0 40px;
+        }
+
+        .footer-inner {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        .footer-logo {
+            display: block;
+            width: 304px;
+            height: auto;
+            margin-bottom: 40px;
+        }
+
+        .footer-nav {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin-bottom: 16px;
+        }
+
+        .footer-nav a {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--green);
+        }
+        .footer-nav a:hover { opacity: .7; }
+
+        .footer-sep {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--green);
+            margin: 0 12px;
+        }
+
+        .footer-privacy {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--green);
+            margin-bottom: 16px;
+        }
+        .footer-privacy:hover { opacity: .7; }
+
+        .footer-copy {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 11px;
+            font-weight: 400;
+            color: var(--green);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+         HEADER
+    ============================================================ -->
+    <header id="header">
+        <div class="header-inner">
+            <a href="#" class="header-logo">
+                <img src="https://s3-alpha-sig.figma.com/img/489d/73ee/7f98bf8f3c2493b77170da9086e2e7f6?Expires=1777852800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=J61dgIZSweX8RUGYjmhzSShYIKETwGlcV6UL5JX8rU5apEVZGoFzKWybG~Cuj1HBv-m8U2cwOMZglwqLcaO2Ehk3XPWizNEsnKZchAVmCJMNxFiPr-nP6Ry9EH06yboHofwFX5-t1Nu8wRDkSBQaCxLY4c6SdcIQfvr5DDuNRM1Z96Kb3zayjLhuvf-vwhFzO4agEY2n7swaNhMpPRxxNj6WDW9QKHQYoluGkzyFRPFe3N4CPAQ5c3OHLpdv-YrnXY2gVc6FtUOLhGGaeXV2D~zN5HZukSxBYmTn5xUWHjuepuZs8NHC67L8VuVcST6trXY-zV9jO-~GcisrqB2DkA__" alt="経理インテグレート">
+            </a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="#">TOP</a>
+                    <a href="#service">サービス</a>
+                    <a href="#message">会社概要</a>
+                </nav>
+                <a href="#cta" class="header-cta">
+                    無料相談
+                    <span class="arrow-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ============================================================
+             FV SECTION
+        ============================================================ -->
+        <section id="fv">
+            <div class="fv-bg" style="background-image: url('https://s3-alpha-sig.figma.com/img/6868/140a/7388a3aa83fae4984949c0d1605cab96?Expires=1777852800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Mrr8dDf71PBHJyFkQqtR715F~O~q9Xi7-kr2Z4UC-QBMx5sAKUX4oxGQ0Z-I56Zt9P-HqQKeyOF4Qi1atsXc2wGPKXJ6ycyFpeYZFYMijRxUHsAfV07IZgFNJfzktBj55OxYPyEQ15XRYNmc3CSHCB3z1jpXFOiMYDT1innJCL1n09-YES~yN0T8K3y8gdafSDZ1Ryz661P~dCXjJd0OR2gQbL5kdyB7E~q4yg8LtL7546XgdwPiY2-A-cANN7x8kUMfxFf1WjS4ooeED6SCLQJUm2uZUl9OnOIpqy-6AxeZVG8do5u6DPsRoxtZKgRbGnFSzEdxCD-JddS97O6VTw__');"></div>
+
+            <!-- decorative circles -->
+            <div class="fv-deco fv-deco-1"></div>
+            <div class="fv-deco fv-deco-2"></div>
+
+            <div class="fv-content">
+                <div class="fv-panel">
+                    <div class="fv-copy">
+                        <p class="fv-copy-sub">「数字をまとめる」経理から、</p>
+                        <p class="fv-copy-main">「経営を動かす」経理へ。</p>
+                    </div>
+                    <div class="fv-divider"></div>
+                    <p class="fv-body">IPO準備・経理内製化・内部監査。<br>上場を完走した実務責任者のノウハウを貴社へ統合し、<br>成長の揺るぎない土台を構築します。</p>
+                    <div class="fv-buttons">
+                        <a href="#cta" class="btn-primary">
+                            無料で相談する
+                            <span class="arrow-icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                        </a>
+                        <a href="#service" class="btn-outline">
+                            提供サービスを見る
+                            <span class="arrow-icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 18L15 12L9 6" stroke="#00622f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             MESSAGE SECTION
+        ============================================================ -->
+        <section id="message">
+            <div class="message-bg" style="background-image: url('https://s3-alpha-sig.figma.com/img/6b0f/eb8c/219344c7ab319be6da373fb8258ae6ce?Expires=1777852800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=TGNXi4dQchWbJfSI-~mmYVd70LzOje55WZSfHzwe82y3DvkU1ZkzPro9O6HKcXZ-sB7mv7kheKdtloyaRAGFq7b1PeGbq64RUX-GFefOjtPVJehkzdT8UewrzGKrXxQeQw4zPuk~n3LoTeUn-UXnfjwxWKI3kiT6scqbr5guE1rqypNzi-A5xK0RiXVh9mbaP7UMmaS3IuuaNzX-qK3Iy~bgG9hqIzIc~pLT~plDh2q6qMa-bKSwotj4sXu-YsxCruo9uzEuv8pJFPXyQwQav9S8phBG8JwykHAWrwIPFJIGb6BvgxEIwpc4e0ndqDuvtlWmjyQIhGwHBlUmoYHoQA__');"></div>
+
+            <div class="message-container">
+                <div class="message-section-header">
+                    <div class="section-header-left">
+                        <p class="section-title-ja weight-500">代表挨拶</p>
+                        <div class="section-title-en">
+                            <span class="en-deco"></span>
+                            MESSAGE
+                            <span class="en-deco"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="message-content">
+                    <div class="message-left">
+                        <h2 class="message-quote">「形だけの管理体制」が、<br>組織の成長を止めていないか。</h2>
+                        <div class="message-divider"></div>
+                        <div>
+                            <p class="message-body">監査法人での「チェックする立場」と、事業会社でIPOを主導し「実行する立場」。その両面を経験して痛感したのは、形式ばかりの体制構築は現場を疲弊させるだけだということです。</p>
+                            <p class="message-body">私たちが目指すのは、単なる箱作りではありません。上場水準のガバナンスを守りながら、経営者が「次の一手」を迷わず決断できる土台を、現場と共に汗をかきながら「統合（インテグレート）」していくことです。</p>
+                            <p class="message-body">泥臭く、しかし確実な成長を支える私の想いをお伝えします。</p>
+                        </div>
+                        <div class="message-link-row">
+                            <a href="#" class="btn-text">
+                                代表挨拶はこちら
+                                <span class="arrow-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9 18L15 12L9 6" stroke="#00622f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="message-right">
+                        <div class="message-photo-wrap">
+                            <img class="message-photo" src="https://s3-alpha-sig.figma.com/img/0160/01a9/e9107cee60fe5ccaa2b6fadc6fd8e58e?Expires=1777852800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=YjpvadjWhe9xw-7smeX-ao1MGJQmjRZ0ctn2FXnvQZ2oQljeiTwbLVu6wOF0WrU1uesrZLbTw6olJ9Z8bJai4fPRpiZDiS0Fd1cqZl~RK1EvBWMdou69kwLIs-62v3o5m5RjoZHHkrLUADVyhACdQWUFCGjw0d5N7s2~UVWjXV3diAxrxbtGO~o-b9HS5VpziWP62tSau~LrL6Sl2ZzohAgWPRNWDwIMLhFLeN8QEeyYIY9HLk2z8IZU3qw0nTq4vAe4EsAaoFAwYNSN6sTsZsWKzAUGqc5Jnxf05XdRUMWTlZXRPU4MgNcrNaNTpZ2dut1Ue6XBAjIGP6R9CMCgJw__" alt="代表 小林 知直">
+                            <div class="message-name-card">
+                                <div class="message-name-row">
+                                    <span class="name-role">代表</span>
+                                    <span class="name-jp">小林 知直</span>
+                                </div>
+                                <div class="name-divider"></div>
+                                <p class="name-en">Tomonao Kobayashi</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             REASONS SECTION
+        ============================================================ -->
+        <section id="reasons">
+            <div class="reasons-container">
+                <div class="reasons-title">
+                    <div class="section-header">
+                        <p class="section-title-ja" style="text-align:center;">経理インテグレートが<br>選ばれる理由</p>
+                        <div class="section-title-en">
+                            <span class="en-deco"></span>
+                            REASONS
+                            <span class="en-deco"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reasons-cards">
+                    <!-- Card 01 -->
+                    <div class="reason-card">
+                        <div style="position:relative;">
+                            <p class="reason-number">01</p>
+                            <img class="reason-img" src="https://s3-alpha-sig.figma.com/img/645c/034e/917870375b34f3bca05ff426750f8db7?Expires=1777852800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=ooPUy5rjqUnpl11jwbvqRUqfMZ1A3BkKE4M4wSOonkzZunFbSnlVp5d-v7D0MDJPVQXOvBiuayPtnsFMgJkT9X7X33DQroPKXxSFH0i5NvnEwDB9SM2n1pg8B27UHOcWBVwTUQ1YLpeNrdjj3P213ZZdD-oW9WruoFzViQdhzCAR5qTxej-cMt-LkTc38ufn6YwhDAmPbtbEHXgXsWl83E1REswB0u3Qdr407Gv989I2YgT5b8ugq3SFabRrsalpD80kVneErl7nIJyheQwXQScIbw~3UCdH5ulpw0ka5J6E6347ZIdffj15Z0jjEBRZSUlyt0TItptTPhgZJOnroA__" alt="内部監査特化・J-SOX対応">
+                        </div>
+                        <div class="reason-text">
+                            <h3 class="reason-heading">内部監査特化・J-SOX対応</h3>
+                            <div class="reason-divider"></div>
+                            <p class="reason-body">形式的ではなく、現場の業務効率を落とさない実効性の高いフロー設計を構築します。</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 02 -->
+                    <div class="reason-card">
+                        <div style="position:relative;">
+                            <p class="reason-number">02</p>
+                            <img class="reason-img" src="https://s3-alpha-sig.figma.com/img/b0d7/8aba/212999136f055fa808ea70b2a3edbda8?Expires=1777852800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=t4Vf-ucIAH1sw8QNFFT3hn8QbAfvSS4nMcNLyg816LxsIgS96Nx3U0qdCboWOV7PBhn~LWuzg2lWMGaETfTAmYK6Ssftb3f~bV5r9jev6Sn6Cth9Nxoxj37cta6pyptAyS1yREREk6keHuyCuMj8oi9rvhnWpGtg5pHZ9~jdGFeaVbJIElDq9OWoN-hb5cGok4BgJr~LBUkzf7ZAYP2Dn1UJ8yLDrt56eD6LZs7k5dB7C3Nt9gtqPP8jlyJ9yJ-aqqwxTlYRjV2BmoNIfsjTmM4yv~r0c4s6v6nIkHhIk9PrNUN5CFOzfXUaU0By19RFrV6SA15OYPSByWdLGLj5jg__" alt="経理部門の完全内製化">
+                        </div>
+                        <div class="reason-text">
+                            <h3 class="reason-heading">経理部門の完全内製化</h3>
+                            <div class="reason-divider"></div>
+                            <p class="reason-body">税理士依存からの脱却。自社決算体制への移行を、立ち上げから定着まで伴走します。</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 03 -->
+                    <div class="reason-card">
+                        <div style="position:relative;">
+                            <p class="reason-number">03</p>
+                            <img class="reason-img" src="https://s3-alpha-sig.figma.com/img/5496/c37a/be4301f7d79e8fbb8e901998a0ebb1ce?Expires=1777852800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=rRuAE4TV6NQFG~YQsI4OFpFSSqA21k50IsP0nmf0XM7L2EYhmtPpVSBKD38mu7sJawRFAlYEVIvpCqo2ovBN1j-RbahliVZ0za6O02iHHcRmFPaAn2PAJ14m5fs3Aq8-lZNDanlh2rmdc~MfgFE8u3IgdCxw2Bb0HlkLyYE2BBFqmodn6xz3Way8ZbEJosmBTaGX4HdFUQdlfoK5Vecojbn1HeZU53D6UbgZBUY9YMSrlo9byc8KGWMpwdD6Ashqhp4tJRgDB5P90qxrg3wx~o4ULNI1VKP6yVa7Hjcv96JfGdpi7cRnv9NMYvPP226Xh4PlwlzL-qOkJwox92Y-vw__" alt="圧倒的な実務解像度">
+                        </div>
+                        <div class="reason-text">
+                            <h3 class="reason-heading">圧倒的な実務解像度</h3>
+                            <div class="reason-divider"></div>
+                            <p class="reason-body">IFRS採用・上場完走を「作る側」として主導した実務責任者の生きたノウハウを提供します。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             SERVICE SECTION
+        ============================================================ -->
+        <section id="service">
+            <div class="service-container">
+                <div class="service-title">
+                    <div class="section-header">
+                        <p class="section-title-ja weight-500" style="text-align:center;">提供サービス</p>
+                        <div class="section-title-en">
+                            <span class="en-deco"></span>
+                            SERVICE
+                            <span class="en-deco"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-rows">
+                    <!-- Service 1: image left, text right -->
+                    <div class="service-row">
+                        <div class="service-image" style="background-image: url('https://s3-alpha-sig.figma.com/img/8d56/2559/11b12be0455d4e06e699fcb4ffac202f?Expires=1777852800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=cW2oQAYBvCVy67A8M2BoFELf9dLOD5ICUtr~I1dt1ECmGpFKpCVIRExwqIMXrCwVz0bvV54JSpDApXWohNwnnSa-4R7NBGS8ll40gCnqzNP~WvQydy2pv2KiFYQsuiErHx~SzcbC38Eo7iBzr7jroA7BhdB-eiSqbrsZ5fkVrEFM1yrHCLgXBldnj5KoHGFqZbLAJGyx1KViIgnNK9C8hmgAdLsvum6-orT-3DU-sEG83ph9ndotsxBEpo9A-~8KeCFs1ZDLD1EZHfbtncZdZfjm9qOUA4P2-ByXFMRWJ6uaDyu1YVd~tZQooFJjH-uybRmv1nxgrwiNNPxfVi8Wqw__');"></div>
+                        <div class="service-text-area">
+                            <div class="service-text-inner">
+                                <h3 class="service-heading">IPO準備・高度管理体制構築支援</h3>
+                                <div class="service-divider"></div>
+                                <p class="service-body">上場審査に耐えうる「上場企業水準」の管理体制を、貴社の実務に即した形で構築します。</p>
+                                <p class="service-body">経理部門の立ち上げから上場審査対応まで、全体感を見据えつつも状況に即して支援を実施いたします。</p>
+                                <div class="service-link-row">
+                                    <a href="#" class="btn-text-sm">
+                                        詳細を見る
+                                        <span class="arrow-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9 18L15 12L9 6" stroke="#00622f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 2: text left, image right -->
+                    <div class="service-row">
+                        <div class="service-text-area">
+                            <div class="service-text-inner">
+                                <h3 class="service-heading">ハンズオン型経理・財務実務支援</h3>
+                                <div class="service-divider"></div>
+                                <p class="service-body">リソース不足や複雑な実務課題に対し、実務担当者として直接課題を解決します。</p>
+                                <p class="service-body">アドバイスに留まらず、現場の一員として共に汗をかき、自走する組織を創り上げます。</p>
+                                <div class="service-link-row">
+                                    <a href="#" class="btn-text-sm">
+                                        詳細を見る
+                                        <span class="arrow-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9 18L15 12L9 6" stroke="#00622f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="service-image" style="background-image: url('https://s3-alpha-sig.figma.com/img/2184/85b0/7b17ec222fd69bfcfea9350d81896aaf?Expires=1777852800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=RK2N3tVBYlPbA2DWgiuj509rSqMb6f3jBZycAK~~9Nr4WFkCNpfliAgU1cOmxnxX0j1caDeFTetf58wMNbAS921uLxkuziPWnqjw2oIp~ccr1XDLNcn~6~7XChiihXlG-fPcZyT3Y-EKIq0s0w2oo2ZUGKtQa9c~vpQiIMB0JwTw5nD3KRUlVMNSvb3b6nIkLzdEv3BIRZ2~Y7VJghkcFSlRn9gY4487cT-XpeMC4x11JU5kfwp4goTiH5MpSMl1gPBetL9yyH5t-PzQtUKOYNRzzEROyAzSNao5KIpSExSY9wBre3bNgXdELFjpX4UP9RQcPa8ObilWUSGuVCG6lw__');"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             LINKS BANNER SECTION
+        ============================================================ -->
+        <section id="links">
+            <div class="links-container">
+                <div class="links-grid">
+                    <a href="#service" class="link-card">
+                        <div class="link-card-text">
+                            <p class="link-card-ja">サービス</p>
+                            <p class="link-card-en">SERVICE</p>
+                        </div>
+                        <span class="arrow-icon-lg">
+                            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16 28L24 20L16 12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                    </a>
+                    <a href="#message" class="link-card">
+                        <div class="link-card-text">
+                            <p class="link-card-ja">代表挨拶</p>
+                            <p class="link-card-en">MESSAGE</p>
+                        </div>
+                        <span class="arrow-icon-lg">
+                            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16 28L24 20L16 12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                    </a>
+                    <a href="#" class="link-card">
+                        <div class="link-card-text">
+                            <p class="link-card-ja">会社概要</p>
+                            <p class="link-card-en">COMPANY</p>
+                        </div>
+                        <span class="arrow-icon-lg">
+                            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16 28L24 20L16 12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             CTA SECTION
+        ============================================================ -->
+        <section id="cta">
+            <div class="cta-bg" style="background-image: url('https://s3-alpha-sig.figma.com/img/c05c/04f5/79cb1d3e56cae2de3a1f5639157bfdab?Expires=1777852800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=R2wKb9RWnldcY~84nKtYjFOGkWTy0C14GpI-YOGM-S3NGcMkBH8GyIhvUku0LdUHfBmYEYmoqcv5qPbJmn-ddyR0xrFY02qQoBmy61-6Mj7guJGWqtpZWqgMfi665Li6fZuRCmj6bZHIyqU8lclySZ5rpluYRe6c2zTnJZWYpw5NdC8zO6lqMbV7MwK9UWkzuc6SiSFSTkMbqUGweBKbWV6yOGoNHGqIrtQSHL~GiiSsH0buORLQn59N8LwZ6XOfDV0E4u3m8Z-bAmahClszeWb5w5M8AkGbXXAxF9zfFv8mALL~bBTp-np2zOwGs-sgJHhcGeu9rFD2E-BZL0R3XQ__');"></div>
+            <div class="cta-overlay"></div>
+            <div class="cta-container">
+                <div class="cta-text">
+                    <p class="cta-en">CONTACT</p>
+                    <p class="cta-ja">まずはお気軽にご相談ください。</p>
+                </div>
+                <a href="#" class="cta-btn">
+                    無料相談・お問い合わせはこちら
+                    <span class="arrow-icon-lg">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 28L24 20L16 12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================================================
+         FOOTER
+    ============================================================ -->
+    <footer id="footer">
+        <div class="footer-inner">
+            <img class="footer-logo" src="https://s3-alpha-sig.figma.com/img/18f8/1c3f/8c18ad97bfafa6cebaa390ffde1a7020?Expires=1777852800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=cBMUhdDxdbkYfwhGFIhMARu0SviDhQYKqlk1fpeC4loIQIjwfqEDldQVBmKuXIL3DrJtzd1GztZ-mGjssP3OM4SJ3q~8jadyWZSPc9-SE0ExFQ9UBOwb4W1uK~VrJk5fdwgM9zQ0vxItJI-ZOVN2HmOTecyoGucEuYckc0008fWznpQX69GSS4c3IPImnpKuhKK1dbpv9JJ8A~pjHhz63Ico5mFQHpz4oXgfhCeARgF-tmwIAq10uIMCwUEg7O0oMlwdBbgfyIDSFTN6RMktXnCmCetwQrVytKlSYNa-7LVhM0CRaDeuSIMUmuJdPiUo3TiVHkTi5NlZGQHySme26w__" alt="経理インテグレート">
+            <nav class="footer-nav">
+                <a href="#">TOP</a>
+                <span class="footer-sep">｜</span>
+                <a href="#service">サービス</a>
+                <span class="footer-sep">｜</span>
+                <a href="#">会社概要</a>
+                <span class="footer-sep">｜</span>
+                <a href="#cta">お問い合わせ</a>
+            </nav>
+            <a href="#" class="footer-privacy">プライバシーポリシー</a>
+            <p class="footer-copy">© 2026 会計事務所 経理インテグレート All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
