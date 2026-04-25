@@ -939,13 +939,14 @@
       .hamburger-btn span { background: #fff; }
 
       /* FV SP */
-      .fv { width: 100%; height: 740px; }
+      .fv { width: 100%; height: auto; background: #fff; overflow: hidden; }
       .fv-bg {
-        position: absolute;
-        left: 16px;
+        position: relative;
+        margin-left: 16px;
+        left: 0;
         top: 0;
-        height: 346px;
-        width: calc(100% + 250px);
+        height: 280px;
+        width: calc(100% - 16px + 100px);
         border-radius: 40px;
         transform: none;
         overflow: hidden;
@@ -961,16 +962,18 @@
         object-fit: cover;
       }
       .fv-content {
-        position: absolute;
-        bottom: 12px;
-        left: 0;
-        right: 0;
+        position: relative;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        margin-top: -28px;
         width: 100%;
-        padding: 20px 16px;
+        padding: 36px 16px 40px;
         border-radius: 0 40px 0 0;
         background: #fff;
+        z-index: 1;
       }
-      .fv-inner { width: 100%; gap: 16px; align-items: flex-start; }
+      .fv-inner { width: 100%; gap: 24px; align-items: flex-start; }
       .fv-copy { gap: 16px; width: 100%; }
       .fv-headline { width: 100%; }
       .fv-headline-sub { font-size: 22px; letter-spacing: 1.1px; padding-left: 4px; }
@@ -980,8 +983,7 @@
       .fv-buttons { flex-direction: column; gap: 20px; padding: 0; align-items: stretch; width: 100%; }
       .btn-primary { width: 100%; }
       .btn-outline { width: 100%; }
-      .fv-deco-1 { left: 16px; top: 262px; width: 40px; height: 40px; }
-      .fv-deco-2 { display: none; }
+      .fv-deco { display: none; }
 
       /* MESSAGE SP */
       .message-section { width: 100%; padding: 60px 20px; }
