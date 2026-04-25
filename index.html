@@ -241,36 +241,39 @@
            FV SECTION
         ============================================================ */
         #fv {
-            position: relative;
+            display: flex;
             min-height: 797px;
             padding-top: 70px;
             background: #fff;
         }
 
-        .fv-img {
-            position: absolute;
-            top: 0;
-            right: 0;
-            height: 100%;
-            width: auto;
-            display: block;
-            z-index: 1;
-        }
-
         .fv-content {
-            position: relative;
-            z-index: 2;
-            min-height: 727px;
+            flex: 0 0 540px;
             display: flex;
             align-items: flex-end;
+            padding-bottom: 60px;
+            z-index: 2;
         }
 
         .fv-panel {
-            width: 600px;
-            padding: 48px 48px 60px 130px;
+            width: 100%;
+            padding: 0 40px 0 130px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+        }
+
+        .fv-img-col {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .fv-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
         }
 
         .fv-copy {
@@ -838,8 +841,6 @@
              FV SECTION
         ============================================================ -->
         <section id="fv">
-            <img class="fv-img" src="FV.png" alt="">
-
             <div class="fv-content">
                 <div class="fv-panel">
                     <div class="fv-copy">
@@ -867,6 +868,9 @@
                         </a>
                     </div>
                 </div>
+            </div>
+            <div class="fv-img-col">
+                <img class="fv-img" src="FV.png" alt="">
             </div>
         </section>
 
