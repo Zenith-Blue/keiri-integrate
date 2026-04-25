@@ -565,6 +565,19 @@
       line-height: 1.6;
     }
 
+    /* ── HEADER MAIL BUTTON (SP only) ── */
+    .header-mail-btn {
+      display: none;
+      width: 50px;
+      height: 50px;
+      background: #00622f;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+    .header-mail-btn img { display: block; }
+
     /* ══ HAMBURGER ══ */
     .hamburger-btn {
       display: none;
@@ -663,31 +676,82 @@
 
     /* ══ RESPONSIVE MOBILE ≤767px ══ */
     @media (max-width: 767px) {
-      .hero { height: 200px; }
-      .hero-photo { height: 165px; width: calc(100% - 32px); border-radius: 20px; }
-      .hero-gradient { height: 165px; width: calc(100% - 32px); border-radius: 20px; }
-      .hero-text { left: 24px; }
-      .hero-title-ja { font-size: 22px; letter-spacing: 1px; }
-      .hero-title-en { font-size: 14px; }
-      .hero-subtitle { display: none; }
+      /* Header SP */
+      .header { height: 50px; padding-left: 10px; padding-right: 0; justify-content: flex-start; gap: 0; }
+      .header-logo { width: 174px; height: 24px; }
+      .header-nav { display: none; }
+      .header-mail-btn { display: flex; margin-left: auto; }
+      .hamburger-btn { height: 50px; background: #008026; padding: 0; width: 50px; }
+      .hamburger-btn span { background: #fff; }
+      .mobile-nav { top: 50px; }
 
-      .service-intro-headline { font-size: 18px; padding: 0 20px; }
-      .service-img { height: 260px; }
-      .service-text { padding: 32px 20px; }
-      .service-title { font-size: 22px; }
-      .service-body { font-size: 14px; }
-      .service-tag { font-size: 13px; padding: 10px 16px; }
+      /* Hero SP */
+      .hero { height: 200px; overflow: hidden; }
+      .hero-photo { height: 180px; width: 355px; border-radius: 20px; filter: blur(1px); }
+      .hero-photo img { height: 100%; left: -22.62%; top: -0.03%; width: 140.45%; }
+      .hero-gradient { height: 180px; width: 355px; border-radius: 20px; background: linear-gradient(53.81deg, rgba(0,98,47,0.6) 40%, rgba(0,98,47,0.2) 95.83%); }
+      .hero-text { left: 20px; top: 50%; transform: translateY(calc(-50% + 15px)); }
+      .hero-title-row { flex-direction: column; gap: 0; align-items: flex-start; }
+      .hero-title-ja { font-size: 28px; letter-spacing: 1.4px; line-height: 1.4; }
+      .hero-title-en { font-size: 18px; letter-spacing: 0.9px; line-height: 1.6; }
+      .hero-subtitle {
+        display: block;
+        top: auto;
+        bottom: 22px;
+        left: 20px;
+        transform: none;
+        text-align: left;
+        font-size: 12px;
+        letter-spacing: 0.6px;
+        white-space: normal;
+        width: 317px;
+        line-height: 1.6;
+      }
 
-      .flow-section { padding: 60px 20px; }
-      .flow-card-wrap { flex: 0 0 100%; }
-      .flow-title-ja { font-size: 28px; letter-spacing: 4px; }
+      /* Service intro SP */
+      .service-intro { width: 100%; padding-top: 40px; gap: 28px; }
+      .service-intro-headline { font-size: 20px; letter-spacing: 1px; padding: 0 20px; line-height: 1.8; }
+      .vertical-line { height: 40px; }
 
-      .cta-section { padding: 60px 20px; }
-      .cta-title { font-size: 44px; }
-      .cta-subtitle { font-size: 18px; }
+      /* Service items SP */
+      .service-items { width: 100%; }
+      .service-row { flex-direction: column; gap: 0; }
+      .service-row-1 { padding-right: 0; }
+      .service-row-2 { flex-direction: column; padding-left: 0; }
+      .service-img { width: 100%; height: 280px; }
+      .service-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; left: 0; top: 0; }
+      .service-text { width: 100%; padding: 0 20px 48px; gap: 16px; }
+      .service-label-en { font-size: 16px; }
+      .service-title { font-size: 24px; letter-spacing: 1.2px; }
+      .service-body { font-size: 16px; letter-spacing: 0.8px; }
+      .service-tags { gap: 16px; }
+      .service-tags-row { flex-direction: column; gap: 16px; }
+      .service-tag { padding: 12px 24px; font-size: 15px; }
 
-      .footer { padding: 40px 20px 48px; }
-      .footer-copy { text-align: center; font-size: 10px; }
+      /* Flow section SP */
+      .flow-section { width: 100%; padding: 60px 20px; }
+      .flow-title-ja { font-size: 28px; letter-spacing: 5.6px; }
+      .flow-title-en { font-size: 16px; }
+      .flow-cards { flex-direction: column; align-items: center; gap: 0; }
+      .flow-card-wrap { flex: none; width: 300px; flex-direction: column; align-items: center; }
+      .flow-arrow { display: flex; width: 40px; height: 18px; transform: rotate(90deg); margin: 4px auto; }
+
+      /* CTA SP */
+      .cta-section { width: 100%; padding: 60px 20px; }
+      .cta-inner { width: 100%; flex-direction: column; gap: 40px; align-items: flex-start; }
+      .cta-title { font-size: 48px; letter-spacing: 2.4px; }
+      .cta-subtitle { font-size: 20px; letter-spacing: 1px; }
+      .btn-text-white span.label { font-size: 14px; letter-spacing: 0.7px; }
+
+      /* Footer SP */
+      .footer { width: 100%; padding: 48px 28px 60px; }
+      .footer-inner { gap: 40px; }
+      .footer-logo { width: 178px; height: 80px; }
+      .footer-nav { gap: 40px; }
+      .footer-nav-links { flex-direction: column; align-items: center; gap: 28px; }
+      .footer-nav-links .sep { display: none; }
+      .footer-nav-links a { font-size: 15px; letter-spacing: 0.75px; }
+      .footer-copy { font-size: 10px; letter-spacing: 0.5px; text-align: center; }
     }
   </style>
 </head>
@@ -709,6 +773,9 @@
       </span>
     </a>
   </nav>
+  <a href="./contact.html" class="header-mail-btn" aria-label="お問い合わせ">
+    <img src="./assets/images/mail-icon.svg" alt="" width="24" height="24">
+  </a>
   <button class="hamburger-btn" id="hamburger-btn" aria-label="メニューを開く">
     <span></span><span></span><span></span>
   </button>
