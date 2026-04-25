@@ -710,6 +710,19 @@
       line-height: 1.6;
     }
 
+    /* ── HEADER MAIL BUTTON (SP only) ── */
+    .header-mail-btn {
+      display: none;
+      width: 50px;
+      height: 50px;
+      background: #00622f;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+    .header-mail-btn img { display: block; }
+
     /* ══ HAMBURGER ══ */
     .hamburger-btn {
       display: none;
@@ -808,37 +821,92 @@
 
     /* ══ RESPONSIVE MOBILE ≤767px ══ */
     @media (max-width: 767px) {
-      .hero { height: 200px; }
-      .hero-photo { height: 165px; width: calc(100% - 32px); border-radius: 20px; }
-      .hero-gradient { height: 165px; width: calc(100% - 32px); border-radius: 20px; }
-      .hero-text { padding-left: 24px; }
-      .hero-title-ja { font-size: 22px; letter-spacing: 1px; }
-      .hero-title-en { font-size: 14px; }
+      /* Header SP */
+      .header { height: 50px; padding-left: 10px; padding-right: 0; justify-content: flex-start; gap: 0; }
+      .header-logo { width: 174px; height: 24px; }
+      .header-nav { display: none; }
+      .header-mail-btn { display: flex; margin-left: auto; }
+      .hamburger-btn { height: 50px; background: #008026; padding: 0; width: 50px; }
+      .hamburger-btn span { background: #fff; }
+      .mobile-nav { top: 50px; }
 
-      .message-section { padding: 60px 20px; }
-      .message-photo-col { max-width: 100%; }
-      .rep-photo { width: 100%; height: auto; min-height: 400px; }
-      .rep-name-card { width: 220px; }
-      .msg-headline-item { font-size: 20px; }
-      .msg-body-text p { font-size: 14px; }
-      .side-photo { max-width: 100%; height: 220px; }
-      .msg-quote { font-size: 18px; }
-      .msg-normal { font-size: 14px; }
+      /* Hero SP */
+      .hero { height: 200px; overflow: hidden; }
+      .hero-photo { height: 180px; width: 355px; border-radius: 20px; filter: blur(1px); }
+      .hero-photo img.img1 { height: 131.5%; left: 0.05%; top: -15.93%; width: 100%; }
+      .hero-photo img.img2 { display: none; }
+      .hero-gradient { height: 180px; width: 355px; border-radius: 20px; background: linear-gradient(53.81deg, rgba(0,98,47,0.6) 40%, rgba(0,98,47,0.2) 95.83%); }
+      .hero-text { padding-left: 20px; padding-top: 15px; }
+      .hero-title-row { flex-direction: column; gap: 0; align-items: flex-start; }
+      .hero-title-ja { font-size: 28px; letter-spacing: 1.4px; line-height: 1.4; }
+      .hero-title-en { font-size: 18px; letter-spacing: 0.9px; line-height: 1.6; }
 
-      .career-section { padding: 40px 20px; }
-      .career-heading { width: 100%; }
+      /* Message section SP */
+      .message-section { width: 100%; padding: 60px 20px; }
+      .message-inner { width: 100%; gap: 40px; }
+      .section-title-block { align-items: flex-start; gap: 4px; }
+      .section-title-ja { font-size: 28px; letter-spacing: 5.6px; text-align: left; }
+      .section-subtitle-row { gap: 12px; }
+      .message-body { width: 100%; }
+      .message-top { flex-direction: column; gap: 40px; margin-bottom: 40px; }
+      .message-text-col { width: 100%; }
+      .msg-headline { gap: 0; }
+      .msg-headline-item { font-size: 20px; letter-spacing: 1px; line-height: 1.8; }
+      .msg-body-text { gap: 20px; }
+      .msg-body-text p { font-size: 14px; letter-spacing: 0.7px; line-height: 2; }
 
-      .company-section { padding: 60px 20px; }
-      .company-label { width: 130px; font-size: 12px; padding: 14px 10px; }
-      .company-value { padding: 14px 10px; font-size: 12px; }
-      .company-title-ja { font-size: 28px; letter-spacing: 4px; }
+      /* Rep photo SP */
+      .message-photo-col { width: 335px; max-width: 100%; height: 403px; }
+      .rep-photo { width: 100%; height: 403px; }
+      .rep-photo img { height: 124.91%; left: -0.1%; top: -3.59%; width: 100.19%; }
+      .rep-name-card { width: 220px; padding: 8px 20px; box-shadow: 4px 4px 0 #008026; bottom: 0; }
+      .rep-name-role { font-size: 16px; letter-spacing: 3.2px; }
+      .rep-name-name { font-size: 20px; letter-spacing: 4px; }
+      .rep-name-roman { font-size: 13px; }
 
-      .cta-section { padding: 60px 20px; }
-      .cta-title { font-size: 44px; }
-      .cta-subtitle { font-size: 18px; }
+      /* Bottom block SP — text above, side photo below */
+      .message-bottom { flex-direction: column; gap: 40px; }
+      .message-long-text { flex: none; width: 100%; gap: 20px; }
+      .msg-quote { font-size: 20px; letter-spacing: 1px; }
+      .msg-normal { font-size: 14px; letter-spacing: 0.7px; }
+      .side-photo { width: 335px; max-width: 100%; height: 461px; order: 1; }
+      .side-photo img { height: 108.72%; left: -60.08%; top: -4.18%; width: 274.29%; }
 
-      .footer { padding: 40px 20px 48px; }
-      .footer-copy { text-align: center; font-size: 10px; }
+      /* Career SP */
+      .career-section { padding: 20px 0; flex-direction: column; gap: 20px; width: 100%; }
+      .career-heading { width: 100%; padding-bottom: 13px; }
+      .career-heading h3 { font-size: 18px; letter-spacing: 1px; }
+      .career-text { font-size: 14px; letter-spacing: 0.7px; }
+      .deco-intersect-bl { display: none; }
+      .deco-intersect-r { display: none; }
+
+      /* Company section SP — vertical stacked label/value */
+      .company-section { width: 100%; padding: 60px 20px; }
+      .company-inner { width: 100%; flex-direction: column; gap: 20px; }
+      .company-title-col { gap: 4px; }
+      .company-title-ja { font-size: 28px; letter-spacing: 5.6px; }
+      .company-subtitle-row { gap: 12px; }
+      .company-table { width: 100%; }
+      .company-row { flex-direction: column; border-bottom: none; }
+      .company-label { width: 100%; padding: 16px 4px 4px; font-size: 14px; letter-spacing: 0.7px; }
+      .company-value { width: 100%; padding: 4px 4px 16px; border-bottom: 1px solid rgba(0,98,47,0.2); font-size: 14px; letter-spacing: 0.7px; }
+
+      /* CTA SP */
+      .cta-section { width: 100%; padding: 60px 20px; }
+      .cta-inner { width: 100%; flex-direction: column; gap: 40px; align-items: flex-start; }
+      .cta-title { font-size: 48px; letter-spacing: 2.4px; }
+      .cta-subtitle { font-size: 20px; letter-spacing: 1px; }
+      .btn-text-white span.label { font-size: 14px; letter-spacing: 0.7px; }
+
+      /* Footer SP */
+      .footer { width: 100%; padding: 48px 28px 60px; }
+      .footer-inner { gap: 40px; }
+      .footer-logo { width: 178px; height: 80px; }
+      .footer-nav { gap: 40px; }
+      .footer-nav-links { flex-direction: column; align-items: center; gap: 28px; }
+      .footer-nav-links .sep { display: none; }
+      .footer-nav-links a { font-size: 15px; letter-spacing: 0.75px; }
+      .footer-copy { font-size: 10px; letter-spacing: 0.5px; text-align: center; }
     }
   </style>
 </head>
@@ -860,6 +928,9 @@
       </span>
     </a>
   </nav>
+  <a href="./contact.html" class="header-mail-btn" aria-label="お問い合わせ">
+    <img src="./assets/images/mail-icon.svg" alt="" width="24" height="24">
+  </a>
   <button class="hamburger-btn" id="hamburger-btn" aria-label="メニューを開く">
     <span></span><span></span><span></span>
   </button>
