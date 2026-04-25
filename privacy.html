@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>プライバシーポリシー｜経理インテグレート</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,700;1,500&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Old+Mincho:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #fff;
+      color: #333;
+      min-width: 1440px;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: #fff;
+      box-shadow: 0 4px 5px rgba(0,98,47,0.1);
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-left: 28px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 1440px;
+    }
+    .header-logo {
+      width: 290px;
+      height: 40px;
+      overflow: hidden;
+      position: relative;
+    }
+    .header-logo img {
+      position: absolute;
+      height: 152.5%;
+      left: -5.46%;
+      top: -32.5%;
+      width: 110.93%;
+      max-width: none;
+    }
+    .header-nav {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+    .header-nav a {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      letter-spacing: 0.8px;
+      color: #00622f;
+      text-decoration: none;
+      line-height: 1.6;
+    }
+    .header-cta-btn {
+      background: #00622f;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 24px 16px 36px;
+      height: 70px;
+      text-decoration: none;
+    }
+    .header-cta-btn span.label {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.8px;
+      color: #fff;
+      line-height: 1.6;
+    }
+    .arrow-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transform: rotate(180deg) scaleY(-1);
+      flex-shrink: 0;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      width: 1440px;
+      height: 295px;
+      overflow: hidden;
+    }
+    .hero-photo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1400px;
+      height: 255px;
+      border-radius: 40px;
+      overflow: hidden;
+      filter: blur(1px);
+    }
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .hero-gradient {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1400px;
+      height: 255px;
+      border-radius: 40px;
+      background: linear-gradient(82.41deg, rgba(0,98,47,0.6) 28.787%, rgba(0,98,47,0.2) 97.41%);
+      display: flex;
+      align-items: center;
+    }
+    .hero-text {
+      padding-left: 80px;
+    }
+    .hero-title-row {
+      display: flex;
+      gap: 28px;
+      align-items: baseline;
+    }
+    .hero-title-ja {
+      font-family: 'Zen Old Mincho', serif;
+      font-weight: 700;
+      font-size: 40px;
+      letter-spacing: 2px;
+      color: #fff;
+      line-height: 1.4;
+    }
+    .hero-title-en {
+      font-family: 'Cormorant', serif;
+      font-weight: 700;
+      font-size: 24px;
+      letter-spacing: 1.2px;
+      color: #fff;
+      line-height: 1.6;
+      text-transform: uppercase;
+    }
+
+    /* ── POLICY CONTENT ── */
+    .policy-section {
+      width: 1440px;
+      padding: 100px 0 120px;
+      display: flex;
+      justify-content: center;
+    }
+    .policy-inner {
+      width: 800px;
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+    }
+    .policy-item {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .policy-heading {
+      font-family: 'Zen Old Mincho', serif;
+      font-weight: 500;
+      font-size: 18px;
+      letter-spacing: 0.9px;
+      color: #00622f;
+      line-height: 1.6;
+      padding-left: 16px;
+      border-left: 6px solid rgba(0,98,47,0.2);
+    }
+    .policy-body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      letter-spacing: 0.8px;
+      color: #555;
+      line-height: 2;
+    }
+    .policy-body ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .policy-body ul li {
+      padding-left: 1.2em;
+      position: relative;
+    }
+    .policy-body ul li::before {
+      content: '・';
+      position: absolute;
+      left: 0;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      position: relative;
+      width: 1440px;
+      padding: 100px 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .cta-bg {
+      position: absolute;
+      inset: 0;
+    }
+    .cta-bg img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      object-fit: cover;
+      object-position: bottom;
+    }
+    .cta-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,98,47,0.5);
+    }
+    .cta-inner {
+      position: relative;
+      width: 1180px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+    .cta-text {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      align-items: flex-start;
+      filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.1));
+    }
+    .cta-title {
+      font-family: 'Cormorant', serif;
+      font-weight: 500;
+      font-size: 60px;
+      letter-spacing: 3px;
+      color: #fff;
+      line-height: 1;
+    }
+    .cta-subtitle {
+      font-family: 'Zen Old Mincho', serif;
+      font-weight: 600;
+      font-size: 28px;
+      letter-spacing: 1.4px;
+      color: #fff;
+      line-height: 1.8;
+    }
+    .btn-text-white {
+      border-bottom: 1px solid #fff;
+      display: inline-flex;
+      gap: 24px;
+      align-items: center;
+      padding-bottom: 20px;
+      text-decoration: none;
+    }
+    .btn-text-white span.label {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      font-size: 20px;
+      letter-spacing: 1px;
+      color: #fff;
+      line-height: 1.6;
+      white-space: nowrap;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: #fff;
+      box-shadow: 0 4px 5px rgba(0,98,47,0.1);
+      width: 1440px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      align-items: center;
+      padding: 48px 28px 60px;
+    }
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      align-items: center;
+    }
+    .footer-logo {
+      width: 304px;
+      height: 136.8px;
+      overflow: hidden;
+      position: relative;
+    }
+    .footer-logo img {
+      position: absolute;
+      height: 353.62%;
+      left: -29.33%;
+      top: -112.49%;
+      width: 159.13%;
+      max-width: none;
+    }
+    .footer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      align-items: center;
+    }
+    .footer-nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    .footer-nav-links a, .footer-nav-links span {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      color: #333;
+      text-decoration: none;
+    }
+    .footer-nav-links a { font-size: 16px; letter-spacing: 0.8px; line-height: 1.6; }
+    .footer-nav-links .sep { font-size: 14px; letter-spacing: 0.7px; line-height: 1.6; }
+    .footer-privacy {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      letter-spacing: 0.7px;
+      color: #333;
+      text-decoration: none;
+      line-height: 1.6;
+    }
+    .footer-copy {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      letter-spacing: 0.6px;
+      color: #7e7c57;
+      line-height: 1.6;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <a href="./index.html" class="header-logo">
+    <img src="./assets/images/privacy/logo.png" alt="経理インテグレート">
+  </a>
+  <nav class="header-nav">
+    <a href="./service.html">サービス</a>
+    <a href="./about.html">代表挨拶</a>
+    <a href="./about.html#company">会社概要</a>
+    <a href="./contact.html" class="header-cta-btn">
+      <span class="label">無料相談</span>
+      <span class="arrow-icon">
+        <img src="./assets/images/privacy/arrow-24.svg" alt="" width="24" height="24">
+      </span>
+    </a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-photo">
+    <img src="./assets/images/privacy/hero-bg.jpg" alt="">
+  </div>
+  <div class="hero-gradient">
+    <div class="hero-text">
+      <div class="hero-title-row">
+        <span class="hero-title-ja">プライバシーポリシー</span>
+        <span class="hero-title-en">PRIVACYPOLICY</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POLICY CONTENT -->
+<section class="policy-section">
+  <div class="policy-inner">
+
+    <div class="policy-item">
+      <h2 class="policy-heading">プライバシーポリシー</h2>
+      <div class="policy-body">
+        <p>経理インテグレート（以下「当事務所」）は、お客様の個人情報の保護を重要な責務と考え、以下のとおりプライバシーポリシーを定め、適切に取り扱います。</p>
+      </div>
+    </div>
+
+    <div class="policy-item">
+      <h2 class="policy-heading">個人情報の取得</h2>
+      <div class="policy-body">
+        <p>当事務所は、お問い合わせフォームへのご入力その他適法かつ公正な手段により、必要な範囲で個人情報を取得します。</p>
+      </div>
+    </div>
+
+    <div class="policy-item">
+      <h2 class="policy-heading">利用目的</h2>
+      <div class="policy-body">
+        <p>取得した個人情報は、以下の目的に利用します。</p>
+        <ul>
+          <li>お問い合わせへの回答・対応</li>
+          <li>サービスのご提供およびご案内</li>
+          <li>業務上必要な連絡</li>
+          <li>サービス改善のための分析</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="policy-item">
+      <h2 class="policy-heading">第三者提供</h2>
+      <div class="policy-body">
+        <p>当事務所は、法令に基づく場合を除き、ご本人の同意なく個人情報を第三者に提供することはありません。</p>
+      </div>
+    </div>
+
+    <div class="policy-item">
+      <h2 class="policy-heading">管理</h2>
+      <div class="policy-body">
+        <p>当事務所は、個人情報の漏洩・滅失・き損等を防止するため、適切な安全管理措置を講じます。また、個人情報を取り扱う従業者および委託先の適切な監督を行います。</p>
+      </div>
+    </div>
+
+    <div class="policy-item">
+      <h2 class="policy-heading">お問い合わせ</h2>
+      <div class="policy-body">
+        <p>個人情報の開示・訂正・利用停止等のご要望、またはプライバシーポリシーに関するお問い合わせは、下記までご連絡ください。</p>
+        <p style="margin-top:16px;">経理インテグレート　担当：小林知直<br>メールアドレス：<a href="mailto:tomonao.kobayashi@keiri-integrate.com" style="color:#00622f;">tomonao.kobayashi@keiri-integrate.com</a></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg">
+    <img src="./assets/images/privacy/cta-bg.jpg" alt="">
+    <div class="cta-overlay"></div>
+  </div>
+  <div class="cta-inner">
+    <div class="cta-text">
+      <p class="cta-title">CONTACT</p>
+      <p class="cta-subtitle">まずはお気軽にご相談ください。</p>
+    </div>
+    <a href="./contact.html" class="btn-text-white">
+      <span class="label">無料相談・お問い合わせはこちら</span>
+      <span class="arrow-icon">
+        <img src="./assets/images/privacy/arrow-40.svg" alt="" width="40" height="40">
+      </span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="./assets/images/privacy/footer-logo.jpg" alt="経理インテグレート">
+    </div>
+    <nav class="footer-nav">
+      <div class="footer-nav-links">
+        <a href="./index.html">TOP</a>
+        <span class="sep">｜</span>
+        <a href="./service.html">サービス</a>
+        <span class="sep">｜</span>
+        <a href="./about.html">会社概要</a>
+        <span class="sep">｜</span>
+        <a href="./contact.html">お問い合わせ</a>
+      </div>
+      <a href="./privacy.html" class="footer-privacy">プライバシーポリシー</a>
+    </nav>
+  </div>
+  <p class="footer-copy">© 2026 会計事務所 経理インテグレート All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
