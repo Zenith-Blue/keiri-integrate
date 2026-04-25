@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お問い合わせ｜経理インテグレート</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Old+Mincho:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #fff;
+      color: #333;
+      min-width: 1440px;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: #fff;
+      box-shadow: 0 4px 5px rgba(0,98,47,0.1);
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-left: 28px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 1440px;
+    }
+    .header-logo {
+      width: 290px;
+      height: 40px;
+      overflow: hidden;
+      position: relative;
+      display: block;
+      text-decoration: none;
+    }
+    .header-logo img {
+      position: absolute;
+      height: 152.5%;
+      left: -5.46%;
+      top: -32.5%;
+      width: 110.93%;
+      max-width: none;
+    }
+    .header-nav {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+    .header-nav a {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      letter-spacing: 0.8px;
+      color: #00622f;
+      text-decoration: none;
+      line-height: 1.6;
+    }
+    .header-cta-btn {
+      background: #00622f;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 24px 16px 36px;
+      height: 70px;
+      text-decoration: none;
+    }
+    .header-cta-btn .label {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.8px;
+      color: #fff;
+      line-height: 1.6;
+    }
+    .arrow-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transform: rotate(180deg) scaleY(-1);
+      flex-shrink: 0;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      width: 1440px;
+      height: 295px;
+      overflow: hidden;
+    }
+    .hero-photo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1400px;
+      height: 255px;
+      border-radius: 40px;
+      overflow: hidden;
+      filter: blur(1px);
+    }
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-gradient {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1400px;
+      height: 255px;
+      border-radius: 40px;
+      background: linear-gradient(82.41deg, rgba(0,98,47,0.6) 28.787%, rgba(0,98,47,0.2) 97.41%);
+    }
+    .hero-text {
+      position: absolute;
+      top: 50%;
+      left: 80px;
+      transform: translateY(-50%);
+    }
+    .hero-title-row {
+      display: flex;
+      gap: 28px;
+      align-items: baseline;
+    }
+    .hero-title-ja {
+      font-family: 'Zen Old Mincho', serif;
+      font-weight: 700;
+      font-size: 40px;
+      letter-spacing: 2px;
+      color: #fff;
+      line-height: 1.4;
+    }
+    .hero-title-en {
+      font-family: 'Cormorant', serif;
+      font-weight: 700;
+      font-size: 24px;
+      letter-spacing: 1.2px;
+      color: #fff;
+      line-height: 1.6;
+      text-transform: uppercase;
+    }
+
+    /* ── CONTACT SECTION ── */
+    .contact-section {
+      width: 1440px;
+      padding: 80px 0 120px;
+      display: flex;
+      flex-direction: column;
+      gap: 100px;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .contact-lead {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      letter-spacing: 0.8px;
+      color: #333;
+      line-height: 2;
+      text-align: center;
+      width: 800px;
+    }
+
+    /* ── FORM ── */
+    .form-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      align-items: center;
+      width: 700px;
+    }
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
+      width: 700px;
+    }
+    .form-label-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .form-label {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      letter-spacing: 0.8px;
+      color: #333;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+    .form-required {
+      font-weight: 500;
+      font-size: 16px;
+      letter-spacing: 0.8px;
+      color: #e6694a;
+      line-height: 1.4;
+    }
+    .form-input {
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      letter-spacing: 0.8px;
+      color: #333;
+      line-height: 1.6;
+      background: #fff;
+      outline: none;
+    }
+    .form-input::placeholder { color: #ccc; }
+    .form-input:focus { border-color: #00622f; }
+    .form-textarea {
+      width: 100%;
+      height: 260px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      letter-spacing: 0.8px;
+      color: #333;
+      line-height: 1.6;
+      background: #fff;
+      resize: vertical;
+      outline: none;
+    }
+    .form-textarea::placeholder { color: #ccc; }
+    .form-textarea:focus { border-color: #00622f; }
+
+    /* radio group */
+    .form-radio-field {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-start;
+      width: 100%;
+    }
+    .form-radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .form-radio-item {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      cursor: pointer;
+    }
+    .form-radio-item input[type="radio"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      flex-shrink: 0;
+      cursor: pointer;
+      position: relative;
+      background: #fff;
+    }
+    .form-radio-item input[type="radio"]:checked {
+      border-color: #00622f;
+      background: #00622f;
+    }
+    .form-radio-item input[type="radio"]:checked::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #fff;
+    }
+    .form-radio-item label {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      letter-spacing: 0.8px;
+      color: #333;
+      line-height: 1.4;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    /* privacy checkbox */
+    .form-privacy-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 0;
+      width: 100%;
+    }
+    .form-privacy-row input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 1px solid #ccc;
+      border-radius: 2.5px;
+      flex-shrink: 0;
+      cursor: pointer;
+      background: #fff;
+      position: relative;
+    }
+    .form-privacy-row input[type="checkbox"]:checked {
+      background: #00622f;
+      border-color: #00622f;
+    }
+    .form-privacy-row input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 5px;
+      width: 5px;
+      height: 9px;
+      border: 2px solid #fff;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg);
+    }
+    .form-privacy-label {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      letter-spacing: 0.7px;
+      color: #333;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+    .form-privacy-label a {
+      color: #008026;
+      text-decoration: underline;
+    }
+
+    /* submit button */
+    .form-submit-btn {
+      background: #00622f;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 24px 20px 36px;
+      width: 400px;
+      border: none;
+      cursor: pointer;
+    }
+    .form-submit-btn span {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.8px;
+      color: #fff;
+      line-height: 1.6;
+      white-space: nowrap;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      position: relative;
+      width: 1440px;
+      padding: 100px 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .cta-bg { position: absolute; inset: 0; }
+    .cta-bg img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      object-fit: cover;
+      object-position: bottom;
+    }
+    .cta-overlay { position: absolute; inset: 0; background: rgba(0,98,47,0.5); }
+    .cta-inner {
+      position: relative;
+      width: 1180px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+    .cta-text {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      align-items: flex-start;
+      filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.1));
+    }
+    .cta-title {
+      font-family: 'Cormorant', serif;
+      font-weight: 500;
+      font-size: 60px;
+      letter-spacing: 3px;
+      color: #fff;
+      line-height: 1;
+    }
+    .cta-subtitle {
+      font-family: 'Zen Old Mincho', serif;
+      font-weight: 600;
+      font-size: 28px;
+      letter-spacing: 1.4px;
+      color: #fff;
+      line-height: 1.8;
+    }
+    .btn-text-white {
+      border-bottom: 1px solid #fff;
+      display: inline-flex;
+      gap: 24px;
+      align-items: center;
+      padding-bottom: 20px;
+      text-decoration: none;
+    }
+    .btn-text-white .label {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      font-size: 20px;
+      letter-spacing: 1px;
+      color: #fff;
+      line-height: 1.6;
+      white-space: nowrap;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: #fff;
+      box-shadow: 0 4px 5px rgba(0,98,47,0.1);
+      width: 1440px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      align-items: center;
+      padding: 48px 28px 60px;
+    }
+    .footer-inner { display: flex; flex-direction: column; gap: 40px; align-items: center; }
+    .footer-logo {
+      width: 304px;
+      height: 136.8px;
+      overflow: hidden;
+      position: relative;
+      display: block;
+      text-decoration: none;
+    }
+    .footer-logo img {
+      position: absolute;
+      height: 353.62%;
+      left: -29.33%;
+      top: -112.49%;
+      width: 159.13%;
+      max-width: none;
+    }
+    .footer-nav { display: flex; flex-direction: column; gap: 40px; align-items: center; }
+    .footer-nav-links { display: flex; gap: 28px; align-items: center; }
+    .footer-nav-links a, .footer-nav-links span {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      color: #00622f;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .footer-nav-links a { font-size: 16px; letter-spacing: 0.8px; line-height: 1.6; }
+    .footer-nav-links .sep { font-size: 14px; letter-spacing: 0.7px; line-height: 1.6; }
+    .footer-privacy {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.55px;
+      color: #00622f;
+      line-height: 1.6;
+      text-decoration: none;
+    }
+    .footer-copy {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.55px;
+      color: #00622f;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <a href="./index.html" class="header-logo">
+    <img src="./assets/images/contact/logo.png" alt="経理インテグレート">
+  </a>
+  <nav class="header-nav">
+    <a href="./index.html">TOP</a>
+    <a href="./service.html">サービス</a>
+    <a href="./about.html#company">会社概要</a>
+    <a href="./contact.html" class="header-cta-btn">
+      <span class="label">無料相談</span>
+      <span class="arrow-icon">
+        <img src="./assets/images/contact/arrow-24.svg" alt="" width="24" height="24">
+      </span>
+    </a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-photo">
+    <img src="./assets/images/contact/hero-bg.png" alt="">
+  </div>
+  <div class="hero-gradient"></div>
+  <div class="hero-text">
+    <div class="hero-title-row">
+      <h1 class="hero-title-ja">お問い合わせ</h1>
+      <span class="hero-title-en">CONTACT</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT FORM -->
+<section class="contact-section">
+  <p class="contact-lead">IPO準備や経理体制に関するご相談を承っております。<br>内容を確認の上、通常2営業日以内にご返信いたします。</p>
+
+  <form class="form-wrap" action="#" method="post">
+
+    <!-- 会社名 -->
+    <div class="form-field">
+      <div class="form-label-row">
+        <span class="form-label">会社名</span>
+        <span class="form-required">*</span>
+      </div>
+      <input class="form-input" type="text" name="company" placeholder="株式会社〇〇" required>
+    </div>
+
+    <!-- お名前 -->
+    <div class="form-field">
+      <div class="form-label-row">
+        <span class="form-label">お名前</span>
+        <span class="form-required">*</span>
+      </div>
+      <input class="form-input" type="text" name="name" placeholder="山田 太郎" required>
+    </div>
+
+    <!-- メールアドレス -->
+    <div class="form-field">
+      <div class="form-label-row">
+        <span class="form-label">メールアドレス</span>
+        <span class="form-required">*</span>
+      </div>
+      <input class="form-input" type="email" name="email" placeholder="name@example.com" required>
+    </div>
+
+    <!-- お問い合わせ種別 -->
+    <div class="form-field">
+      <div class="form-label-row">
+        <span class="form-label">お問い合わせ種別</span>
+        <span class="form-required">*</span>
+      </div>
+      <div class="form-radio-group">
+        <label class="form-radio-item">
+          <input type="radio" name="type" value="ipo" required>
+          <span>IPO準備について</span>
+        </label>
+        <label class="form-radio-item">
+          <input type="radio" name="type" value="handson">
+          <span>ハンズオン型経理・財務実務支援について</span>
+        </label>
+        <label class="form-radio-item">
+          <input type="radio" name="type" value="audit">
+          <span>内部監査・J-SOX構築支援について</span>
+        </label>
+        <label class="form-radio-item">
+          <input type="radio" name="type" value="other">
+          <span>その他</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- ご相談内容 -->
+    <div class="form-field">
+      <div class="form-label-row">
+        <span class="form-label">ご相談内容</span>
+        <span class="form-required">*</span>
+      </div>
+      <textarea class="form-textarea" name="message" placeholder="入力してください" required></textarea>
+    </div>
+
+    <!-- プライバシーポリシー -->
+    <div class="form-privacy-row">
+      <input type="checkbox" id="privacy" name="privacy" required>
+      <label class="form-privacy-label" for="privacy">
+        <a href="#">プライバシーポリシー</a>に同意する
+      </label>
+      <span class="form-required">*</span>
+    </div>
+
+    <!-- 送信ボタン -->
+    <button type="submit" class="form-submit-btn">
+      <span>入力内容を確認する</span>
+      <span class="arrow-icon">
+        <img src="./assets/images/contact/arrow-btn.svg" alt="" width="24" height="24">
+      </span>
+    </button>
+
+  </form>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg">
+    <img src="./assets/images/contact/cta-bg.png" alt="">
+    <div class="cta-overlay"></div>
+  </div>
+  <div class="cta-inner">
+    <div class="cta-text">
+      <p class="cta-title">CONTACT</p>
+      <p class="cta-subtitle">まずはお気軽にご相談ください。</p>
+    </div>
+    <a href="./contact.html" class="btn-text-white">
+      <span class="label">無料相談・お問い合わせはこちら</span>
+      <span class="arrow-icon">
+        <img src="./assets/images/contact/arrow-40.svg" alt="" width="40" height="40">
+      </span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <a href="./index.html" class="footer-logo">
+      <img src="./assets/images/contact/footer-logo.png" alt="経理インテグレート">
+    </a>
+    <nav class="footer-nav">
+      <div class="footer-nav-links">
+        <a href="./index.html">TOP</a>
+        <span class="sep">｜</span>
+        <a href="./service.html">サービス</a>
+        <span class="sep">｜</span>
+        <a href="./about.html#company">会社概要</a>
+        <span class="sep">｜</span>
+        <a href="./contact.html">お問い合わせ</a>
+      </div>
+      <a href="#" class="footer-privacy">プライバシーポリシー</a>
+    </nav>
+  </div>
+  <p class="footer-copy">© 2026 会計事務所 経理インテグレート All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

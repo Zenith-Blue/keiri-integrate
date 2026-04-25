@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>サービス｜経理インテグレート</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,700;1,500&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Old+Mincho:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #fff;
+      color: #333;
+      min-width: 1440px;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: #fff;
+      box-shadow: 0 4px 5px rgba(0,98,47,0.1);
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-left: 28px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 1440px;
+    }
+    .header-logo {
+      width: 290px;
+      height: 40px;
+      overflow: hidden;
+      position: relative;
+      text-decoration: none;
+      display: block;
+    }
+    .header-logo img {
+      position: absolute;
+      height: 152.5%;
+      left: -5.46%;
+      top: -32.5%;
+      width: 110.93%;
+      max-width: none;
+    }
+    .header-nav {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+    .header-nav a {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      letter-spacing: 0.8px;
+      color: #00622f;
+      text-decoration: none;
+      line-height: 1.6;
+    }
+    .header-cta-btn {
+      background: #00622f;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 24px 16px 36px;
+      height: 70px;
+      text-decoration: none;
+    }
+    .header-cta-btn span.label {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.8px;
+      color: #fff;
+      line-height: 1.6;
+    }
+    .arrow-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transform: rotate(180deg) scaleY(-1);
+      flex-shrink: 0;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      width: 1440px;
+      height: 295px;
+      overflow: hidden;
+    }
+    .hero-photo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1400px;
+      height: 255px;
+      border-radius: 40px;
+      overflow: hidden;
+      filter: blur(1px);
+    }
+    .hero-photo img {
+      position: absolute;
+      height: 187.26%;
+      left: -2.19%;
+      top: -22.49%;
+      width: 113.51%;
+      max-width: none;
+    }
+    .hero-gradient {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1400px;
+      height: 255px;
+      border-radius: 40px;
+      background: linear-gradient(82.41deg, rgba(0,98,47,0.6) 28.787%, rgba(0,98,47,0.2) 97.41%);
+    }
+    .hero-text {
+      position: absolute;
+      top: 50%;
+      left: 80px;
+      transform: translateY(-50%);
+    }
+    .hero-title-row {
+      display: flex;
+      gap: 28px;
+      align-items: baseline;
+    }
+    .hero-title-ja {
+      font-family: 'Zen Old Mincho', serif;
+      font-weight: 700;
+      font-size: 40px;
+      letter-spacing: 2px;
+      color: #fff;
+      line-height: 1.4;
+    }
+    .hero-title-en {
+      font-family: 'Cormorant', serif;
+      font-weight: 700;
+      font-size: 24px;
+      letter-spacing: 1.2px;
+      color: #fff;
+      line-height: 1.6;
+      text-transform: uppercase;
+    }
+    .hero-subtitle {
+      position: absolute;
+      top: 182.5px;
+      left: 316px;
+      transform: translate(-50%, -50%);
+      font-family: 'Zen Old Mincho', serif;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 0.9px;
+      color: #fff;
+      line-height: 1.6;
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    /* ── SERVICE INTRO ── */
+    .service-intro {
+      width: 1440px;
+      padding-top: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+      align-items: center;
+    }
+    .service-intro-text {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+    .service-intro-headline {
+      font-family: 'Zen Old Mincho', serif;
+      font-weight: 700;
+      font-size: 32px;
+      letter-spacing: 1.6px;
+      color: #00622f;
+      line-height: 1.8;
+      text-align: center;
+    }
+    .vertical-line {
+      width: 1px;
+      height: 80px;
+      background: rgba(0,98,47,0.3);
+    }
+
+    /* ── SERVICE ITEMS ── */
+    .service-items {
+      width: 1440px;
+      background: rgba(0,98,47,0.03);
+    }
+    .service-row {
+      display: flex;
+      gap: 80px;
+      align-items: center;
+      width: 100%;
+    }
+    .service-row-1 { padding-right: 80px; }
+    .service-row-2 { padding-left: 80px; }
+    .service-img {
+      width: 720px;
+      height: 700px;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .service-img img { position: absolute; max-width: none; }
+    .service-img-1 img {
+      height: 100%;
+      left: -116.5%;
+      top: 0.06%;
+      width: 332.93%;
+    }
+    .service-img-2 img {
+      height: 100%;
+      left: -42.09%;
+      top: -0.03%;
+      width: 149.45%;
+    }
+    .service-text {
+      width: 560px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .service-label-en {
+      font-family: 'Cormorant', serif;
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: 1px;
+      color: #7e7c57;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+    .service-title {
+      font-family: 'Zen Old Mincho', serif;
+      font-weight: 500;
+      font-size: 32px;
+      letter-spacing: 1.6px;
+      color: #00622f;
+      line-height: 1.8;
+    }
+    .divider-h {
+      width: 100%;
+      height: 1px;
+      background: rgba(0,98,47,0.3);
+      flex-shrink: 0;
+    }
+    .service-body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      letter-spacing: 0.9px;
+      color: #333;
+      line-height: 2;
+    }
+    .service-tags {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .service-tags-row {
+      display: flex;
+      gap: 16px;
+    }
+    .service-tag {
+      flex: 1;
+      border-left: 6px solid rgba(0,98,47,0.2);
+      background: rgba(0,98,47,0.05);
+      padding: 12px 40px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 15px;
+      letter-spacing: 0.75px;
+      color: #00622f;
+      line-height: 1.6;
+    }
+
+    /* ── FLOW ── */
+    .flow-section {
+      width: 1440px;
+      padding: 100px 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .flow-inner {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      align-items: center;
+    }
+    .flow-title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+    .flow-diamond {
+      width: 14.667px;
+      height: 16px;
+    }
+    .flow-title-ja {
+      font-family: 'Zen Old Mincho', serif;
+      font-weight: 700;
+      font-size: 40px;
+      letter-spacing: 8px;
+      color: #00622f;
+      line-height: 1.4;
+    }
+    .flow-title-en {
+      font-family: 'Cormorant', serif;
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: 1px;
+      color: #7e7c57;
+      line-height: 1.6;
+    }
+    .flow-cards {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      width: 100%;
+    }
+    .flow-card-wrap {
+      display: flex;
+      align-items: center;
+      flex: 1;
+    }
+    .flow-card {
+      flex: 1;
+      background: #fff;
+      border: 1px solid rgba(0,98,47,0.2);
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+      padding: 24px 20px 40px;
+    }
+    .flow-num {
+      font-family: 'Cormorant', serif;
+      font-weight: 500;
+      font-size: 40px;
+      letter-spacing: 2px;
+      color: #7e7c57;
+      line-height: 1;
+      text-align: center;
+    }
+    .flow-icon-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+    .flow-icon-circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: linear-gradient(204.97deg, rgba(0,98,47,0.15) 10.901%, rgba(0,98,47,0.3) 89.357%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .flow-icon-circle img {
+      width: 40px;
+      height: 40px;
+      display: block;
+    }
+    .flow-card-title {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      font-size: 18px;
+      letter-spacing: 0.9px;
+      color: #333;
+      line-height: 1.6;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .flow-card-desc {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.7px;
+      color: #666;
+      line-height: 2;
+      text-align: center;
+    }
+    .flow-arrow {
+      width: 30px;
+      height: 18px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .flow-arrow img {
+      width: 30px;
+      height: 18px;
+      transform: rotate(90deg);
+      display: block;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      position: relative;
+      width: 1440px;
+      padding: 100px 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .cta-bg {
+      position: absolute;
+      inset: 0;
+    }
+    .cta-bg img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      object-fit: cover;
+      object-position: bottom;
+    }
+    .cta-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,98,47,0.5);
+    }
+    .cta-inner {
+      position: relative;
+      width: 1180px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+    .cta-text {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      align-items: flex-start;
+      filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.1));
+    }
+    .cta-title {
+      font-family: 'Cormorant', serif;
+      font-weight: 500;
+      font-size: 60px;
+      letter-spacing: 3px;
+      color: #fff;
+      line-height: 1;
+    }
+    .cta-subtitle {
+      font-family: 'Zen Old Mincho', serif;
+      font-weight: 600;
+      font-size: 28px;
+      letter-spacing: 1.4px;
+      color: #fff;
+      line-height: 1.8;
+    }
+    .btn-text-white {
+      border-bottom: 1px solid #fff;
+      display: inline-flex;
+      gap: 24px;
+      align-items: center;
+      padding-bottom: 20px;
+      text-decoration: none;
+    }
+    .btn-text-white span.label {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      font-size: 20px;
+      letter-spacing: 1px;
+      color: #fff;
+      line-height: 1.6;
+      white-space: nowrap;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: #fff;
+      box-shadow: 0 4px 5px rgba(0,98,47,0.1);
+      width: 1440px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      align-items: center;
+      padding: 48px 28px 60px;
+    }
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      align-items: center;
+    }
+    .footer-logo {
+      width: 304px;
+      height: 136.8px;
+      overflow: hidden;
+      position: relative;
+      text-decoration: none;
+      display: block;
+    }
+    .footer-logo img {
+      position: absolute;
+      height: 353.62%;
+      left: -29.33%;
+      top: -112.49%;
+      width: 159.13%;
+      max-width: none;
+    }
+    .footer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      align-items: center;
+    }
+    .footer-nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+    .footer-nav-links a, .footer-nav-links span {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      color: #00622f;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .footer-nav-links a { font-size: 16px; letter-spacing: 0.8px; line-height: 1.6; }
+    .footer-nav-links .sep { font-size: 14px; letter-spacing: 0.7px; line-height: 1.6; }
+    .footer-privacy {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.55px;
+      color: #00622f;
+      line-height: 1.6;
+      text-decoration: none;
+    }
+    .footer-copy {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.55px;
+      color: #00622f;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <a href="./index.html" class="header-logo">
+    <img src="./assets/images/service/logo.png" alt="経理インテグレート">
+  </a>
+  <nav class="header-nav">
+    <a href="./index.html">TOP</a>
+    <a href="./service.html">サービス</a>
+    <a href="./about.html#company">会社概要</a>
+    <a href="#" class="header-cta-btn">
+      <span class="label">無料相談</span>
+      <span class="arrow-icon">
+        <img src="./assets/images/service/arrow-24.svg" alt="" width="24" height="24">
+      </span>
+    </a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-photo">
+    <img src="./assets/images/service/hero-bg.png" alt="">
+  </div>
+  <div class="hero-gradient"></div>
+  <div class="hero-text">
+    <div class="hero-title-row">
+      <h1 class="hero-title-ja">サービス</h1>
+      <span class="hero-title-en">SERVICE</span>
+    </div>
+  </div>
+  <p class="hero-subtitle">経営を動かす「正しい会計」を、貴社の最強の武器へ。</p>
+</section>
+
+<!-- SERVICE INTRO -->
+<div class="service-intro">
+  <div class="service-intro-text">
+    <h2 class="service-intro-headline">会計を、経営の「意思決定」を支える<br>血の通った仕組みに。</h2>
+    <div class="vertical-line"></div>
+  </div>
+
+  <!-- SERVICE ITEMS -->
+  <div class="service-items">
+    <!-- Row 1: image left, text right -->
+    <div class="service-row service-row-1" id="ipo">
+      <div class="service-img service-img-1">
+        <img src="./assets/images/service/service-01.png" alt="IPO準備・高度管理体制構築支援">
+      </div>
+      <div class="service-text">
+        <p class="service-label-en">Management Structure</p>
+        <h3 class="service-title">IPO準備・高度管理体制構築支援</h3>
+        <div class="divider-h"></div>
+        <div>
+          <p class="service-body">形式的な整備ではなく、上場後の成長も見据えた実効性のある体制を構築します。</p>
+          <p class="service-body">経理部門の立ち上げから上場審査対応まで、全体感を見据えつつも状況に即して支援を実施いたします。</p>
+        </div>
+        <div class="service-tags">
+          <div class="service-tags-row">
+            <div class="service-tag">経理部門の<br>立ち上げ・内製化</div>
+            <div class="service-tag">意思決定を支える<br>管理会計の構築</div>
+          </div>
+          <div class="service-tags-row">
+            <div class="service-tag">J-SOX（内部統制）<br>構築</div>
+            <div class="service-tag">証券審査・<br>監査法人対応</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: text left, image right -->
+    <div class="service-row service-row-2" id="handson">
+      <div class="service-text">
+        <p class="service-label-en">Hands-on Support</p>
+        <h3 class="service-title">ハンズオン型経理・財務実務支援</h3>
+        <div class="divider-h"></div>
+        <div>
+          <p class="service-body">リソース不足や複雑な実務課題に対し、実務担当者として直接課題を解決します。</p>
+          <p class="service-body">Excelのシート一枚から業務フローの一つまで、現場に寄り添い共に作り直します。</p>
+        </div>
+        <div class="service-tags">
+          <div class="service-tags-row">
+            <div class="service-tag">決算早期化・<br>業務フロー改善</div>
+            <div class="service-tag">決算・開示資料<br>作成支援</div>
+          </div>
+          <div class="service-tags-row">
+            <div class="service-tag">M&amp;A・<br>PMI支援</div>
+            <div class="service-tag">経理BPOおよび財務数値の可視化支援</div>
+          </div>
+        </div>
+      </div>
+      <div class="service-img service-img-2">
+        <img src="./assets/images/service/service-02.png" alt="ハンズオン型経理・財務実務支援">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FLOW -->
+<section class="flow-section">
+  <div class="flow-inner">
+    <div class="flow-title-block">
+      <img class="flow-diamond" src="./assets/images/service/diamond.svg" alt="">
+      <h2 class="flow-title-ja">支援開始までの流れ</h2>
+      <span class="flow-title-en">FLOW</span>
+    </div>
+    <div class="flow-cards">
+      <!-- Card 01 -->
+      <div class="flow-card-wrap">
+        <div class="flow-card">
+          <p class="flow-num">01</p>
+          <div class="flow-icon-wrap">
+            <div class="flow-icon-circle">
+              <img src="./assets/images/service/icon-chat.svg" alt="">
+            </div>
+            <p class="flow-card-title">ヒアリング・現状分析</p>
+          </div>
+          <p class="flow-card-desc">現在の課題や組織体制を<br>詳しくお伺いします。</p>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <img src="./assets/images/service/arrow-flow.svg" alt="">
+      </div>
+      <!-- Card 02 -->
+      <div class="flow-card-wrap">
+        <div class="flow-card">
+          <p class="flow-num">02</p>
+          <div class="flow-icon-wrap">
+            <div class="flow-icon-circle">
+              <img src="./assets/images/service/icon-search.svg" alt="">
+            </div>
+            <p class="flow-card-title">課題特定・計画策定</p>
+          </div>
+          <p class="flow-card-desc">最短ルートでの改善・<br>構築プランをご提案します。</p>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <img src="./assets/images/service/arrow-flow.svg" alt="">
+      </div>
+      <!-- Card 03 -->
+      <div class="flow-card-wrap">
+        <div class="flow-card">
+          <p class="flow-num">03</p>
+          <div class="flow-icon-wrap">
+            <div class="flow-icon-circle">
+              <img src="./assets/images/service/icon-gear.svg" alt="">
+            </div>
+            <p class="flow-card-title">業務フロー設計・ルール化</p>
+          </div>
+          <p class="flow-card-desc">現場が迷わない具体的な<br>マニュアルを整備します。</p>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <img src="./assets/images/service/arrow-flow.svg" alt="">
+      </div>
+      <!-- Card 04 -->
+      <div class="flow-card-wrap">
+        <div class="flow-card">
+          <p class="flow-num">04</p>
+          <div class="flow-icon-wrap">
+            <div class="flow-icon-circle">
+              <img src="./assets/images/service/icon-user.svg" alt="">
+            </div>
+            <p class="flow-card-title">定着・伴走サポート</p>
+          </div>
+          <p class="flow-card-desc">体制が定着するまで<br>伴走します。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg">
+    <img src="./assets/images/service/cta-bg.png" alt="">
+    <div class="cta-overlay"></div>
+  </div>
+  <div class="cta-inner">
+    <div class="cta-text">
+      <p class="cta-title">CONTACT</p>
+      <p class="cta-subtitle">まずはお気軽にご相談ください。</p>
+    </div>
+    <a href="#" class="btn-text-white">
+      <span class="label">無料相談・お問い合わせはこちら</span>
+      <span class="arrow-icon">
+        <img src="./assets/images/service/arrow-40.svg" alt="" width="40" height="40">
+      </span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <a href="./index.html" class="footer-logo">
+      <img src="./assets/images/service/footer-logo.png" alt="経理インテグレート">
+    </a>
+    <nav class="footer-nav">
+      <div class="footer-nav-links">
+        <a href="./index.html">TOP</a>
+        <span class="sep">｜</span>
+        <a href="./service.html">サービス</a>
+        <span class="sep">｜</span>
+        <a href="./about.html#company">会社概要</a>
+        <span class="sep">｜</span>
+        <a href="#">お問い合わせ</a>
+      </div>
+      <a href="#" class="footer-privacy">プライバシーポリシー</a>
+    </nav>
+  </div>
+  <p class="footer-copy">© 2026 会計事務所 経理インテグレート All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
