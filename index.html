@@ -807,6 +807,149 @@
       color: #00622f;
       line-height: 1.6;
     }
+
+    /* ══ HAMBURGER ══ */
+    .hamburger-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 6px;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 70px;
+      padding: 0 10px;
+      flex-shrink: 0;
+    }
+    .hamburger-btn span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #00622f;
+      border-radius: 1px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger-btn.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger-btn.open span:nth-child(2) { opacity: 0; }
+    .hamburger-btn.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      right: 0;
+      background: #fff;
+      z-index: 98;
+      flex-direction: column;
+      padding: 0 24px 24px;
+      box-shadow: 0 8px 16px rgba(0,98,47,0.1);
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      display: block;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      color: #333;
+      text-decoration: none;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(0,98,47,0.1);
+      letter-spacing: 0.8px;
+    }
+    .mobile-nav .mobile-cta-link {
+      margin-top: 16px;
+      background: #00622f;
+      color: #fff !important;
+      text-align: center;
+      padding: 14px 0 !important;
+      border-bottom: none !important;
+      border-radius: 2px;
+    }
+
+    /* ══ RESPONSIVE TABLET ≤1023px ══ */
+    @media (max-width: 1023px) {
+      body { min-width: 0; overflow-x: hidden; }
+      .header { width: 100%; }
+      .header-nav > a:not(.header-cta-btn) { display: none; }
+      .header-cta-btn { display: none; }
+      .hamburger-btn { display: flex; }
+
+      .fv { width: 100%; height: 700px; }
+      .fv-bg { width: calc(100% - 40px); left: calc(50% + 40px); }
+
+      .message-section { width: 100%; padding: 80px 40px; }
+      .message-inner { width: 100%; }
+      .message-body { flex-direction: column; gap: 48px; align-items: center; }
+      .message-photo-col { width: 100%; max-width: 370px; align-self: center; }
+      .message-photo { width: 100%; max-width: 370px; }
+
+      .reasons-section { width: 100%; padding: 80px 40px; }
+      .reasons-cards { flex-direction: column; align-items: center; gap: 48px; }
+      .reason-card { width: 100%; max-width: 420px; }
+
+      .service-section { width: 100%; }
+      .service-inner { width: 100%; }
+      .service-items { width: 100%; }
+      .service-row { flex-direction: column; gap: 0; }
+      .service-row-1 { padding-right: 0; }
+      .service-row-2 { padding-left: 0; flex-direction: column-reverse; }
+      .service-img { width: 100%; height: 320px; }
+      .service-text-col { padding: 48px 40px; width: 100%; }
+
+      .page-links-section { width: 100%; padding: 80px 40px; }
+      .page-links-inner { flex-direction: column; align-items: stretch; max-width: 420px; margin: 0 auto; }
+      .page-link-card { width: 100%; }
+
+      .cta-section { width: 100%; padding: 70px 40px; }
+      .cta-inner { width: 100%; flex-direction: column; gap: 36px; align-items: flex-start; }
+      .cta-subtitle { font-size: 22px; }
+
+      .footer { width: 100%; }
+      .footer-nav-links { flex-wrap: wrap; justify-content: center; gap: 12px; }
+    }
+
+    /* ══ RESPONSIVE MOBILE ≤767px ══ */
+    @media (max-width: 767px) {
+      .fv { height: auto; min-height: 0; }
+      .fv-bg { position: relative; height: 260px; width: 100%; left: 0; top: 0; transform: none; border-radius: 0 0 30px 30px; }
+      .fv-content { position: relative; bottom: auto; left: auto; padding: 32px 20px 40px; border-radius: 0; width: 100%; }
+      .fv-deco { display: none; }
+      .fv-headline-sub { font-size: 18px; }
+      .fv-headline-main { font-size: 26px; }
+      .fv-body p { font-size: 14px; }
+      .fv-buttons { flex-direction: column; gap: 12px; padding: 0; align-items: stretch; }
+      .btn-primary, .btn-outline { width: 100%; }
+
+      .message-section { padding: 60px 20px; }
+      .message-headline { font-size: 24px; }
+      .message-text p { font-size: 15px; }
+      .message-photo-col { max-width: 100%; }
+      .message-photo { max-width: 100%; height: 400px; }
+      .message-name-card { width: 220px; }
+
+      .reasons-section { padding: 60px 20px; }
+      .section-title-ja { font-size: 28px; letter-spacing: 4px; }
+      .reason-card { max-width: 100%; }
+      .reason-title { font-size: 20px; }
+      .reason-body { font-size: 15px; }
+
+      .service-title { font-size: 22px; }
+      .service-body { font-size: 15px; }
+      .service-text-col { padding: 32px 20px; }
+
+      .page-links-section { padding: 60px 20px; }
+      .page-link-card { padding: 28px; }
+      .page-link-ja { font-size: 22px; }
+
+      .cta-section { padding: 60px 20px; }
+      .cta-title { font-size: 44px; }
+      .cta-subtitle { font-size: 18px; }
+
+      .footer { padding: 40px 20px 48px; }
+      .footer-copy { text-align: center; font-size: 10px; }
+    }
   </style>
 </head>
 <body>
@@ -827,7 +970,16 @@
       </span>
     </a>
   </nav>
+  <button class="hamburger-btn" id="hamburger-btn" aria-label="メニューを開く">
+    <span></span><span></span><span></span>
+  </button>
 </header>
+<div class="mobile-nav" id="mobile-nav">
+  <a href="./index.html">TOP</a>
+  <a href="./service.html">サービス</a>
+  <a href="./about.html">会社概要</a>
+  <a href="./contact.html" class="mobile-cta-link">無料相談・お問い合わせ</a>
+</div>
 
 <!-- FV / HERO -->
 <section class="fv">
@@ -1109,5 +1261,19 @@
   <p class="footer-copy">© 2026 会計事務所 経理インテグレート All Rights Reserved.</p>
 </footer>
 
+<script>
+  const btn = document.getElementById('hamburger-btn');
+  const nav = document.getElementById('mobile-nav');
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('open');
+    nav.classList.toggle('open');
+  });
+  document.addEventListener('click', (e) => {
+    if (!btn.contains(e.target) && !nav.contains(e.target)) {
+      btn.classList.remove('open');
+      nav.classList.remove('open');
+    }
+  });
+</script>
 </body>
 </html>

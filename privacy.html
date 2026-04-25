@@ -345,6 +345,111 @@
       line-height: 1.6;
       text-align: center;
     }
+
+    /* ══ HAMBURGER ══ */
+    .hamburger-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 6px;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 70px;
+      padding: 0 10px;
+      flex-shrink: 0;
+    }
+    .hamburger-btn span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #00622f;
+      border-radius: 1px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger-btn.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger-btn.open span:nth-child(2) { opacity: 0; }
+    .hamburger-btn.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      right: 0;
+      background: #fff;
+      z-index: 98;
+      flex-direction: column;
+      padding: 0 24px 24px;
+      box-shadow: 0 8px 16px rgba(0,98,47,0.1);
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      display: block;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      color: #333;
+      text-decoration: none;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(0,98,47,0.1);
+      letter-spacing: 0.8px;
+    }
+    .mobile-nav .mobile-cta-link {
+      margin-top: 16px;
+      background: #00622f;
+      color: #fff !important;
+      text-align: center;
+      padding: 14px 0 !important;
+      border-bottom: none !important;
+      border-radius: 2px;
+    }
+
+    /* ══ RESPONSIVE TABLET ≤1023px ══ */
+    @media (max-width: 1023px) {
+      body { min-width: 0; overflow-x: hidden; }
+      .header { width: 100%; }
+      .header-nav > a:not(.header-cta-btn) { display: none; }
+      .header-cta-btn { display: none; }
+      .hamburger-btn { display: flex; }
+
+      .hero { width: 100%; }
+      .hero-photo { width: calc(100% - 40px); }
+      .hero-gradient { width: calc(100% - 40px); }
+
+      .policy-section { width: 100%; padding: 80px 40px 100px; }
+      .policy-inner { width: 100%; }
+
+      .cta-section { width: 100%; padding: 70px 40px; }
+      .cta-inner { width: 100%; flex-direction: column; gap: 36px; align-items: flex-start; }
+      .cta-subtitle { font-size: 22px; }
+
+      .footer { width: 100%; }
+      .footer-nav-links { flex-wrap: wrap; justify-content: center; gap: 12px; }
+    }
+
+    /* ══ RESPONSIVE MOBILE ≤767px ══ */
+    @media (max-width: 767px) {
+      .hero { height: 200px; }
+      .hero-photo { height: 165px; width: calc(100% - 32px); border-radius: 20px; }
+      .hero-gradient { height: 165px; width: calc(100% - 32px); border-radius: 20px; }
+      .hero-text { padding-left: 24px; }
+      .hero-title-ja { font-size: 22px; letter-spacing: 1px; }
+      .hero-title-en { font-size: 14px; }
+
+      .policy-section { padding: 60px 20px 80px; }
+      .policy-heading { font-size: 16px; }
+      .policy-body { font-size: 14px; }
+
+      .cta-section { padding: 60px 20px; }
+      .cta-title { font-size: 44px; }
+      .cta-subtitle { font-size: 18px; }
+
+      .footer { padding: 40px 20px 48px; }
+      .footer-nav-links { gap: 10px; }
+      .footer-copy { font-size: 10px; }
+    }
   </style>
 </head>
 <body>
@@ -365,7 +470,16 @@
       </span>
     </a>
   </nav>
+  <button class="hamburger-btn" id="hamburger-btn" aria-label="メニューを開く">
+    <span></span><span></span><span></span>
+  </button>
 </header>
+<div class="mobile-nav" id="mobile-nav">
+  <a href="./index.html">TOP</a>
+  <a href="./service.html">サービス</a>
+  <a href="./about.html">会社概要</a>
+  <a href="./contact.html" class="mobile-cta-link">無料相談・お問い合わせ</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -480,5 +594,19 @@
   <p class="footer-copy">© 2026 会計事務所 経理インテグレート All Rights Reserved.</p>
 </footer>
 
+<script>
+  const btn = document.getElementById('hamburger-btn');
+  const nav = document.getElementById('mobile-nav');
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('open');
+    nav.classList.toggle('open');
+  });
+  document.addEventListener('click', (e) => {
+    if (!btn.contains(e.target) && !nav.contains(e.target)) {
+      btn.classList.remove('open');
+      nav.classList.remove('open');
+    }
+  });
+</script>
 </body>
 </html>
