@@ -356,15 +356,11 @@
     }
     .message-photo-col {
       position: relative;
-      display: inline-grid;
-      grid-template-columns: max-content;
-      grid-template-rows: max-content;
-      align-items: start;
       flex-shrink: 0;
+      width: 370px;
+      height: 524px;
     }
     .message-photo {
-      grid-column: 1;
-      grid-row: 1;
       width: 370px;
       height: 524px;
       overflow: hidden;
@@ -379,17 +375,16 @@
       max-width: none;
     }
     .message-name-card {
-      grid-column: 1;
-      grid-row: 1;
-      align-self: end;
+      position: absolute;
+      bottom: 33px;
+      left: 0;
       background: rgba(255,255,255,0.95);
       box-shadow: 5px 5px 0 #008026;
       display: flex;
       flex-direction: column;
       gap: 2px;
       padding: 8px 28px;
-      width: 370px;
-      margin-top: 408px;
+      width: 284.73px;
     }
     .message-name-row {
       display: flex;
@@ -828,7 +823,7 @@
     <a href="#" class="header-cta-btn">
       <span>無料相談</span>
       <span class="arrow-icon">
-        <img src="./assets/images/arrow-24-white.png" alt="" width="24" height="24">
+        <img src="./assets/images/arrow-24-white.svg" alt="" width="24" height="24">
       </span>
     </a>
   </nav>
@@ -857,23 +852,23 @@
         <a href="#" class="btn-primary">
           <span>無料で相談する</span>
           <span class="arrow-icon">
-            <img src="./assets/images/arrow-24-white.png" alt="" width="24" height="24">
+            <img src="./assets/images/arrow-24-white.svg" alt="" width="24" height="24">
           </span>
         </a>
         <a href="#" class="btn-outline">
           <span>提供サービスを見る</span>
           <span class="arrow-icon">
-            <img src="./assets/images/arrow-24-green.png" alt="" width="24" height="24">
+            <img src="./assets/images/arrow-24-green.svg" alt="" width="24" height="24">
           </span>
         </a>
       </div>
     </div>
   </div>
   <div class="fv-deco fv-deco-1">
-    <img src="./assets/images/deco-exclude.png" alt="" width="50" height="50">
+    <img src="./assets/images/deco-exclude.svg" alt="" width="50" height="50">
   </div>
   <div class="fv-deco fv-deco-2">
-    <img src="./assets/images/deco-exclude.png" alt="" width="50" height="50">
+    <img src="./assets/images/deco-exclude.svg" alt="" width="50" height="50">
   </div>
 </section>
 
@@ -883,13 +878,13 @@
   <div class="message-inner">
     <div class="section-title-wrap">
       <div class="section-title-diamond">
-        <img src="./assets/images/diamond.png" alt="" width="14.667" height="16">
+        <img src="./assets/images/diamond.svg" alt="" width="14.667" height="16">
       </div>
       <h2 class="section-title-ja">代表挨拶</h2>
       <div class="section-subtitle-row">
-        <img src="./assets/images/diamond-left.png" alt="" width="11" height="12">
+        <img src="./assets/images/diamond-left.svg" alt="" width="11" height="12">
         <span class="section-title-en">MESSAGE</span>
-        <img src="./assets/images/diamond-right.png" alt="" width="11" height="12">
+        <img src="./assets/images/diamond-right.svg" alt="" width="11" height="12">
       </div>
     </div>
     <div class="message-body">
@@ -907,7 +902,7 @@
           <a href="#" class="btn-text">
             <span>代表挨拶はこちら</span>
             <span class="arrow-icon">
-              <img src="./assets/images/arrow-24-green.png" alt="" width="24" height="24">
+              <img src="./assets/images/arrow-24-green.svg" alt="" width="24" height="24">
             </span>
           </a>
         </div>
@@ -933,7 +928,7 @@
 <section class="reasons-section">
   <div class="reasons-inner">
     <div class="reasons-title-wrap">
-      <img src="./assets/images/diamond.png" alt="" width="14.667" height="16">
+      <img src="./assets/images/diamond.svg" alt="" width="14.667" height="16">
       <h2 class="section-title-ja" style="text-align:center;">経理インテグレートが<br>選ばれる理由</h2>
       <span class="section-title-en">REASONS</span>
     </div>
@@ -982,7 +977,7 @@
 <section class="service-section">
   <div class="service-inner">
     <div class="service-title-wrap">
-      <img src="./assets/images/diamond.png" alt="" width="14.667" height="16">
+      <img src="./assets/images/diamond.svg" alt="" width="14.667" height="16">
       <h2 class="section-title-ja" style="letter-spacing:8px;">提供サービス</h2>
       <span class="section-title-en">SERVICE</span>
     </div>
@@ -1005,7 +1000,7 @@
             <a href="#" class="btn-text">
               <span>詳細を見る</span>
               <span class="arrow-icon">
-                <img src="./assets/images/arrow-24-green.png" alt="" width="24" height="24">
+                <img src="./assets/images/arrow-24-green.svg" alt="" width="24" height="24">
               </span>
             </a>
           </div>
@@ -1026,7 +1021,7 @@
             <a href="#" class="btn-text">
               <span>詳細を見る</span>
               <span class="arrow-icon">
-                <img src="./assets/images/arrow-24-green.png" alt="" width="24" height="24">
+                <img src="./assets/images/arrow-24-green.svg" alt="" width="24" height="24">
               </span>
             </a>
           </div>
@@ -1048,7 +1043,7 @@
         <span class="page-link-en">SERVICE</span>
       </div>
       <span class="arrow-icon">
-        <img src="./assets/images/arrow-40-white.png" alt="" width="40" height="40">
+        <img src="./assets/images/arrow-40-white.svg" alt="" width="40" height="40">
       </span>
     </a>
     <a href="#" class="page-link-card">
@@ -1057,7 +1052,7 @@
         <span class="page-link-en">MESSAGE</span>
       </div>
       <span class="arrow-icon">
-        <img src="./assets/images/arrow-40-white.png" alt="" width="40" height="40">
+        <img src="./assets/images/arrow-40-white.svg" alt="" width="40" height="40">
       </span>
     </a>
     <a href="#" class="page-link-card">
@@ -1066,7 +1061,7 @@
         <span class="page-link-en">COMPANY</span>
       </div>
       <span class="arrow-icon">
-        <img src="./assets/images/arrow-40-white.png" alt="" width="40" height="40">
+        <img src="./assets/images/arrow-40-white.svg" alt="" width="40" height="40">
       </span>
     </a>
   </div>
@@ -1086,7 +1081,7 @@
     <a href="#" class="btn-text-white">
       <span>無料相談・お問い合わせはこちら</span>
       <span class="arrow-icon">
-        <img src="./assets/images/arrow-40-white.png" alt="" width="40" height="40">
+        <img src="./assets/images/arrow-40-white.svg" alt="" width="40" height="40">
       </span>
     </a>
   </div>

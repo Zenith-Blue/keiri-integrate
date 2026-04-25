@@ -1,0 +1,12 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 628 681.428" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Intersect" filter="url(#filter0_f_0_107)">
+<path d="M572.333 20C581.937 20 591.483 20.2452 600.967 20.7295C605.593 49.5022 608 79.0182 608 109.096C608 414.14 360.712 661.428 55.667 661.428C46.0628 661.428 36.516 661.182 27.0322 660.697C22.4058 631.925 20 602.41 20 572.333C20 267.288 267.288 20 572.333 20Z" fill="var(--fill-0, #00622F)" fill-opacity="0.1"/>
+</g>
+<defs>
+<filter id="filter0_f_0_107" x="0" y="0" width="628" height="681.428" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="10" result="effect1_foregroundBlur_0_107"/>
+</filter>
+</defs>
+</svg>

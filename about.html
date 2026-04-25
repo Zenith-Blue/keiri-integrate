@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>会社概要｜経理インテグレート</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,700;1,500&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Old+Mincho:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #fff;
+      color: #333;
+      min-width: 1440px;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: #fff;
+      box-shadow: 0 4px 5px rgba(0,98,47,0.1);
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-left: 28px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 1440px;
+    }
+    .header-logo {
+      width: 290px;
+      height: 40px;
+      overflow: hidden;
+      position: relative;
+    }
+    .header-logo img {
+      position: absolute;
+      height: 152.5%;
+      left: -5.46%;
+      top: -32.5%;
+      width: 110.93%;
+      max-width: none;
+    }
+    .header-nav {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+    .header-nav a {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      letter-spacing: 0.8px;
+      color: #00622f;
+      text-decoration: none;
+      line-height: 1.6;
+    }
+    .header-cta-btn {
+      background: #00622f;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 24px 16px 36px;
+      height: 70px;
+      text-decoration: none;
+    }
+    .header-cta-btn span.label {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.8px;
+      color: #fff;
+      line-height: 1.6;
+    }
+    .arrow-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transform: rotate(180deg) scaleY(-1);
+      flex-shrink: 0;
+    }
+
+    /* ── HERO / 下層タイトル ── */
+    .hero {
+      position: relative;
+      width: 1440px;
+      height: 295px;
+      overflow: hidden;
+    }
+    .hero-photo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1400px;
+      height: 255px;
+      border-radius: 40px;
+      overflow: hidden;
+      filter: blur(1px);
+    }
+    .hero-photo img {
+      position: absolute;
+      max-width: none;
+    }
+    .hero-photo img.img1 {
+      height: 187.26%;
+      left: -2.09%;
+      top: -22.49%;
+      width: 108.6%;
+    }
+    .hero-photo img.img2 {
+      height: 339.29%;
+      left: -0.02%;
+      top: -233.48%;
+      width: 111.93%;
+    }
+    .hero-gradient {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1400px;
+      height: 255px;
+      border-radius: 40px;
+      background: linear-gradient(82.41deg, rgba(0,98,47,0.6) 28.787%, rgba(0,98,47,0.2) 97.41%);
+      display: flex;
+      align-items: center;
+    }
+    .hero-text {
+      padding-left: 80px;
+    }
+    .hero-title-row {
+      display: flex;
+      gap: 28px;
+      align-items: baseline;
+    }
+    .hero-title-ja {
+      font-family: 'Zen Old Mincho', serif;
+      font-weight: 700;
+      font-size: 40px;
+      letter-spacing: 2px;
+      color: #fff;
+      line-height: 1.4;
+    }
+    .hero-title-en {
+      font-family: 'Cormorant', serif;
+      font-weight: 700;
+      font-size: 24px;
+      letter-spacing: 1.2px;
+      color: #fff;
+      line-height: 1.6;
+      text-transform: uppercase;
+    }
+
+    /* ── MESSAGE SECTION ── */
+    .message-section {
+      position: relative;
+      width: 1440px;
+      padding: 120px 130px;
+      overflow: hidden;
+      background: #fff;
+    }
+    /* decorative background elements */
+    .deco-intersect-bl {
+      position: absolute;
+      width: 649.944px;
+      height: 709px;
+      left: -241px;
+      top: 777px;
+      transform: rotate(180deg) scaleY(-1);
+      pointer-events: none;
+      overflow: visible;
+    }
+    .deco-intersect-bl img {
+      position: absolute;
+      inset: -2.82% -3.08%;
+      width: calc(100% + 6.16%);
+      height: calc(100% + 5.64%);
+      max-width: none;
+    }
+    .deco-bg-img {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1440px;
+      height: 827px;
+      opacity: 0.25;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .deco-bg-img img {
+      position: absolute;
+      height: 100.6%;
+      left: -3.19%;
+      top: -0.6%;
+      width: 106.39%;
+      max-width: none;
+    }
+    .deco-intersect-r {
+      position: absolute;
+      width: 588px;
+      height: 641.428px;
+      left: 1003px;
+      top: 319px;
+      pointer-events: none;
+      overflow: visible;
+    }
+    .deco-intersect-r img {
+      position: absolute;
+      inset: -3.12% -3.4%;
+      width: calc(100% + 6.8%);
+      height: calc(100% + 6.24%);
+      max-width: none;
+    }
+
+    /* section inner */
+    .message-inner {
+      position: relative;
+      width: 1180px;
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+      align-items: center;
+      margin: 0 auto;
+    }
+
+    /* section title */
+    .section-title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+    }
+    .section-title-ja {
+      font-family: 'Zen Old Mincho', serif;
+      font-weight: 700;
+      font-size: 40px;
+      letter-spacing: 8px;
+      color: #00622f;
+      line-height: 1.4;
+      text-align: center;
+    }
+    .section-subtitle-row {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .section-title-en {
+      font-family: 'Cormorant', serif;
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: 1px;
+      color: #7e7c57;
+      line-height: 20px;
+      text-align: center;
+    }
+    .diamond-sm {
+      width: 11px;
+      height: 12px;
+      flex-shrink: 0;
+    }
+
+    /* body layout */
+    .message-body {
+      width: 100%;
+    }
+
+    /* top block: headline + text + photo */
+    .message-top {
+      display: flex;
+      gap: 60px;
+      align-items: flex-start;
+      width: 100%;
+      margin-bottom: 80px;
+    }
+    .message-text-col {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .msg-headline {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .msg-headline-item {
+      font-family: 'Zen Old Mincho', serif;
+      font-weight: 700;
+      font-size: 28px;
+      letter-spacing: 1.4px;
+      color: #00622f;
+      line-height: 1.8;
+    }
+    .divider-line {
+      width: 100%;
+      height: 1px;
+      background: rgba(0,98,47,0.3);
+      flex-shrink: 0;
+    }
+    .msg-body-text {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .msg-body-text p {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      letter-spacing: 0.8px;
+      color: #333;
+      line-height: 2;
+    }
+
+    /* photo + name card */
+    .message-photo-col {
+      flex-shrink: 0;
+      position: relative;
+      width: 430px;
+      height: 608.974px;
+    }
+    .rep-photo {
+      width: 430px;
+      height: 608.974px;
+      overflow: hidden;
+      position: relative;
+    }
+    .rep-photo img {
+      position: absolute;
+      height: 106.11%;
+      left: -0.1%;
+      top: -3.05%;
+      width: 100.19%;
+      max-width: none;
+    }
+    .rep-name-card {
+      position: absolute;
+      bottom: 33px;
+      left: 0;
+      width: 284.73px;
+      background: rgba(255,255,255,0.95);
+      box-shadow: 5px 5px 0 #008026;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 8px 28px;
+    }
+    .rep-name-row {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      font-family: 'Zen Old Mincho', serif;
+      font-weight: 500;
+      color: #333;
+      white-space: nowrap;
+    }
+    .rep-name-role { font-size: 18px; letter-spacing: 3.6px; line-height: 1.6; }
+    .rep-name-name { font-size: 24px; letter-spacing: 4.8px; line-height: 1.6; }
+    .rep-name-roman {
+      font-family: 'Cormorant', serif;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 1.5px;
+      color: #555;
+      text-transform: uppercase;
+      line-height: 2;
+    }
+
+    /* bottom block: side photo + long text */
+    .message-bottom {
+      display: flex;
+      gap: 100px;
+      align-items: flex-end;
+      width: 100%;
+    }
+    .side-photo {
+      width: 340px;
+      height: 598px;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .side-photo img {
+      position: absolute;
+      height: 90.3%;
+      left: -56.66%;
+      top: 9.73%;
+      width: 291.18%;
+      max-width: none;
+    }
+    .message-long-text {
+      flex: 0 0 740px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      align-items: flex-start;
+    }
+    .msg-quote {
+      font-family: 'Zen Old Mincho', serif;
+      font-weight: 700;
+      font-size: 24px;
+      letter-spacing: 1.2px;
+      color: #00622f;
+      line-height: 2;
+    }
+    .msg-normal {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      letter-spacing: 0.8px;
+      color: #333;
+      line-height: 2;
+    }
+    .msg-normal .highlight {
+      font-weight: 500;
+      color: #00622f;
+    }
+
+    /* ── 略歴・実績 ── */
+    .career-section {
+      padding: 60px 100px;
+      display: flex;
+      gap: 80px;
+      align-items: flex-start;
+      width: 1180px;
+      margin: 0 auto;
+    }
+    .career-heading {
+      border-bottom: 1px solid rgba(0,98,47,0.2);
+      padding-bottom: 17px;
+      width: 240px;
+      flex-shrink: 0;
+    }
+    .career-heading h3 {
+      font-family: 'Zen Old Mincho', serif;
+      font-weight: 700;
+      font-size: 24px;
+      letter-spacing: 1.0562px;
+      color: #00622f;
+      line-height: 31.685px;
+      white-space: nowrap;
+    }
+    .career-list {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding-top: 4px;
+    }
+    .career-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .career-bullet {
+      width: 16px;
+      height: 32px;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .career-bullet img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+    }
+    .career-text {
+      flex: 1;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      letter-spacing: 0.8px;
+      color: #333;
+      line-height: 2;
+    }
+
+    /* ── 会社概要 TABLE SECTION ── */
+    .company-section {
+      width: 1440px;
+      padding: 120px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .company-inner {
+      width: 1180px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+    .company-title-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-start;
+      flex-shrink: 0;
+    }
+    .company-title-ja {
+      font-family: 'Zen Old Mincho', serif;
+      font-weight: 700;
+      font-size: 40px;
+      letter-spacing: 8px;
+      color: #00622f;
+      line-height: 1.4;
+    }
+    .company-subtitle-row {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .company-title-en {
+      font-family: 'Cormorant', serif;
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: 1px;
+      color: #7e7c57;
+      line-height: 20px;
+    }
+    .company-table {
+      width: 800px;
+      display: flex;
+      flex-direction: column;
+    }
+    .company-row {
+      display: flex;
+      align-items: stretch;
+      border-bottom: 1px solid rgba(0,98,47,0.2);
+    }
+    .company-label {
+      width: 250px;
+      flex-shrink: 0;
+      padding: 20px 24px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      letter-spacing: 0.7px;
+      color: #333;
+      line-height: 1.6;
+    }
+    .company-value {
+      flex: 1;
+      padding: 20px 24px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      letter-spacing: 0.7px;
+      color: #333;
+      line-height: 1.6;
+    }
+    .company-value ul {
+      list-style: disc;
+      padding-left: 21px;
+    }
+    .company-value li {
+      margin-bottom: 0;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      position: relative;
+      width: 1440px;
+      padding: 100px 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .cta-bg {
+      position: absolute;
+      inset: 0;
+    }
+    .cta-bg img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      object-fit: cover;
+      object-position: bottom;
+    }
+    .cta-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,98,47,0.5);
+    }
+    .cta-inner {
+      position: relative;
+      width: 1180px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+    .cta-text {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      align-items: flex-start;
+      filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.1));
+    }
+    .cta-title {
+      font-family: 'Cormorant', serif;
+      font-weight: 500;
+      font-size: 60px;
+      letter-spacing: 3px;
+      color: #fff;
+      line-height: 1;
+    }
+    .cta-subtitle {
+      font-family: 'Zen Old Mincho', serif;
+      font-weight: 600;
+      font-size: 28px;
+      letter-spacing: 1.4px;
+      color: #fff;
+      line-height: 1.8;
+    }
+    .btn-text-white {
+      border-bottom: 1px solid #fff;
+      display: inline-flex;
+      gap: 24px;
+      align-items: center;
+      padding-bottom: 20px;
+      text-decoration: none;
+    }
+    .btn-text-white span.label {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      font-size: 20px;
+      letter-spacing: 1px;
+      color: #fff;
+      line-height: 1.6;
+      white-space: nowrap;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: #fff;
+      box-shadow: 0 4px 5px rgba(0,98,47,0.1);
+      width: 1440px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      align-items: center;
+      padding: 48px 28px 60px;
+    }
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      align-items: center;
+    }
+    .footer-logo {
+      width: 304px;
+      height: 136.8px;
+      overflow: hidden;
+      position: relative;
+    }
+    .footer-logo img {
+      position: absolute;
+      height: 353.62%;
+      left: -29.33%;
+      top: -112.49%;
+      width: 159.13%;
+      max-width: none;
+    }
+    .footer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      align-items: center;
+    }
+    .footer-nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+    .footer-nav-links a, .footer-nav-links span {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      color: #00622f;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .footer-nav-links a { font-size: 16px; letter-spacing: 0.8px; line-height: 1.6; }
+    .footer-nav-links .sep { font-size: 14px; letter-spacing: 0.7px; line-height: 1.6; }
+    .footer-privacy {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.55px;
+      color: #00622f;
+      line-height: 1.6;
+      text-decoration: none;
+    }
+    .footer-copy {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.55px;
+      color: #00622f;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-logo">
+    <img src="./assets/images/about/logo.png" alt="経理インテグレート">
+  </div>
+  <nav class="header-nav">
+    <a href="./index.html">TOP</a>
+    <a href="#">サービス</a>
+    <a href="./about.html">会社概要</a>
+    <a href="#" class="header-cta-btn">
+      <span class="label">無料相談</span>
+      <span class="arrow-icon">
+        <img src="./assets/images/about/arrow-24-white.svg" alt="" width="24" height="24">
+      </span>
+    </a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-photo">
+    <img class="img1" src="./assets/images/about/hero-bg1.png" alt="">
+    <img class="img2" src="./assets/images/about/hero-bg2.png" alt="">
+  </div>
+  <div class="hero-gradient">
+    <div class="hero-text">
+      <div class="hero-title-row">
+        <h1 class="hero-title-ja">会社概要</h1>
+        <span class="hero-title-en">Profile &amp; Company</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MESSAGE / 代表挨拶 -->
+<section class="message-section">
+  <!-- decorative elements -->
+  <div class="deco-intersect-bl">
+    <img src="./assets/images/about/deco-intersect-bl.svg" alt="">
+  </div>
+  <div class="deco-bg-img">
+    <img src="./assets/images/about/deco-bg.png" alt="">
+  </div>
+  <div class="deco-intersect-r">
+    <img src="./assets/images/about/deco-intersect-r.svg" alt="">
+  </div>
+
+  <div class="message-inner">
+    <!-- Section title -->
+    <div class="section-title-block">
+      <h2 class="section-title-ja">代表挨拶</h2>
+      <div class="section-subtitle-row">
+        <img class="diamond-sm" src="./assets/images/about/diamond-left.svg" alt="">
+        <span class="section-title-en">MESSAGE</span>
+        <img class="diamond-sm" src="./assets/images/about/diamond-right.svg" alt="">
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="message-body">
+      <!-- Top: headline + body text + photo -->
+      <div class="message-top">
+        <div class="message-text-col">
+          <div class="msg-headline">
+            <div>
+              <p class="msg-headline-item">会計を、<br>経営を加速させる「最強の武器」へ。</p>
+            </div>
+            <div>
+              <p class="msg-headline-item">現場と共に汗をかき、<br>成長の土台を「統合(Integrate)」する。</p>
+            </div>
+          </div>
+          <div class="divider-line"></div>
+          <div class="msg-body-text">
+            <p>急成長を遂げるベンチャー企業の管理部門において、私は上場準備から上場後の体制運用まで、実務の最前線で中心的な役割を担ってきました。株式会社アシロ（2021年東証マザーズ上場）では、CFOと連携してゼロからの管理体制構築、高度な専門性が求められるIFRS（国際財務報告基準）適用の主導、そして上場後のM&A対応やガバナンス強化など、企業の拡大に伴うあらゆる「現場の課題」を突破し、上場とその後の成長を支えてまいりました。</p>
+            <p>一方で、数多くのIPO準備の過程や急成長企業の現場でどうしても直面しがちなのが、組織が拡大するにつれ、経理部門が日々の事務処理に追われ、現場との距離が生じてしまうという共通の構造的課題です。いつしか数字を取りまとめるだけの部門となり、同じ会社にいるにもかかわらず、まるで「社内の外注部門」のような存在に陥ってしまう。これでは、経理が本来果たすべき役割を全うできているとは言えません。</p>
+          </div>
+        </div>
+        <div class="message-photo-col">
+          <div class="rep-photo">
+            <img src="./assets/images/about/representative.png" alt="代表 小林知直">
+          </div>
+          <div class="rep-name-card">
+            <div class="rep-name-row">
+              <span class="rep-name-role">代表</span>
+              <span class="rep-name-name">小林 知直</span>
+            </div>
+            <div class="divider-line" style="margin: 4px 0;"></div>
+            <span class="rep-name-roman">Tomonao Kobayashi</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom: side photo + long text -->
+      <div class="message-bottom">
+        <div class="side-photo">
+          <img src="./assets/images/about/side-photo.png" alt="">
+        </div>
+        <div class="message-long-text">
+          <p class="msg-quote">本来、会計とは<br>経営者が「次の一手」を迷わず決断するためのコンパスであり、<br>企業の成長を支える揺るぎない土台であるべきです。</p>
+          <p class="msg-normal">そんな想いから、私は「会計事務所 経理インテグレート」を立ち上げました。<br>私たちのミッションは、IPOを見据えた高度な管理体制や高品質な会計体制を、単なる「形式」として整えるのではなく、<span class="highlight">貴社の業務フローや経営管理の中に深く「統合（Integrate）」</span>させることです。</p>
+          <p class="msg-normal">私は、正論だけを語るアドバイザーではありません。 監査法人という「チェックする側」と、事業会社という「実行する側」の両面を経験したからこそ、教科書通りの解決策では通用しない現場の苦悩を誰よりも理解しています。リソースの不足、システムの不備、急激な組織の変化……。そうした困難に対し、私は貴社の一員として現場に入り込み、Excelのシート一枚、業務フローの一つから共に作り直します。</p>
+          <p class="msg-quote">「型を作るだけでなく、経営を動かす血を通わせること」<br>「共に汗をかき、自走する組織を創り上げること」</p>
+          <p class="msg-normal">会計士としての専門知見を泥臭い実務にまで浸透させ、貴社の成長を加速させるパートナーとして、共に歩んでいけることを心より願っております。</p>
+        </div>
+      </div>
+
+      <!-- 略歴・実績 -->
+      <div class="career-section" style="padding-left:0; padding-right:0;">
+        <div class="career-heading">
+          <h3>略歴・実績</h3>
+        </div>
+        <div class="career-list">
+          <div class="career-item">
+            <div class="career-bullet"><img src="./assets/images/about/bullet.svg" alt=""></div>
+            <p class="career-text">東京都府中市出身。</p>
+          </div>
+          <div class="career-item">
+            <div class="career-bullet"><img src="./assets/images/about/bullet.svg" alt=""></div>
+            <p class="career-text">2007年東京大学経済学部卒業後、2008年に公認会計士試験に合格し、あずさ監査法人に入所し、国内大手メーカー等の監査に従事。</p>
+          </div>
+          <div class="career-item">
+            <div class="career-bullet"><img src="./assets/images/about/bullet.svg" alt=""></div>
+            <p class="career-text">2012年以降は経理を軸とし、東証一部上場企業の経理部門等で、通常の経理業務やIR・複数のM＆A業務等を経験。</p>
+          </div>
+          <div class="career-item">
+            <div class="career-bullet"><img src="./assets/images/about/bullet.svg" alt=""></div>
+            <p class="career-text">2017年にIPO準備会社に参画して経理部門の立ち上げを主導し、2021年にIFRSを採用してIPOを達成。</p>
+          </div>
+          <div class="career-item">
+            <div class="career-bullet"><img src="./assets/images/about/bullet.svg" alt=""></div>
+            <p class="career-text">2024年に同社を退職後、2社のIPO準備会社の経理部門を経て2026年に独立開業。会計士としての専門性と豊富な経理経験を活かしたハンズオン型の支援を得意としております。</p>
+          </div>
+          <div class="career-item">
+            <div class="career-bullet"><img src="./assets/images/about/bullet.svg" alt=""></div>
+            <p class="career-text">趣味の将棋では全国大会の優勝経験多数。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 会社概要 TABLE -->
+<section class="company-section">
+  <div class="company-inner">
+    <div class="company-title-col">
+      <h2 class="company-title-ja">会社概要</h2>
+      <div class="company-subtitle-row">
+        <img class="diamond-sm" src="./assets/images/about/diamond-right.svg" alt="">
+        <span class="company-title-en">COMPANY</span>
+      </div>
+    </div>
+    <div class="company-table">
+      <div class="company-row">
+        <div class="company-label">屋号</div>
+        <div class="company-value">会計事務所 経理インテグレート</div>
+      </div>
+      <div class="company-row">
+        <div class="company-label">代表者</div>
+        <div class="company-value">小林 知直</div>
+      </div>
+      <div class="company-row">
+        <div class="company-label">事業開始日</div>
+        <div class="company-value">2026年 2月</div>
+      </div>
+      <div class="company-row">
+        <div class="company-label">問い合わせメールアドレス</div>
+        <div class="company-value">tomonao.kobayashi@accintegrate.jp</div>
+      </div>
+      <div class="company-row">
+        <div class="company-label">事業内容</div>
+        <div class="company-value">
+          <ul>
+            <li>IPO準備支援</li>
+            <li>経理・財務実務支援（ハンズオン型）</li>
+            <li>内部監査・J-SOX構築支援</li>
+            <li>経理内製化支援</li>
+          </ul>
+        </div>
+      </div>
+      <div class="company-row">
+        <div class="company-label">提供サービスの提供地域</div>
+        <div class="company-value">リモートで全国対応可能。出張は要相談。</div>
+      </div>
+      <div class="company-row">
+        <div class="company-label">対応している連絡手段</div>
+        <div class="company-value">メール、Slack、Teams等</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg">
+    <img src="./assets/images/about/cta-bg.png" alt="">
+    <div class="cta-overlay"></div>
+  </div>
+  <div class="cta-inner">
+    <div class="cta-text">
+      <p class="cta-title">CONTACT</p>
+      <p class="cta-subtitle">まずはお気軽にご相談ください。</p>
+    </div>
+    <a href="#" class="btn-text-white">
+      <span class="label">無料相談・お問い合わせはこちら</span>
+      <span class="arrow-icon">
+        <img src="./assets/images/about/arrow-40-white.svg" alt="" width="40" height="40">
+      </span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="./assets/images/about/footer-logo.png" alt="経理インテグレート">
+    </div>
+    <nav class="footer-nav">
+      <div class="footer-nav-links">
+        <a href="./index.html">TOP</a>
+        <span class="sep">｜</span>
+        <a href="#">サービス</a>
+        <span class="sep">｜</span>
+        <a href="./about.html">会社概要</a>
+        <span class="sep">｜</span>
+        <a href="#">お問い合わせ</a>
+      </div>
+      <a href="#" class="footer-privacy">プライバシーポリシー</a>
+    </nav>
+  </div>
+  <p class="footer-copy">© 2026 会計事務所 経理インテグレート All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
