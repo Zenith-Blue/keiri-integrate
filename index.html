@@ -255,31 +255,6 @@
             border-radius: 0 0 50px 50px;
         }
 
-        /* decorative exclude circles */
-        .fv-deco {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            z-index: 3;
-            pointer-events: none;
-        }
-        .fv-deco::before, .fv-deco::after {
-            content: '';
-            position: absolute;
-            border-radius: 50%;
-            background: var(--green);
-        }
-        .fv-deco::before {
-            width: 50px; height: 50px;
-            top: 0; left: 0;
-        }
-        .fv-deco::after {
-            width: 30px; height: 30px;
-            top: 10px; left: 10px;
-            background: #fff;
-        }
-        .fv-deco-1 { left: 79px; top: calc(70px + 275px); }
-        .fv-deco-2 { left: 763px; bottom: 47px; }
 
         .fv-content {
             position: relative;
@@ -866,9 +841,6 @@
         <section id="fv">
             <div class="fv-bg" style="background-image: url('FV.png');"></div>
 
-            <!-- decorative circles -->
-            <div class="fv-deco fv-deco-1"></div>
-            <div class="fv-deco fv-deco-2"></div>
 
             <div class="fv-content">
                 <div class="fv-panel">
