@@ -8,6 +8,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,700;1,500&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Old+Mincho:wght@400;500;600;700;900&display=swap" rel="stylesheet">
   <style>
+    /* === site-centering (fit-to-viewport for 1024-1439px) === */
+    html { overflow-x: hidden; }
+    @media (min-width: 1440px) {
+      body { width: 100%; }
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -798,14 +804,9 @@
       .hero-photo { width: calc(100% - 40px); }
       .hero-gradient { width: calc(100% - 40px); }
 
+      /* Message: keep PC layout (photo+text side-by-side, side-photo+long-text side-by-side) until 800px */
       .message-section { width: 100%; padding: 80px 40px; }
       .message-inner { width: 100%; }
-      .message-top { flex-direction: column; gap: 48px; align-items: center; }
-      .message-photo-col { width: 100%; max-width: 430px; align-self: center; }
-      .rep-photo { width: 100%; }
-      .message-bottom { flex-direction: column; gap: 40px; align-items: flex-start; }
-      .side-photo { width: 100%; max-width: 420px; height: 300px; }
-      .message-long-text { flex: none; width: 100%; }
 
       .career-section { width: 100%; flex-direction: column; gap: 24px; padding: 40px; }
       .career-heading { width: 100%; }
@@ -820,6 +821,30 @@
 
       .footer { width: 100%; }
       .footer-nav-links { flex-wrap: wrap; justify-content: center; gap: 12px; }
+    }
+
+    /* ══ RESPONSIVE 800-1023px (keep message PC layout, fit-to-width) ══ */
+    @media (min-width: 800px) and (max-width: 1023px) {
+      /* message-top: text + photo side-by-side, scaled */
+      .message-top { gap: 48px; align-items: flex-start; }
+      .message-photo-col { width: 38%; max-width: 430px; flex-shrink: 0; }
+      .rep-photo { width: 100%; height: auto; aspect-ratio: 430 / 524; }
+      /* message-bottom: side-photo + long text side-by-side */
+      .message-bottom { gap: 40px; align-items: flex-start; }
+      .side-photo { width: 38%; max-width: 420px; height: auto; aspect-ratio: 420 / 300; flex-shrink: 0; }
+      .message-long-text { flex: 1; min-width: 0; }
+      /* msg headline tighten */
+      .msg-headline-item { font-size: 26px; letter-spacing: 1.3px; }
+    }
+
+    /* ══ RESPONSIVE ≤799px (message collapses to column) ══ */
+    @media (max-width: 799px) {
+      .message-top { flex-direction: column; gap: 48px; align-items: center; }
+      .message-photo-col { width: 100%; max-width: 430px; align-self: center; }
+      .rep-photo { width: 100%; }
+      .message-bottom { flex-direction: column; gap: 40px; align-items: flex-start; }
+      .side-photo { width: 100%; max-width: 420px; height: 300px; }
+      .message-long-text { flex: none; width: 100%; }
     }
 
     /* ══ RESPONSIVE MOBILE ≤767px ══ */
@@ -911,6 +936,36 @@
       .footer-nav-links a { font-size: 15px; letter-spacing: 0.75px; }
       .footer-copy { font-size: 10px; letter-spacing: 0.5px; text-align: center; }
     }
+    /* === Slide-up reveal animations === */
+    .slide-up-reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.9s ease-out, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform, opacity;
+    }
+    .slide-up-reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    .stagger-up > * {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform, opacity;
+    }
+    .stagger-up.is-visible > * { opacity: 1; transform: translateY(0); }
+    .stagger-up.is-visible > *:nth-child(1) { transition-delay: 0s; }
+    .stagger-up.is-visible > *:nth-child(2) { transition-delay: 0.1s; }
+    .stagger-up.is-visible > *:nth-child(3) { transition-delay: 0.2s; }
+    .stagger-up.is-visible > *:nth-child(4) { transition-delay: 0.3s; }
+    .stagger-up.is-visible > *:nth-child(5) { transition-delay: 0.4s; }
+    .stagger-up.is-visible > *:nth-child(6) { transition-delay: 0.5s; }
+    .stagger-up.is-visible > *:nth-child(7) { transition-delay: 0.6s; }
+    .stagger-up.is-visible > *:nth-child(8) { transition-delay: 0.7s; }
+
+    .reveal-on-load.slide-up-reveal { transition-delay: 0.2s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .slide-up-reveal, .stagger-up > * { transition: none; opacity: 1; transform: none; }
+    }
   </style>
 </head>
 <body>
@@ -927,12 +982,12 @@
     <a href="./contact.html" class="header-cta-btn">
       <span class="label">無料相談</span>
       <span class="arrow-icon">
-        <img src="./assets/images/about/arrow-24-white.svg" alt="" width="24" height="24">
+        <img src="./assets/images/about/arrow-24-white.svg" alt="" width="24" height="24" loading="lazy" decoding="async">
       </span>
     </a>
   </nav>
   <a href="./contact.html" class="header-mail-btn" aria-label="お問い合わせ">
-    <img src="./assets/images/mail-icon.svg" alt="" width="24" height="24">
+    <img src="./assets/images/mail-icon.svg" alt="" width="24" height="24" loading="lazy" decoding="async">
   </a>
   <button class="hamburger-btn" id="hamburger-btn" aria-label="メニューを開く">
     <span></span><span></span><span></span>
@@ -948,12 +1003,12 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-photo">
-    <img class="img1" src="./assets/images/about/hero-bg1.png" alt="">
-    <img class="img2" src="./assets/images/about/hero-bg2.png" alt="">
+    <img class="img1" src="./assets/images/about/hero-bg1.webp" alt="" loading="lazy" decoding="async">
+    <img class="img2" src="./assets/images/about/hero-bg2.webp" alt="" loading="lazy" decoding="async">
   </div>
   <div class="hero-gradient">
     <div class="hero-text">
-      <div class="hero-title-row">
+      <div class="hero-title-row slide-up-reveal reveal-on-load">
         <h1 class="hero-title-ja">会社概要</h1>
         <span class="hero-title-en">Profile &amp; Company</span>
       </div>
@@ -965,23 +1020,23 @@
 <section class="message-section">
   <!-- decorative elements -->
   <div class="deco-intersect-bl">
-    <img src="./assets/images/about/deco-intersect-bl.svg" alt="">
+    <img src="./assets/images/about/deco-intersect-bl.svg" alt="" loading="lazy" decoding="async">
   </div>
   <div class="deco-bg-img">
-    <img src="./assets/images/about/deco-bg.png" alt="">
+    <img src="./assets/images/about/deco-bg.webp" alt="" loading="lazy" decoding="async">
   </div>
   <div class="deco-intersect-r">
-    <img src="./assets/images/about/deco-intersect-r.svg" alt="">
+    <img src="./assets/images/about/deco-intersect-r.svg" alt="" loading="lazy" decoding="async">
   </div>
 
   <div class="message-inner">
     <!-- Section title -->
-    <div class="section-title-block">
+    <div class="section-title-block slide-up-reveal">
       <h2 class="section-title-ja">代表挨拶</h2>
       <div class="section-subtitle-row">
-        <img class="diamond-sm" src="./assets/images/about/diamond-left.svg" alt="">
+        <img class="diamond-sm" src="./assets/images/about/diamond-left.svg" alt="" loading="lazy" decoding="async">
         <span class="section-title-en">MESSAGE</span>
-        <img class="diamond-sm" src="./assets/images/about/diamond-right.svg" alt="">
+        <img class="diamond-sm" src="./assets/images/about/diamond-right.svg" alt="" loading="lazy" decoding="async">
       </div>
     </div>
 
@@ -990,23 +1045,23 @@
       <!-- Top: headline + body text + photo -->
       <div class="message-top">
         <div class="message-text-col">
-          <div class="msg-headline">
+          <div class="msg-headline stagger-up">
             <div>
               <p class="msg-headline-item">会計を、<br>経営を加速させる「最強の武器」へ。</p>
             </div>
             <div>
-              <p class="msg-headline-item">現場と共に汗をかき、<br>成長の土台を「統合(Integrate)」する。</p>
+              <p class="msg-headline-item">現場と共に汗をかき、<br>成長の土台を「統合（Integrate）」する。</p>
             </div>
           </div>
-          <div class="divider-line"></div>
-          <div class="msg-body-text">
+          <div class="divider-line slide-up-reveal"></div>
+          <div class="msg-body-text stagger-up">
             <p>急成長を遂げるベンチャー企業の管理部門において、私は上場準備から上場後の体制運用まで、実務の最前線で中心的な役割を担ってきました。株式会社アシロ（2021年東証マザーズ上場）では、CFOと連携してゼロからの管理体制構築、高度な専門性が求められるIFRS（国際財務報告基準）適用の主導、そして上場後のM&A対応やガバナンス強化など、企業の拡大に伴うあらゆる「現場の課題」を突破し、上場とその後の成長を支えてまいりました。</p>
             <p>一方で、数多くのIPO準備の過程や急成長企業の現場でどうしても直面しがちなのが、組織が拡大するにつれ、経理部門が日々の事務処理に追われ、現場との距離が生じてしまうという共通の構造的課題です。いつしか数字を取りまとめるだけの部門となり、同じ会社にいるにもかかわらず、まるで「社内の外注部門」のような存在に陥ってしまう。これでは、経理が本来果たすべき役割を全うできているとは言えません。</p>
           </div>
         </div>
-        <div class="message-photo-col">
+        <div class="message-photo-col slide-up-reveal">
           <div class="rep-photo">
-            <img src="./assets/images/about/representative.png" alt="代表 小林知直">
+            <img src="./assets/images/about/representative.webp" alt="代表 小林知直" loading="lazy" decoding="async">
           </div>
           <div class="rep-name-card">
             <div class="rep-name-row">
@@ -1021,10 +1076,10 @@
 
       <!-- Bottom: side photo + long text -->
       <div class="message-bottom">
-        <div class="side-photo">
-          <img src="./assets/images/about/side-photo.png" alt="">
+        <div class="side-photo slide-up-reveal">
+          <img src="./assets/images/about/side-photo.webp" alt="" loading="lazy" decoding="async">
         </div>
-        <div class="message-long-text">
+        <div class="message-long-text stagger-up">
           <p class="msg-quote">本来、会計とは<br>経営者が「次の一手」を迷わず決断するためのコンパスであり、<br>企業の成長を支える揺るぎない土台であるべきです。</p>
           <p class="msg-normal">そんな想いから、私は「会計事務所 経理インテグレート」を立ち上げました。<br>私たちのミッションは、IPOを見据えた高度な管理体制や高品質な会計体制を、単なる「形式」として整えるのではなく、<span class="highlight">貴社の業務フローや経営管理の中に深く「統合（Integrate）」</span>させることです。</p>
           <p class="msg-normal">私は、正論だけを語るアドバイザーではありません。 監査法人という「チェックする側」と、事業会社という「実行する側」の両面を経験したからこそ、教科書通りの解決策では通用しない現場の苦悩を誰よりも理解しています。リソースの不足、システムの不備、急激な組織の変化……。そうした困難に対し、私は貴社の一員として現場に入り込み、Excelのシート一枚、業務フローの一つから共に作り直します。</p>
@@ -1035,32 +1090,32 @@
 
       <!-- 略歴・実績 -->
       <div class="career-section" style="padding-left:0; padding-right:0;">
-        <div class="career-heading">
+        <div class="career-heading slide-up-reveal">
           <h3>略歴・実績</h3>
         </div>
-        <div class="career-list">
+        <div class="career-list stagger-up">
           <div class="career-item">
-            <div class="career-bullet"><img src="./assets/images/about/bullet.svg" alt=""></div>
+            <div class="career-bullet"><img src="./assets/images/about/bullet.svg" alt="" loading="lazy" decoding="async"></div>
             <p class="career-text">東京都府中市出身。</p>
           </div>
           <div class="career-item">
-            <div class="career-bullet"><img src="./assets/images/about/bullet.svg" alt=""></div>
+            <div class="career-bullet"><img src="./assets/images/about/bullet.svg" alt="" loading="lazy" decoding="async"></div>
             <p class="career-text">2007年東京大学経済学部卒業後、2008年に公認会計士試験に合格し、あずさ監査法人に入所し、国内大手メーカー等の監査に従事。</p>
           </div>
           <div class="career-item">
-            <div class="career-bullet"><img src="./assets/images/about/bullet.svg" alt=""></div>
-            <p class="career-text">2012年以降は経理を軸とし、東証一部上場企業の経理部門等で、通常の経理業務やIR・複数のM＆A業務等を経験。</p>
+            <div class="career-bullet"><img src="./assets/images/about/bullet.svg" alt="" loading="lazy" decoding="async"></div>
+            <p class="career-text">2012年以降は経理を軸とし、東証一部上場企業の経理部門等で、通常の経理業務やIR・複数のM&amp;A業務等を経験。</p>
           </div>
           <div class="career-item">
-            <div class="career-bullet"><img src="./assets/images/about/bullet.svg" alt=""></div>
+            <div class="career-bullet"><img src="./assets/images/about/bullet.svg" alt="" loading="lazy" decoding="async"></div>
             <p class="career-text">2017年にIPO準備会社に参画して経理部門の立ち上げを主導し、2021年にIFRSを採用してIPOを達成。</p>
           </div>
           <div class="career-item">
-            <div class="career-bullet"><img src="./assets/images/about/bullet.svg" alt=""></div>
+            <div class="career-bullet"><img src="./assets/images/about/bullet.svg" alt="" loading="lazy" decoding="async"></div>
             <p class="career-text">2024年に同社を退職後、2社のIPO準備会社の経理部門を経て2026年に独立開業。会計士としての専門性と豊富な経理経験を活かしたハンズオン型の支援を得意としております。</p>
           </div>
           <div class="career-item">
-            <div class="career-bullet"><img src="./assets/images/about/bullet.svg" alt=""></div>
+            <div class="career-bullet"><img src="./assets/images/about/bullet.svg" alt="" loading="lazy" decoding="async"></div>
             <p class="career-text">趣味の将棋では全国大会の優勝経験多数。</p>
           </div>
         </div>
@@ -1072,14 +1127,14 @@
 <!-- 会社概要 TABLE -->
 <section class="company-section" id="company">
   <div class="company-inner">
-    <div class="company-title-col">
+    <div class="company-title-col slide-up-reveal">
       <h2 class="company-title-ja">会社概要</h2>
       <div class="company-subtitle-row">
-        <img class="diamond-sm" src="./assets/images/about/diamond-right.svg" alt="">
+        <img class="diamond-sm" src="./assets/images/about/diamond-right.svg" alt="" loading="lazy" decoding="async">
         <span class="company-title-en">COMPANY</span>
       </div>
     </div>
-    <div class="company-table">
+    <div class="company-table stagger-up">
       <div class="company-row">
         <div class="company-label">屋号</div>
         <div class="company-value">会計事務所 経理インテグレート</div>
@@ -1122,7 +1177,7 @@
 <!-- CTA -->
 <section class="cta-section">
   <div class="cta-bg">
-    <img src="./assets/images/about/cta-bg.png" alt="">
+    <img src="./assets/images/about/cta-bg.webp" alt="" loading="lazy" decoding="async">
     <div class="cta-overlay"></div>
   </div>
   <div class="cta-inner">
@@ -1133,7 +1188,7 @@
     <a href="./contact.html" class="btn-text-white">
       <span class="label">無料相談・お問い合わせはこちら</span>
       <span class="arrow-icon">
-        <img src="./assets/images/about/arrow-40-white.svg" alt="" width="40" height="40">
+        <img src="./assets/images/about/arrow-40-white.svg" alt="" width="40" height="40" loading="lazy" decoding="async">
       </span>
     </a>
   </div>
@@ -1175,5 +1230,45 @@
     }
   });
 </script>
+
+  <script>
+    (function(){
+      var DW = 1440, raf = 0;
+      function apply(){
+        raf = 0;
+        var vw = document.documentElement.clientWidth;
+        if (vw >= 1024 && vw < DW) {
+          document.body.style.zoom = (vw / DW);
+        } else {
+          document.body.style.zoom = '';
+        }
+      }
+      function fit(){ if (!raf) raf = requestAnimationFrame(apply); }
+      window.addEventListener('resize', fit, { passive: true });
+      document.addEventListener('DOMContentLoaded', apply);
+      apply();
+    })();
+
+    // Slide-up reveal observer + reveal-on-load
+    (function(){
+      function init(){
+        var targets = document.querySelectorAll('.slide-up-reveal:not(.reveal-on-load), .stagger-up');
+        if (targets.length && 'IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function(entries){
+            entries.forEach(function(e){
+              if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+            });
+          }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+          targets.forEach(function(el){ io.observe(el); });
+        } else {
+          targets.forEach(function(el){ el.classList.add('is-visible'); });
+        }
+        document.querySelectorAll('.reveal-on-load').forEach(function(el){
+          requestAnimationFrame(function(){ el.classList.add('is-visible'); });
+        });
+      }
+      document.addEventListener('DOMContentLoaded', init);
+    })();
+  </script>
 </body>
 </html>

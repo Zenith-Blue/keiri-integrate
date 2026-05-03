@@ -8,6 +8,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,700;1,500&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Old+Mincho:wght@400;500;600;700;900&display=swap" rel="stylesheet">
   <style>
+    /* === site-centering (fit-to-viewport for 1024-1439px) === */
+    html { overflow-x: hidden; }
+    @media (min-width: 1440px) {
+      body { width: 100%; }
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -192,6 +198,71 @@
       color: #00622f;
       line-height: 1.8;
       text-align: center;
+    }
+    /* Slide up reveal */
+    .slide-up-reveal { opacity: 0; transform: translateY(50px); transition: opacity 1s ease-out, transform 1s cubic-bezier(0.22, 1, 0.36, 1); will-change: transform, opacity; }
+    .slide-up-reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    /* Flow cards: stagger blur-in reveal (01→04) */
+    .flow-cards .flow-card-wrap,
+    .flow-cards .flow-arrow {
+      opacity: 0;
+      filter: blur(20px);
+      transition: opacity 0.9s ease-out, filter 0.9s ease-out;
+      will-change: filter, opacity;
+    }
+    .flow-cards.is-visible .flow-card-wrap,
+    .flow-cards.is-visible .flow-arrow { opacity: 1; filter: blur(0); }
+    .flow-cards.is-visible > *:nth-child(1) { transition-delay: 0s; }
+    .flow-cards.is-visible > *:nth-child(2) { transition-delay: 0.15s; }
+    .flow-cards.is-visible > *:nth-child(3) { transition-delay: 0.3s; }
+    .flow-cards.is-visible > *:nth-child(4) { transition-delay: 0.45s; }
+    .flow-cards.is-visible > *:nth-child(5) { transition-delay: 0.6s; }
+    .flow-cards.is-visible > *:nth-child(6) { transition-delay: 0.75s; }
+    .flow-cards.is-visible > *:nth-child(7) { transition-delay: 0.9s; }
+    @media (prefers-reduced-motion: reduce) {
+      .flow-cards .flow-card-wrap,
+      .flow-cards .flow-arrow { transition: none; opacity: 1; filter: none; }
+    }
+
+    /* Service text: per-line stagger reveal (slide-up) */
+    .stagger-lines .service-label-en,
+    .stagger-lines .service-title,
+    .stagger-lines .divider-h,
+    .stagger-lines .service-body,
+    .stagger-lines .service-tags-row {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform, opacity;
+    }
+    .stagger-lines.is-visible .service-label-en             { opacity: 1; transform: translateY(0); transition-delay: 0s; }
+    .stagger-lines.is-visible .service-title                { opacity: 1; transform: translateY(0); transition-delay: 0.12s; }
+    .stagger-lines.is-visible .divider-h                    { opacity: 1; transform: translateY(0); transition-delay: 0.26s; }
+    .stagger-lines.is-visible .service-body:nth-of-type(1)  { opacity: 1; transform: translateY(0); transition-delay: 0.36s; }
+    .stagger-lines.is-visible .service-body:nth-of-type(2)  { opacity: 1; transform: translateY(0); transition-delay: 0.5s; }
+    .stagger-lines.is-visible .service-tags-row:nth-of-type(1) { opacity: 1; transform: translateY(0); transition-delay: 0.65s; }
+    .stagger-lines.is-visible .service-tags-row:nth-of-type(2) { opacity: 1; transform: translateY(0); transition-delay: 0.8s; }
+    @media (prefers-reduced-motion: reduce) {
+      .stagger-lines .service-label-en,
+      .stagger-lines .service-title,
+      .stagger-lines .divider-h,
+      .stagger-lines .service-body,
+      .stagger-lines .service-tags-row { transition: none; opacity: 1; transform: none; }
+    }
+    /* Hero slide-up on page load */
+    .hero-title-row, .hero-subtitle {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 1s ease-out, transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform, opacity;
+    }
+    .hero-title-row.is-visible, .hero-subtitle.is-visible { opacity: 1; transform: translateY(0); }
+    .hero-title-row { transition-delay: 0.2s; }
+    .hero-subtitle { transition-delay: 0.6s; }
+    @media (prefers-reduced-motion: reduce) {
+      .slide-up-reveal,
+      .hero-title-row, .hero-subtitle { transition: none; opacity: 1; transform: none; }
     }
     .vertical-line {
       width: 1px;
@@ -660,19 +731,13 @@
       .hero-text { left: 40px; }
       .hero-subtitle { left: 50%; transform: translate(-50%,-50%); }
 
+      /* Service intro/items: keep PC layout until 800px */
       .service-intro { width: 100%; padding-top: 60px; }
       .service-intro-headline { font-size: 24px; padding: 0 40px; text-align: center; }
       .service-items { width: 100%; }
-      .service-row { flex-direction: column; gap: 0; }
-      .service-row-1 { padding-right: 0; }
-      .service-row-2 { padding-left: 0; flex-direction: column-reverse; }
-      .service-img { width: 100%; height: 380px; }
-      .service-text { width: 100%; padding: 48px 40px; }
 
+      /* Flow: keep PC horizontal layout until 800px */
       .flow-section { width: 100%; padding: 80px 40px; }
-      .flow-cards { flex-wrap: wrap; justify-content: center; gap: 24px; }
-      .flow-card-wrap { flex: 0 0 calc(50% - 12px); }
-      .flow-arrow { display: none; }
 
       .cta-section { width: 100%; padding: 70px 40px; }
       .cta-inner { width: 100%; flex-direction: column; gap: 36px; align-items: flex-start; }
@@ -680,6 +745,39 @@
 
       .footer { width: 100%; }
       .footer-nav-links { flex-wrap: wrap; justify-content: center; gap: 12px; }
+    }
+
+    /* ══ RESPONSIVE 800-1023px (keep service rows + flow PC layout, fit-to-width) ══ */
+    @media (min-width: 800px) and (max-width: 1023px) {
+      /* service rows: image+text side-by-side, scaled */
+      .service-row { gap: 40px; }
+      .service-row-1 { padding-right: 40px; }
+      .service-row-2 { padding-left: 40px; }
+      .service-img { width: 45%; height: auto; aspect-ratio: 720 / 500; }
+      .service-text { gap: 24px; padding: 0; }
+      .service-title { font-size: 24px; letter-spacing: 1.2px; }
+
+      /* flow: keep 4 cards + 3 arrows in a row, scaled */
+      .flow-cards { flex-wrap: nowrap; gap: 12px; }
+      .flow-card-wrap { flex: 1 1 0; }
+      .flow-card { padding: 24px 16px; }
+      .flow-card-title { font-size: 16px; letter-spacing: 0.8px; }
+      .flow-card-desc { font-size: 13px; }
+      .flow-arrow { display: flex; flex: 0 0 auto; }
+      .flow-arrow img { width: 24px; height: auto; }
+    }
+
+    /* ══ RESPONSIVE ≤799px (service rows + flow collapse) ══ */
+    @media (max-width: 799px) {
+      .service-row { flex-direction: column; gap: 0; }
+      .service-row-1 { padding-right: 0; }
+      .service-row-2 { padding-left: 0; flex-direction: column-reverse; }
+      .service-img { width: 100%; height: 380px; }
+      .service-text { width: 100%; padding: 48px 40px; }
+
+      .flow-cards { flex-wrap: wrap; justify-content: center; gap: 24px; }
+      .flow-card-wrap { flex: 0 0 calc(50% - 12px); }
+      .flow-arrow { display: none; }
     }
 
     /* ══ RESPONSIVE MOBILE ≤767px ══ */
@@ -778,12 +876,12 @@
     <a href="./contact.html" class="header-cta-btn">
       <span class="label">無料相談</span>
       <span class="arrow-icon">
-        <img src="./assets/images/service/arrow-24.svg" alt="" width="24" height="24">
+        <img src="./assets/images/service/arrow-24.svg" alt="" width="24" height="24" loading="lazy" decoding="async">
       </span>
     </a>
   </nav>
   <a href="./contact.html" class="header-mail-btn" aria-label="お問い合わせ">
-    <img src="./assets/images/mail-icon.svg" alt="" width="24" height="24">
+    <img src="./assets/images/mail-icon.svg" alt="" width="24" height="24" loading="lazy" decoding="async">
   </a>
   <button class="hamburger-btn" id="hamburger-btn" aria-label="メニューを開く">
     <span></span><span></span><span></span>
@@ -799,22 +897,22 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-photo">
-    <img src="./assets/images/service/hero-bg.png" alt="">
+    <img src="./assets/images/service/hero-bg.webp" alt="" loading="lazy" decoding="async">
   </div>
   <div class="hero-gradient"></div>
   <div class="hero-text">
-    <div class="hero-title-row">
+    <div class="hero-title-row reveal-on-load">
       <h1 class="hero-title-ja">サービス</h1>
       <span class="hero-title-en">SERVICE</span>
     </div>
   </div>
-  <p class="hero-subtitle">経営を動かす「正しい会計」を、貴社の最強の武器へ。</p>
+  <p class="hero-subtitle reveal-on-load">経営を動かす「正しい会計」を、貴社の最強の武器へ。</p>
 </section>
 
 <!-- SERVICE INTRO -->
 <div class="service-intro">
   <div class="service-intro-text">
-    <h2 class="service-intro-headline">会計を、経営の「意思決定」を支える<br>血の通った仕組みに。</h2>
+    <h2 class="service-intro-headline slide-up-reveal">会計を、経営の「意思決定」を支える<br>血の通った仕組みに。</h2>
     <div class="vertical-line"></div>
   </div>
 
@@ -823,9 +921,9 @@
     <!-- Row 1: image left, text right -->
     <div class="service-row service-row-1" id="ipo">
       <div class="service-img service-img-1">
-        <img src="./assets/images/service/service-01.png" alt="IPO準備・高度管理体制構築支援">
+        <img src="./assets/images/service/service-01.webp" alt="IPO準備・高度管理体制構築支援" loading="lazy" decoding="async">
       </div>
-      <div class="service-text">
+      <div class="service-text stagger-lines">
         <div class="service-title-group">
           <p class="service-label-en">Management Structure</p>
           <h3 class="service-title">IPO準備・高度管理体制<br>構築支援</h3>
@@ -850,7 +948,7 @@
 
     <!-- Row 2: text left, image right -->
     <div class="service-row service-row-2" id="handson">
-      <div class="service-text">
+      <div class="service-text stagger-lines">
         <div class="service-title-group service-title-group-2">
           <p class="service-label-en">Hands-on Support</p>
           <h3 class="service-title">ハンズオン型経理・<br>財務実務支援</h3>
@@ -872,7 +970,7 @@
         </div>
       </div>
       <div class="service-img service-img-2">
-        <img src="./assets/images/service/service-02.png" alt="ハンズオン型経理・財務実務支援">
+        <img src="./assets/images/service/service-02.webp" alt="ハンズオン型経理・財務実務支援" loading="lazy" decoding="async">
       </div>
     </div>
   </div>
@@ -882,18 +980,18 @@
 <section class="flow-section">
   <div class="flow-inner">
     <div class="flow-title-block">
-      <img class="flow-diamond" src="./assets/images/service/diamond.svg" alt="">
+      <img class="flow-diamond" src="./assets/images/service/diamond.svg" alt="" loading="lazy" decoding="async">
       <h2 class="flow-title-ja">支援開始までの流れ</h2>
       <span class="flow-title-en">FLOW</span>
     </div>
-    <div class="flow-cards">
+    <div class="flow-cards stagger-flow">
       <!-- Card 01 -->
       <div class="flow-card-wrap">
         <div class="flow-card">
           <p class="flow-num">01</p>
           <div class="flow-icon-wrap">
             <div class="flow-icon-circle">
-              <img src="./assets/images/service/icon-chat.svg" alt="">
+              <img src="./assets/images/service/icon-chat.svg" alt="" loading="lazy" decoding="async">
             </div>
             <p class="flow-card-title">ヒアリング・現状分析</p>
           </div>
@@ -901,7 +999,7 @@
         </div>
       </div>
       <div class="flow-arrow">
-        <img src="./assets/images/service/arrow-flow.svg" alt="">
+        <img src="./assets/images/service/arrow-flow.svg" alt="" loading="lazy" decoding="async">
       </div>
       <!-- Card 02 -->
       <div class="flow-card-wrap">
@@ -909,7 +1007,7 @@
           <p class="flow-num">02</p>
           <div class="flow-icon-wrap">
             <div class="flow-icon-circle">
-              <img src="./assets/images/service/icon-search.svg" alt="">
+              <img src="./assets/images/service/icon-search.svg" alt="" loading="lazy" decoding="async">
             </div>
             <p class="flow-card-title">課題特定・計画策定</p>
           </div>
@@ -917,7 +1015,7 @@
         </div>
       </div>
       <div class="flow-arrow">
-        <img src="./assets/images/service/arrow-flow.svg" alt="">
+        <img src="./assets/images/service/arrow-flow.svg" alt="" loading="lazy" decoding="async">
       </div>
       <!-- Card 03 -->
       <div class="flow-card-wrap">
@@ -925,7 +1023,7 @@
           <p class="flow-num">03</p>
           <div class="flow-icon-wrap">
             <div class="flow-icon-circle">
-              <img src="./assets/images/service/icon-gear.svg" alt="">
+              <img src="./assets/images/service/icon-gear.svg" alt="" loading="lazy" decoding="async">
             </div>
             <p class="flow-card-title">業務フロー設計・ルール化</p>
           </div>
@@ -933,7 +1031,7 @@
         </div>
       </div>
       <div class="flow-arrow">
-        <img src="./assets/images/service/arrow-flow.svg" alt="">
+        <img src="./assets/images/service/arrow-flow.svg" alt="" loading="lazy" decoding="async">
       </div>
       <!-- Card 04 -->
       <div class="flow-card-wrap">
@@ -941,7 +1039,7 @@
           <p class="flow-num">04</p>
           <div class="flow-icon-wrap">
             <div class="flow-icon-circle">
-              <img src="./assets/images/service/icon-user.svg" alt="">
+              <img src="./assets/images/service/icon-user.svg" alt="" loading="lazy" decoding="async">
             </div>
             <p class="flow-card-title">定着・伴走サポート</p>
           </div>
@@ -955,7 +1053,7 @@
 <!-- CTA -->
 <section class="cta-section">
   <div class="cta-bg">
-    <img src="./assets/images/service/cta-bg.png" alt="">
+    <img src="./assets/images/service/cta-bg.webp" alt="" loading="lazy" decoding="async">
     <div class="cta-overlay"></div>
   </div>
   <div class="cta-inner">
@@ -966,7 +1064,7 @@
     <a href="./contact.html" class="btn-text-white">
       <span class="label">無料相談・お問い合わせはこちら</span>
       <span class="arrow-icon">
-        <img src="./assets/images/service/arrow-40.svg" alt="" width="40" height="40">
+        <img src="./assets/images/service/arrow-40.svg" alt="" width="40" height="40" loading="lazy" decoding="async">
       </span>
     </a>
   </div>
@@ -1008,5 +1106,45 @@
     }
   });
 </script>
+
+  <script>
+    (function(){
+      var DW = 1440, raf = 0;
+      function apply(){
+        raf = 0;
+        var vw = document.documentElement.clientWidth;
+        if (vw >= 1024 && vw < DW) {
+          document.body.style.zoom = (vw / DW);
+        } else {
+          document.body.style.zoom = '';
+        }
+      }
+      function fit(){ if (!raf) raf = requestAnimationFrame(apply); }
+      window.addEventListener('resize', fit, { passive: true });
+      document.addEventListener('DOMContentLoaded', apply);
+      apply();
+    })();
+
+    // Reveal-on-scroll + reveal-on-load
+    (function(){
+      function init(){
+        var targets = document.querySelectorAll('.slide-up-reveal:not(.reveal-on-load), .stagger-lines, .stagger-flow');
+        if (targets.length && 'IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function(entries){
+            entries.forEach(function(e){
+              if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+            });
+          }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+          targets.forEach(function(el){ io.observe(el); });
+        } else {
+          targets.forEach(function(el){ el.classList.add('is-visible'); });
+        }
+        document.querySelectorAll('.reveal-on-load').forEach(function(el){
+          requestAnimationFrame(function(){ el.classList.add('is-visible'); });
+        });
+      }
+      document.addEventListener('DOMContentLoaded', init);
+    })();
+  </script>
 </body>
 </html>

@@ -7,7 +7,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,700;1,500&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Old+Mincho:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="./assets/images/fv-bg.webp" media="(min-width: 768px)">
+  <link rel="preload" as="image" href="./assets/images/fv-bg-sp.webp" media="(max-width: 767px)">
   <style>
+    /* === site-centering (fit-to-viewport for 1024-1439px) === */
+    html { overflow-x: hidden; }
+    @media (min-width: 1440px) {
+      body { width: 100%; }
+    }
+    /* Below-the-fold sections: skip rendering until scrolled near */
+    .reasons-section, .service-section, .page-links-section, .cta-section, .footer {
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 800px;
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -117,6 +130,37 @@
       max-width: none;
       object-fit: cover;
       border-radius: 0 0 50px 50px;
+      animation: fv-img-clear 1.2s ease-out both;
+      will-change: filter, transform;
+    }
+    /* FV: white haze clearing from bottom-left */
+    .fv-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      border-radius: 0 0 50px 50px;
+      background: radial-gradient(circle at 0% 100%,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.35) 35%,
+        rgba(255,255,255,0.85) 70%,
+        rgba(255,255,255,0.98) 100%);
+      transform-origin: 0% 100%;
+      animation: fv-haze-clear 0.2s ease-out forwards;
+    }
+    @keyframes fv-img-clear {
+      0%   { filter: blur(8px) brightness(1.15) saturate(0.85); transform: scale(1.03); }
+      100% { filter: blur(0) brightness(1) saturate(1);         transform: scale(1); }
+    }
+    @keyframes fv-haze-clear {
+      0%   { opacity: 1; transform: scale(0.9); }
+      60%  { opacity: 0.6; }
+      100% { opacity: 0; transform: scale(1.8); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fv-bg img { animation: none; }
+      .fv-bg::after { display: none; }
     }
     .fv-content {
       position: absolute;
@@ -146,6 +190,19 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      overflow: hidden;
+    }
+    /* FV headline: slide up line-by-line */
+    .fv-headline-sub,
+    .fv-headline-main {
+      opacity: 0;
+      transform: translateY(100%);
+      transition: opacity 0.9s ease-out, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .fv-headline.is-visible .fv-headline-sub { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+    .fv-headline.is-visible .fv-headline-main { opacity: 1; transform: translateY(0); transition-delay: 0.45s; }
+    @media (prefers-reduced-motion: reduce) {
+      .fv-headline-sub, .fv-headline-main { transition: none; opacity: 1; transform: none; }
     }
     .fv-headline-sub {
       font-family: 'Zen Old Mincho', serif;
@@ -172,6 +229,19 @@
     }
     .fv-body {
       padding: 0 24px;
+      overflow: hidden;
+    }
+    /* FV body: slide up line-by-line */
+    .fv-body p {
+      opacity: 0;
+      transform: translateY(100%);
+      transition: opacity 0.9s ease-out, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .fv-body.is-visible p:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.8s; }
+    .fv-body.is-visible p:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 1.0s; }
+    .fv-body.is-visible p:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 1.2s; }
+    @media (prefers-reduced-motion: reduce) {
+      .fv-body p { transition: none; opacity: 1; transform: none; }
     }
     .fv-body p {
       font-family: 'Noto Sans JP', sans-serif;
@@ -288,6 +358,54 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
+    }
+    /* Fade-in from top (TOP page only) */
+    .message-inner.fade-from-top {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+    .message-inner.fade-from-top.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .message-inner.fade-from-top { transition: none; opacity: 1; transform: none; }
+    }
+    /* Service rows: slide-in from sides */
+    .service-row.slide-from-right { opacity: 0; transform: translateX(80px); transition: opacity 0.9s ease-out, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+    .service-row.slide-from-left  { opacity: 0; transform: translateX(-80px); transition: opacity 0.9s ease-out, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+    .service-row.slide-from-right.is-visible,
+    .service-row.slide-from-left.is-visible { opacity: 1; transform: translateX(0); }
+    .service-row.slide-from-left { transition-delay: 0.2s; }
+    @media (prefers-reduced-motion: reduce) {
+      .service-row.slide-from-right, .service-row.slide-from-left { transition: none; opacity: 1; transform: none; }
+    }
+
+    /* Page-link cards: stagger blur-in reveal */
+    .page-links-inner .page-link-card {
+      opacity: 0;
+      filter: blur(20px);
+      transition: opacity 1.6s ease-out, filter 1.6s ease-out;
+    }
+    .page-links-inner.is-visible .page-link-card { opacity: 1; filter: blur(0); }
+    .page-links-inner.is-visible .page-link-card:nth-child(1) { transition-delay: 0s; }
+    .page-links-inner.is-visible .page-link-card:nth-child(2) { transition-delay: 0.4s; }
+    .page-links-inner.is-visible .page-link-card:nth-child(3) { transition-delay: 0.8s; }
+    @media (prefers-reduced-motion: reduce) {
+      .page-links-inner .page-link-card { transition: none; opacity: 1; filter: none; }
+    }
+
+    /* Reason cards: each fires when it scrolls into view */
+    .reasons-cards .reason-card {
+      opacity: 0;
+      transform: translateY(40px) scale(0.7);
+      transform-origin: center center;
+      transition: opacity 0.9s ease-out, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reasons-cards .reason-card.is-visible { opacity: 1; transform: translateY(0) scale(1); }
+    @media (prefers-reduced-motion: reduce) {
+      .reasons-cards .reason-card { transition: none; opacity: 1; transform: none; }
     }
     .message-section .bg-img {
       position: absolute;
@@ -882,28 +1000,25 @@
       .fv { width: 100%; height: 700px; }
       .fv-bg { width: calc(100% - 40px); left: calc(50% + 40px); }
 
+      /* Message: keep PC layout (photo + text side-by-side) until 800px */
       .message-section { width: 100%; padding: 80px 40px; }
       .message-inner { width: 100%; }
-      .message-body { flex-direction: column; gap: 48px; align-items: center; }
-      .message-photo-col { width: 100%; max-width: 370px; align-self: center; }
-      .message-photo { width: 100%; max-width: 370px; }
 
       .reasons-section { width: 100%; padding: 80px 40px; }
-      .reasons-cards { flex-direction: column; align-items: center; gap: 48px; }
-      .reason-card { width: 100%; max-width: 420px; }
+      .reasons-cards { flex-direction: column; align-items: center; gap: 72px; }
+      .reason-card { width: 100%; max-width: 630px; gap: 30px; }
+      .reason-card .reason-num { font-size: 78px; letter-spacing: 3.9px; left: 28px; }
+      .reason-card .reason-img { height: 360px; }
+      .reason-card .reason-title { font-size: 30px; letter-spacing: 1.5px; }
+      .reason-card .reason-body { font-size: 16.5px; letter-spacing: 0.9px; line-height: 1.95; }
 
+      /* Service section: keep PC layout until 800px (override below) */
       .service-section { width: 100%; }
       .service-inner { width: 100%; }
       .service-items { width: 100%; }
-      .service-row { flex-direction: column; gap: 0; }
-      .service-row-1 { padding-right: 0; }
-      .service-row-2 { padding-left: 0; flex-direction: column-reverse; }
-      .service-img { width: 100%; height: 320px; }
-      .service-text-col { padding: 48px 40px; width: 100%; }
 
+      /* Page links: keep PC layout (3 columns) until 800px (override below) */
       .page-links-section { width: 100%; padding: 80px 40px; }
-      .page-links-inner { flex-direction: column; align-items: stretch; max-width: 420px; margin: 0 auto; }
-      .page-link-card { width: 100%; }
 
       .cta-section { width: 100%; padding: 70px 40px; }
       .cta-inner { width: 100%; flex-direction: column; gap: 36px; align-items: flex-start; }
@@ -911,6 +1026,48 @@
 
       .footer { width: 100%; }
       .footer-nav-links { flex-wrap: wrap; justify-content: center; gap: 12px; }
+    }
+
+    /* ══ RESPONSIVE 800-1023px (keep message/service/page-links PC layout, fit-to-width) ══ */
+    @media (min-width: 800px) and (max-width: 1023px) {
+      /* message: photo + text side-by-side, scaled to fit */
+      .message-body { gap: 48px; align-items: flex-start; }
+      .message-photo-col { width: 38%; max-width: 370px; height: auto; aspect-ratio: 370 / 524; }
+      .message-photo { width: 100%; height: 100%; }
+      .message-headline { font-size: 30px; letter-spacing: 1.5px; }
+      .message-text p { font-size: 15.5px; letter-spacing: 0.75px; }
+
+      /* service: image+text side-by-side, scaled to fit */
+      .service-row { gap: 40px; }
+      .service-row-1 { padding-right: 40px; }
+      .service-row-2 { padding-left: 40px; }
+      .service-img { width: 45%; height: auto; aspect-ratio: 720 / 500; }
+      .service-text-col { gap: 24px; }
+      .service-title { font-size: 24px; letter-spacing: 1.2px; }
+
+      /* page-links: 3 columns, scaled to fit */
+      .page-links-section { padding: 80px 20px; }
+      .page-links-inner { gap: 14px; width: 100%; justify-content: center; }
+      .page-link-card { width: 32%; padding: 24px; }
+      .page-link-ja { font-size: 22px; letter-spacing: 1.1px; }
+      .page-link-en { font-size: 16px; letter-spacing: 0.8px; }
+      .page-link-card .arrow-icon img { width: 32px; height: 32px; }
+    }
+
+    /* ══ RESPONSIVE ≤799px (message/service/page-links collapse here) ══ */
+    @media (max-width: 799px) {
+      .message-body { flex-direction: column; gap: 48px; align-items: center; }
+      .message-photo-col { width: 100%; max-width: 370px; align-self: center; height: auto; aspect-ratio: 370 / 524; }
+      .message-photo { width: 100%; max-width: 370px; height: 100%; }
+
+      .service-row { flex-direction: column; gap: 0; }
+      .service-row-1 { padding-right: 0; }
+      .service-row-2 { padding-left: 0; flex-direction: column-reverse; }
+      .service-img { width: 100%; height: 320px; }
+      .service-text-col { padding: 48px 40px; width: 100%; }
+
+      .page-links-inner { flex-direction: column; align-items: stretch; width: 100%; max-width: 640px; margin: 0 auto; gap: 24px; }
+      .page-link-card { width: 100%; padding: 36px 40px; }
     }
 
     /* ══ MAIL BTN (desktop: hidden) ══ */
@@ -996,8 +1153,8 @@
       .message-text-col { width: 100%; }
       .message-headline { font-size: 22px; letter-spacing: 1.1px; }
       .message-text p { font-size: 15px; letter-spacing: 0.75px; }
-      .message-photo-col { width: 100%; max-width: 100%; height: 460px; position: relative; flex-shrink: 0; align-self: center; }
-      .message-photo { width: 100%; height: 460px; }
+      .message-photo-col { width: 100%; max-width: 320px; height: 460px; position: relative; flex-shrink: 0; align-self: center; margin: 0 auto; }
+      .message-photo { width: 100%; height: 460px; margin: 0 auto; }
       .message-photo img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: top center; top: 0; left: 0; }
       .message-name-card { width: 220px; padding: 8px 20px; box-shadow: 4px 4px 0 #008026; bottom: 0; }
       .message-name-role { font-size: 16px; letter-spacing: 3.2px; }
@@ -1053,6 +1210,15 @@
       .footer-nav-links a { font-size: 15px; letter-spacing: 0.75px; }
       .footer-copy { font-size: 10px; letter-spacing: 0.5px; text-align: center; }
     }
+
+    /* GPU hints for animated reveal elements */
+    .reasons-cards .reason-card,
+    .page-links-inner .page-link-card,
+    .service-row.slide-from-right,
+    .service-row.slide-from-left,
+    .message-inner.fade-from-top,
+    .fv-headline-sub, .fv-headline-main,
+    .fv-body p { will-change: transform, opacity, filter; }
   </style>
 </head>
 <body>
@@ -1069,12 +1235,12 @@
     <a href="./contact.html" class="header-cta-btn">
       <span>無料相談</span>
       <span class="arrow-icon">
-        <img src="./assets/images/arrow-24-white.svg" alt="" width="24" height="24">
+        <img src="./assets/images/arrow-24-white.svg" alt="" width="24" height="24" loading="lazy" decoding="async">
       </span>
     </a>
   </nav>
   <a href="./contact.html" class="header-mail-btn" aria-label="お問い合わせ">
-    <img src="./assets/images/mail-icon.svg" alt="" width="24" height="24">
+    <img src="./assets/images/mail-icon.svg" alt="" width="24" height="24" loading="lazy" decoding="async">
   </a>
   <button class="hamburger-btn" id="hamburger-btn" aria-label="メニューを開く">
     <span></span><span></span><span></span>
@@ -1090,18 +1256,18 @@
 <!-- FV / HERO -->
 <section class="fv">
   <div class="fv-bg">
-    <img class="fv-bg-pc" src="./assets/images/fv-bg.png" alt="">
-    <img class="fv-bg-sp" src="./assets/images/fv-bg-sp.jpg" alt="">
+    <img class="fv-bg-pc" src="./assets/images/fv-bg.webp" alt="" fetchpriority="high" decoding="async">
+    <img class="fv-bg-sp" src="./assets/images/fv-bg-sp.webp" alt="" fetchpriority="high" decoding="async">
   </div>
   <div class="fv-content">
     <div class="fv-inner">
       <div class="fv-copy">
-        <div class="fv-headline">
+        <div class="fv-headline reveal-on-load">
           <p class="fv-headline-sub">「数字をまとめる」経理から、</p>
           <p class="fv-headline-main">「経営を動かす」経理へ。</p>
         </div>
         <div class="divider-line"></div>
-        <div class="fv-body">
+        <div class="fv-body reveal-on-load">
           <p>IPO準備・経理内製化・内部監査。</p>
           <p>上場を完走した実務責任者のノウハウを貴社へ統合し、</p>
           <p>成長の揺るぎない土台を構築します。</p>
@@ -1111,39 +1277,39 @@
         <a href="./contact.html" class="btn-primary">
           <span>無料で相談する</span>
           <span class="arrow-icon">
-            <img src="./assets/images/arrow-24-white.svg" alt="" width="24" height="24">
+            <img src="./assets/images/arrow-24-white.svg" alt="" width="24" height="24" loading="lazy" decoding="async">
           </span>
         </a>
         <a href="./service.html" class="btn-outline">
           <span>提供サービスを見る</span>
           <span class="arrow-icon">
-            <img src="./assets/images/arrow-24-green.svg" alt="" width="24" height="24">
+            <img src="./assets/images/arrow-24-green.svg" alt="" width="24" height="24" loading="lazy" decoding="async">
           </span>
         </a>
       </div>
     </div>
   </div>
   <div class="fv-deco fv-deco-1">
-    <img src="./assets/images/deco-exclude.svg" alt="" width="50" height="50">
+    <img src="./assets/images/deco-exclude.svg" alt="" width="50" height="50" loading="lazy" decoding="async">
   </div>
   <div class="fv-deco fv-deco-2">
-    <img src="./assets/images/deco-exclude.svg" alt="" width="50" height="50">
+    <img src="./assets/images/deco-exclude.svg" alt="" width="50" height="50" loading="lazy" decoding="async">
   </div>
 </section>
 
 <!-- MESSAGE -->
 <section class="message-section">
-  <img class="bg-img" src="./assets/images/message-bg.png" alt="">
-  <div class="message-inner">
+  <img class="bg-img" src="./assets/images/message-bg.webp" alt="" loading="lazy" decoding="async">
+  <div class="message-inner fade-from-top">
     <div class="section-title-wrap">
       <div class="section-title-diamond">
-        <img src="./assets/images/diamond.svg" alt="" width="14.667" height="16">
+        <img src="./assets/images/diamond.svg" alt="" width="14.667" height="16" loading="lazy" decoding="async">
       </div>
       <h2 class="section-title-ja">代表挨拶</h2>
       <div class="section-subtitle-row">
-        <img src="./assets/images/diamond-left.svg" alt="" width="11" height="12">
+        <img src="./assets/images/diamond-left.svg" alt="" width="11" height="12" loading="lazy" decoding="async">
         <span class="section-title-en">MESSAGE</span>
-        <img src="./assets/images/diamond-right.svg" alt="" width="11" height="12">
+        <img src="./assets/images/diamond-right.svg" alt="" width="11" height="12" loading="lazy" decoding="async">
       </div>
     </div>
     <div class="message-body">
@@ -1161,14 +1327,14 @@
           <a href="./about.html" class="btn-text">
             <span>代表挨拶はこちら</span>
             <span class="arrow-icon">
-              <img src="./assets/images/arrow-24-green.svg" alt="" width="24" height="24">
+              <img src="./assets/images/arrow-24-green.svg" alt="" width="24" height="24" loading="lazy" decoding="async">
             </span>
           </a>
         </div>
       </div>
       <div class="message-photo-col">
         <div class="message-photo">
-          <img src="./assets/images/representative.png" alt="代表 小林知直">
+          <img src="./assets/images/representative.webp" alt="代表 小林知直" loading="lazy" decoding="async">
         </div>
         <div class="message-name-card">
           <div class="message-name-row">
@@ -1187,16 +1353,16 @@
 <section class="reasons-section">
   <div class="reasons-inner">
     <div class="reasons-title-wrap">
-      <img src="./assets/images/diamond.svg" alt="" width="14.667" height="16">
+      <img src="./assets/images/diamond.svg" alt="" width="14.667" height="16" loading="lazy" decoding="async">
       <h2 class="section-title-ja" style="text-align:center;">経理インテグレートが<br>選ばれる理由</h2>
       <span class="section-title-en">REASONS</span>
     </div>
-    <div class="reasons-cards">
+    <div class="reasons-cards stagger-cards">
       <!-- Card 01 -->
       <div class="reason-card">
         <span class="reason-num">01</span>
         <div class="reason-img">
-          <img src="./assets/images/reason-01.png" alt="内部監査特化・J-SOX対応">
+          <img src="./assets/images/reason-01.webp" alt="内部監査特化・J-SOX対応" loading="lazy" decoding="async">
         </div>
         <div class="reason-text">
           <p class="reason-title">内部監査特化・J-SOX対応</p>
@@ -1208,7 +1374,7 @@
       <div class="reason-card">
         <span class="reason-num">02</span>
         <div class="reason-img reason-img-2">
-          <img src="./assets/images/reason-02.png" alt="経理部門の完全内製化">
+          <img src="./assets/images/reason-02.webp" alt="経理部門の完全内製化" loading="lazy" decoding="async">
         </div>
         <div class="reason-text">
           <p class="reason-title">経理部門の完全内製化</p>
@@ -1220,7 +1386,7 @@
       <div class="reason-card">
         <span class="reason-num">03</span>
         <div class="reason-img">
-          <img src="./assets/images/reason-03.png" alt="圧倒的な実務解像度">
+          <img src="./assets/images/reason-03.webp" alt="圧倒的な実務解像度" loading="lazy" decoding="async">
         </div>
         <div class="reason-text">
           <p class="reason-title">圧倒的な実務解像度</p>
@@ -1236,15 +1402,15 @@
 <section class="service-section">
   <div class="service-inner">
     <div class="service-title-wrap">
-      <img src="./assets/images/diamond.svg" alt="" width="14.667" height="16">
+      <img src="./assets/images/diamond.svg" alt="" width="14.667" height="16" loading="lazy" decoding="async">
       <h2 class="section-title-ja" style="letter-spacing:8px;">提供サービス</h2>
       <span class="section-title-en">SERVICE</span>
     </div>
     <div class="service-items">
       <!-- Row 1 -->
-      <div class="service-row service-row-1">
+      <div class="service-row service-row-1 slide-from-right">
         <div class="service-img">
-          <img src="./assets/images/service-01.png" alt="IPO準備・高度管理体制構築支援">
+          <img src="./assets/images/service-01.webp" alt="IPO準備・高度管理体制構築支援" loading="lazy" decoding="async">
         </div>
         <div class="service-text-col">
           <div class="service-text-inner">
@@ -1259,14 +1425,14 @@
             <a href="./service.html#ipo" class="btn-text">
               <span>詳細を見る</span>
               <span class="arrow-icon">
-                <img src="./assets/images/arrow-24-green.svg" alt="" width="24" height="24">
+                <img src="./assets/images/arrow-24-green.svg" alt="" width="24" height="24" loading="lazy" decoding="async">
               </span>
             </a>
           </div>
         </div>
       </div>
       <!-- Row 2 -->
-      <div class="service-row service-row-2">
+      <div class="service-row service-row-2 slide-from-left">
         <div class="service-text-col">
           <div class="service-text-inner">
             <p class="service-title">ハンズオン型経理・財務実務支援</p>
@@ -1280,13 +1446,13 @@
             <a href="./service.html#handson" class="btn-text">
               <span>詳細を見る</span>
               <span class="arrow-icon">
-                <img src="./assets/images/arrow-24-green.svg" alt="" width="24" height="24">
+                <img src="./assets/images/arrow-24-green.svg" alt="" width="24" height="24" loading="lazy" decoding="async">
               </span>
             </a>
           </div>
         </div>
         <div class="service-img service-img-2">
-          <img src="./assets/images/service-02.png" alt="ハンズオン型経理・財務実務支援">
+          <img src="./assets/images/service-02.webp" alt="ハンズオン型経理・財務実務支援" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -1295,14 +1461,14 @@
 
 <!-- PAGE LINKS -->
 <section class="page-links-section">
-  <div class="page-links-inner">
+  <div class="page-links-inner stagger-page-links">
     <a href="./service.html" class="page-link-card">
       <div class="page-link-label">
         <span class="page-link-ja">サービス</span>
         <span class="page-link-en">SERVICE</span>
       </div>
       <span class="arrow-icon">
-        <img src="./assets/images/arrow-40-white.svg" alt="" width="40" height="40">
+        <img src="./assets/images/arrow-40-white.svg" alt="" width="40" height="40" loading="lazy" decoding="async">
       </span>
     </a>
     <a href="./about.html" class="page-link-card">
@@ -1311,7 +1477,7 @@
         <span class="page-link-en">MESSAGE</span>
       </div>
       <span class="arrow-icon">
-        <img src="./assets/images/arrow-40-white.svg" alt="" width="40" height="40">
+        <img src="./assets/images/arrow-40-white.svg" alt="" width="40" height="40" loading="lazy" decoding="async">
       </span>
     </a>
     <a href="./about.html#company" class="page-link-card">
@@ -1320,7 +1486,7 @@
         <span class="page-link-en">COMPANY</span>
       </div>
       <span class="arrow-icon">
-        <img src="./assets/images/arrow-40-white.svg" alt="" width="40" height="40">
+        <img src="./assets/images/arrow-40-white.svg" alt="" width="40" height="40" loading="lazy" decoding="async">
       </span>
     </a>
   </div>
@@ -1329,8 +1495,8 @@
 <!-- CTA -->
 <section class="cta-section">
   <div class="cta-bg">
-    <img class="cta-bg-pc" src="./assets/images/cta-bg.png" alt="">
-    <img class="cta-bg-sp" src="./assets/images/cta-bg-sp.png" alt="">
+    <img class="cta-bg-pc" src="./assets/images/cta-bg.webp" alt="" loading="lazy" decoding="async">
+    <img class="cta-bg-sp" src="./assets/images/cta-bg-sp.webp" alt="" loading="lazy" decoding="async">
     <div class="cta-overlay"></div>
   </div>
   <div class="cta-inner">
@@ -1341,7 +1507,7 @@
     <a href="./contact.html" class="btn-text-white">
       <span>無料相談・お問い合わせはこちら</span>
       <span class="arrow-icon">
-        <img src="./assets/images/arrow-40-white.svg" alt="" width="40" height="40">
+        <img src="./assets/images/arrow-40-white.svg" alt="" width="40" height="40" loading="lazy" decoding="async">
       </span>
     </a>
   </div>
@@ -1383,5 +1549,49 @@
     }
   });
 </script>
+
+  <script>
+    (function(){
+      var DW = 1440, raf = 0;
+      function apply(){
+        raf = 0;
+        var vw = document.documentElement.clientWidth;
+        if (vw >= 1024 && vw < DW) {
+          document.body.style.zoom = (vw / DW);
+        } else {
+          document.body.style.zoom = '';
+        }
+      }
+      function fit(){ if (!raf) raf = requestAnimationFrame(apply); }
+      window.addEventListener('resize', fit, { passive: true });
+      document.addEventListener('DOMContentLoaded', apply);
+      apply();
+    })();
+
+    // Fade-in on scroll (fade-from-top + stagger-cards)
+    (function(){
+      function init(){
+        var targets = document.querySelectorAll('.fade-from-top, .stagger-page-links, .slide-from-right, .slide-from-left, .reasons-cards .reason-card');
+        if (targets.length && 'IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function(entries){
+            entries.forEach(function(e){
+              if (e.isIntersecting) {
+                e.target.classList.add('is-visible');
+                io.unobserve(e.target);
+              }
+            });
+          }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+          targets.forEach(function(el){ io.observe(el); });
+        } else {
+          targets.forEach(function(el){ el.classList.add('is-visible'); });
+        }
+        // Reveal on load (FV elements)
+        document.querySelectorAll('.reveal-on-load').forEach(function(el){
+          requestAnimationFrame(function(){ el.classList.add('is-visible'); });
+        });
+      }
+      document.addEventListener('DOMContentLoaded', init);
+    })();
+  </script>
 </body>
 </html>

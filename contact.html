@@ -8,6 +8,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Old+Mincho:wght@600;700&display=swap" rel="stylesheet">
   <style>
+    /* === site-centering (fit-to-viewport for 1024-1439px) === */
+    html { overflow-x: hidden; }
+    @media (min-width: 1440px) {
+      body { width: 100%; }
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -152,6 +158,15 @@
       line-height: 1.6;
       text-transform: uppercase;
     }
+
+    /* ── FORMSPREE messages & errors ── */
+    .form-message { display: none; max-width: 720px; width: 100%; padding: 16px 20px; border-radius: 4px; font-family: 'Noto Sans JP', sans-serif; font-size: 15px; line-height: 1.7; letter-spacing: 0.6px; margin: 0 auto; }
+    .form-message-success { background: #e8f4ec; color: #00622f; border: 1px solid #00622f; }
+    .form-message-error { background: #fdecec; color: #b3261e; border: 1px solid #b3261e; }
+    .form-message.is-visible { display: block; }
+    .form-error:not(:empty) { display: block; color: #b3261e; font-size: 13px; margin-top: 6px; }
+    [data-fs-field][aria-invalid="true"] { border-color: #b3261e !important; }
+    [data-fs-submit-btn][disabled] { opacity: 0.5; cursor: not-allowed; }
 
     /* ── CONTACT SECTION ── */
     .contact-section {
@@ -663,12 +678,12 @@
     <a href="./contact.html" class="header-cta-btn">
       <span class="label">無料相談</span>
       <span class="arrow-icon">
-        <img src="./assets/images/contact/arrow-24.svg" alt="" width="24" height="24">
+        <img src="./assets/images/contact/arrow-24.svg" alt="" width="24" height="24" loading="lazy" decoding="async">
       </span>
     </a>
   </nav>
   <a href="./contact.html" class="header-mail-btn" aria-label="お問い合わせ">
-    <img src="./assets/images/mail-icon.svg" alt="" width="24" height="24">
+    <img src="./assets/images/mail-icon.svg" alt="" width="24" height="24" loading="lazy" decoding="async">
   </a>
   <button class="hamburger-btn" id="hamburger-btn" aria-label="メニューを開く">
     <span></span><span></span><span></span>
@@ -684,7 +699,7 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-photo">
-    <img src="./assets/images/contact/hero-bg.png" alt="">
+    <img src="./assets/images/contact/hero-bg.webp" alt="" loading="lazy" decoding="async">
   </div>
   <div class="hero-gradient"></div>
   <div class="hero-text">
@@ -699,7 +714,9 @@
 <section class="contact-section">
   <p class="contact-lead">IPO準備や経理体制に関するご相談を承っております。<br>内容を確認の上、通常2営業日以内にご返信いたします。</p>
 
-  <form class="form-wrap" action="#" method="post">
+  <form id="contact-form" class="form-wrap" action="https://formspree.io/f/mbdwdkbe" method="POST">
+    <input type="hidden" name="_subject" id="contact-subject" value="【経理インテグレート】お問い合わせ">
+    <input type="hidden" name="_replyto" id="contact-replyto" value="">
 
     <!-- 会社名 -->
     <div class="form-field">
@@ -707,7 +724,8 @@
         <span class="form-label">会社名</span>
         <span class="form-required">*</span>
       </div>
-      <input class="form-input" type="text" name="company" placeholder="株式会社〇〇" required>
+      <input class="form-input" type="text" name="会社名" placeholder="株式会社〇〇" required data-fs-field>
+      <span class="form-error" data-fs-error="会社名"></span>
     </div>
 
     <!-- お名前 -->
@@ -716,7 +734,8 @@
         <span class="form-label">お名前</span>
         <span class="form-required">*</span>
       </div>
-      <input class="form-input" type="text" name="name" placeholder="山田 太郎" required>
+      <input class="form-input" type="text" name="お名前" placeholder="山田 太郎" required data-fs-field>
+      <span class="form-error" data-fs-error="お名前"></span>
     </div>
 
     <!-- メールアドレス -->
@@ -725,7 +744,8 @@
         <span class="form-label">メールアドレス</span>
         <span class="form-required">*</span>
       </div>
-      <input class="form-input" type="email" name="email" placeholder="name@example.com" required>
+      <input class="form-input" type="email" id="contact-email" name="メールアドレス" placeholder="name@example.com" required data-fs-field>
+      <span class="form-error" data-fs-error="メールアドレス"></span>
     </div>
 
     <!-- お問い合わせ種別 -->
@@ -736,19 +756,19 @@
       </div>
       <div class="form-radio-group">
         <label class="form-radio-item">
-          <input type="radio" name="type" value="ipo" required>
+          <input type="radio" name="お問い合わせ種別" value="IPO準備について" required>
           <span>IPO準備について</span>
         </label>
         <label class="form-radio-item">
-          <input type="radio" name="type" value="handson">
+          <input type="radio" name="お問い合わせ種別" value="ハンズオン型経理・財務実務支援について">
           <span>ハンズオン型経理・財務実務支援について</span>
         </label>
         <label class="form-radio-item">
-          <input type="radio" name="type" value="audit">
+          <input type="radio" name="お問い合わせ種別" value="内部監査・J-SOX構築支援について">
           <span>内部監査・J-SOX構築支援について</span>
         </label>
         <label class="form-radio-item">
-          <input type="radio" name="type" value="other">
+          <input type="radio" name="お問い合わせ種別" value="その他">
           <span>その他</span>
         </label>
       </div>
@@ -760,23 +780,32 @@
         <span class="form-label">ご相談内容</span>
         <span class="form-required">*</span>
       </div>
-      <textarea class="form-textarea" name="message" placeholder="入力してください" required></textarea>
+      <textarea class="form-textarea" name="ご相談内容" placeholder="入力してください" required data-fs-field></textarea>
+      <span class="form-error" data-fs-error="ご相談内容"></span>
     </div>
 
     <!-- プライバシーポリシー -->
     <div class="form-privacy-row">
-      <input type="checkbox" id="privacy" name="privacy" required>
+      <input type="checkbox" id="privacy" required>
       <label class="form-privacy-label" for="privacy">
         <a href="./privacy.html">プライバシーポリシー</a>に同意する
       </label>
       <span class="form-required">*</span>
     </div>
 
+    <!-- Formspree messages -->
+    <div class="form-message form-message-success" data-fs-success role="status" aria-live="polite">
+      お問い合わせを送信しました。通常2営業日以内にご返信いたします。
+    </div>
+    <div class="form-message form-message-error" data-fs-error role="alert" aria-live="assertive">
+      送信に失敗しました。お手数ですが時間を置いて再度お試しください。
+    </div>
+
     <!-- 送信ボタン -->
-    <button type="submit" class="form-submit-btn">
-      <span>入力内容を確認する</span>
+    <button type="submit" class="form-submit-btn" data-fs-submit-btn>
+      <span>送信する</span>
       <span class="arrow-icon">
-        <img src="./assets/images/contact/arrow-btn.svg" alt="" width="24" height="24">
+        <img src="./assets/images/contact/arrow-btn.svg" alt="" width="24" height="24" loading="lazy" decoding="async">
       </span>
     </button>
 
@@ -786,7 +815,7 @@
 <!-- CTA -->
 <section class="cta-section">
   <div class="cta-bg">
-    <img src="./assets/images/contact/cta-bg.png" alt="">
+    <img src="./assets/images/contact/cta-bg.webp" alt="" loading="lazy" decoding="async">
     <div class="cta-overlay"></div>
   </div>
   <div class="cta-inner">
@@ -797,7 +826,7 @@
     <a href="./contact.html" class="btn-text-white">
       <span class="label">無料相談・お問い合わせはこちら</span>
       <span class="arrow-icon">
-        <img src="./assets/images/contact/arrow-40.svg" alt="" width="40" height="40">
+        <img src="./assets/images/contact/arrow-40.svg" alt="" width="40" height="40" loading="lazy" decoding="async">
       </span>
     </a>
   </div>
@@ -839,5 +868,62 @@
     }
   });
 </script>
+
+  <script>
+    (function(){
+      var DW = 1440, raf = 0;
+      function apply(){
+        raf = 0;
+        var vw = document.documentElement.clientWidth;
+        if (vw >= 1024 && vw < DW) {
+          document.body.style.zoom = (vw / DW);
+        } else {
+          document.body.style.zoom = '';
+        }
+      }
+      function fit(){ if (!raf) raf = requestAnimationFrame(apply); }
+      window.addEventListener('resize', fit, { passive: true });
+      document.addEventListener('DOMContentLoaded', apply);
+      apply();
+    })();
+  </script>
+
+  <!-- Formspree (Ajax) integration -->
+  <script>
+    // Mirror email -> _replyto, and dynamically build _subject from お問い合わせ種別 + 会社名
+    document.addEventListener('DOMContentLoaded', function(){
+      var form = document.getElementById('contact-form');
+      if (!form) return;
+      var emailEl = document.getElementById('contact-email');
+      var replyEl = document.getElementById('contact-replyto');
+      var subjectEl = document.getElementById('contact-subject');
+      var companyEl = form.querySelector('input[name="会社名"]');
+
+      function syncReply(){ if (emailEl && replyEl) replyEl.value = emailEl.value; }
+      function syncSubject(){
+        if (!subjectEl) return;
+        var typeEl = form.querySelector('input[name="お問い合わせ種別"]:checked');
+        var typeVal = typeEl ? typeEl.value : '';
+        var companyVal = companyEl ? companyEl.value.trim() : '';
+        var parts = ['【経理インテグレート】お問い合わせ'];
+        if (typeVal) parts.push(typeVal);
+        if (companyVal) parts.push(companyVal);
+        subjectEl.value = parts.join('｜');
+      }
+
+      if (emailEl) {
+        emailEl.addEventListener('input', syncReply);
+        emailEl.addEventListener('change', syncReply);
+      }
+      if (companyEl) companyEl.addEventListener('input', syncSubject);
+      form.querySelectorAll('input[name="お問い合わせ種別"]').forEach(function(r){
+        r.addEventListener('change', syncSubject);
+      });
+      form.addEventListener('submit', function(){ syncReply(); syncSubject(); }, true);
+    });
+    window.formspree = window.formspree || function(){ (formspree.q = formspree.q || []).push(arguments); };
+    formspree('initForm', { formElement: '#contact-form', formId: 'mbdwdkbe' });
+  </script>
+  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
 </html>

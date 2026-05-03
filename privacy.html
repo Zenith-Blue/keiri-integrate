@@ -8,6 +8,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,700;1,500&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Old+Mincho:wght@400;500;600;700;900&display=swap" rel="stylesheet">
   <style>
+    /* === site-centering (fit-to-viewport for 1024-1439px) === */
+    html { overflow-x: hidden; }
+    @media (min-width: 1440px) {
+      body { width: 100%; }
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -505,12 +511,12 @@
     <a href="./contact.html" class="header-cta-btn">
       <span class="label">無料相談</span>
       <span class="arrow-icon">
-        <img src="./assets/images/privacy/arrow-24.svg" alt="" width="24" height="24">
+        <img src="./assets/images/privacy/arrow-24.svg" alt="" width="24" height="24" loading="lazy" decoding="async">
       </span>
     </a>
   </nav>
   <a href="./contact.html" class="header-mail-btn" aria-label="お問い合わせ">
-    <img src="./assets/images/mail-icon.svg" alt="" width="24" height="24">
+    <img src="./assets/images/mail-icon.svg" alt="" width="24" height="24" loading="lazy" decoding="async">
   </a>
   <button class="hamburger-btn" id="hamburger-btn" aria-label="メニューを開く">
     <span></span><span></span><span></span>
@@ -526,7 +532,7 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-photo">
-    <img src="./assets/images/privacy/hero-bg.jpg" alt="">
+    <img src="./assets/images/privacy/hero-bg.webp" alt="" loading="lazy" decoding="async">
   </div>
   <div class="hero-gradient">
     <div class="hero-text">
@@ -597,7 +603,7 @@
 <!-- CTA -->
 <section class="cta-section">
   <div class="cta-bg">
-    <img src="./assets/images/privacy/cta-bg.jpg" alt="">
+    <img src="./assets/images/privacy/cta-bg.webp" alt="" loading="lazy" decoding="async">
     <div class="cta-overlay"></div>
   </div>
   <div class="cta-inner">
@@ -608,7 +614,7 @@
     <a href="./contact.html" class="btn-text-white">
       <span class="label">無料相談・お問い合わせはこちら</span>
       <span class="arrow-icon">
-        <img src="./assets/images/privacy/arrow-40.svg" alt="" width="40" height="40">
+        <img src="./assets/images/privacy/arrow-40.svg" alt="" width="40" height="40" loading="lazy" decoding="async">
       </span>
     </a>
   </div>
@@ -650,5 +656,24 @@
     }
   });
 </script>
+
+  <script>
+    (function(){
+      var DW = 1440, raf = 0;
+      function apply(){
+        raf = 0;
+        var vw = document.documentElement.clientWidth;
+        if (vw >= 1024 && vw < DW) {
+          document.body.style.zoom = (vw / DW);
+        } else {
+          document.body.style.zoom = '';
+        }
+      }
+      function fit(){ if (!raf) raf = requestAnimationFrame(apply); }
+      window.addEventListener('resize', fit, { passive: true });
+      document.addEventListener('DOMContentLoaded', apply);
+      apply();
+    })();
+  </script>
 </body>
 </html>
