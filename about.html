@@ -128,7 +128,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 1400px;
+      width: calc(100% - 30px);
       height: 255px;
       border-radius: 40px;
       overflow: hidden;
@@ -155,7 +155,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 1400px;
+      width: calc(100% - 30px);
       height: 255px;
       border-radius: 40px;
       background: linear-gradient(82.41deg, rgba(0,98,47,0.6) 28.787%, rgba(0,98,47,0.2) 97.41%);
@@ -375,7 +375,7 @@
       position: absolute;
       bottom: 33px;
       left: 0;
-      width: 284.73px;
+      width: 304.73px;
       background: rgba(255,255,255,0.95);
       box-shadow: 5px 5px 0 #008026;
       display: flex;
@@ -823,8 +823,8 @@
       .hamburger-btn { display: flex; }
 
       .hero { width: 100%; }
-      .hero-photo { width: calc(100% - 40px); }
-      .hero-gradient { width: calc(100% - 40px); }
+      .hero-photo { width: calc(100% - 30px); }
+      .hero-gradient { width: calc(100% - 30px); }
 
       /* Message: keep PC layout (photo+text side-by-side, side-photo+long-text side-by-side) until 800px */
       .message-section { width: 100%; padding: 80px 40px; }
@@ -845,18 +845,26 @@
       .footer-nav-links { flex-wrap: wrap; justify-content: center; gap: 12px; }
     }
 
-    /* ══ RESPONSIVE 800-1023px (keep message PC layout, fit-to-width) ══ */
+    /* ══ RESPONSIVE 800-1023px (keep PC layout for message-top, full-width side-photo for message-bottom) ══ */
     @media (min-width: 800px) and (max-width: 1023px) {
-      /* message-top: text + photo side-by-side, scaled */
-      .message-top { gap: 48px; align-items: flex-start; }
-      .message-photo-col { width: 38%; max-width: 430px; flex-shrink: 0; }
-      .rep-photo { width: 100%; height: auto; aspect-ratio: 430 / 524; }
-      /* message-bottom: side-photo + long text side-by-side */
-      .message-bottom { gap: 40px; align-items: flex-start; }
-      .side-photo { width: 38%; max-width: 420px; height: auto; aspect-ratio: 420 / 300; flex-shrink: 0; }
-      .message-long-text { flex: 1; min-width: 0; }
-      /* msg headline tighten */
-      .msg-headline-item { font-size: 26px; letter-spacing: 1.3px; }
+      /* message-top: rep photo + name card fixed at 70% scale */
+      .message-photo-col { width: 301px; height: 426.28px; }
+      .rep-photo { width: 301px; height: 426.28px; }
+      .rep-name-card { width: 213.31px; padding: 5.6px 19.6px; bottom: 30px; box-shadow: 4px 4px 0 #008026; }
+      .rep-name-row { gap: 14px; }
+      .rep-name-role { font-size: 12.6px; letter-spacing: 2.52px; }
+      .rep-name-name { font-size: 16.8px; letter-spacing: 3.36px; }
+      .rep-name-roman { font-size: 10.5px; letter-spacing: 1.05px; }
+      /* message body text on tablet matches SP sizes (smaller than PC) */
+      .msg-headline-item { font-size: 20px; letter-spacing: 1px; line-height: 1.8; }
+      .msg-body-text p { font-size: 14px; letter-spacing: 0.7px; line-height: 2; }
+      .msg-quote { font-size: 20px; letter-spacing: 1px; }
+      .msg-normal { font-size: 14px; letter-spacing: 0.7px; }
+      /* message-bottom: side-photo full width on tablet, text below */
+      .message-bottom { flex-direction: column; gap: 40px; align-items: center; }
+      .side-photo { width: 100%; max-width: none; height: auto; aspect-ratio: 420 / 300; flex-shrink: 0; }
+      .side-photo img { position: static; width: 100%; height: 100%; left: auto; top: auto; object-fit: cover; object-position: center; }
+      .message-long-text { flex: none; width: 100%; min-width: 0; }
     }
 
     /* ══ RESPONSIVE ≤799px (message collapses to column) ══ */
@@ -882,10 +890,10 @@
 
       /* Hero SP */
       .hero { height: 200px; overflow: hidden; }
-      .hero-photo { height: 180px; width: 355px; border-radius: 20px; filter: blur(1px); }
+      .hero-photo { height: 180px; width: calc(100% - 30px); border-radius: 20px; filter: blur(1px); }
       .hero-photo img.img1 { height: 131.5%; left: 0.05%; top: -15.93%; width: 100%; }
       .hero-photo img.img2 { display: none; }
-      .hero-gradient { height: 180px; width: 355px; border-radius: 20px; background: linear-gradient(53.81deg, rgba(0,98,47,0.6) 40%, rgba(0,98,47,0.2) 95.83%); }
+      .hero-gradient { height: 180px; width: calc(100% - 30px); border-radius: 20px; background: linear-gradient(53.81deg, rgba(0,98,47,0.6) 40%, rgba(0,98,47,0.2) 95.83%); }
       .hero-text { padding-left: 20px; padding-top: 15px; }
       .hero-title-row { flex-direction: column; gap: 0; align-items: flex-start; }
       .hero-title-ja { font-size: 28px; letter-spacing: 1.4px; line-height: 1.4; }
@@ -909,7 +917,7 @@
       .message-photo-col { width: 335px; max-width: 100%; height: 403px; }
       .rep-photo { width: 100%; height: 403px; }
       .rep-photo img { height: 124.91%; left: -0.1%; top: -3.59%; width: 100.19%; }
-      .rep-name-card { width: 220px; padding: 8px 20px; box-shadow: 4px 4px 0 #008026; bottom: 0; }
+      .rep-name-card { width: 270px; padding: 8px 20px; box-shadow: 4px 4px 0 #008026; bottom: 30px; }
       .rep-name-role { font-size: 16px; letter-spacing: 3.2px; }
       .rep-name-name { font-size: 20px; letter-spacing: 4px; }
       .rep-name-roman { font-size: 13px; }
@@ -1087,7 +1095,7 @@
           </div>
           <div class="rep-name-card">
             <div class="rep-name-row">
-              <span class="rep-name-role">代表</span>
+              <span class="rep-name-role">公認会計士</span>
               <span class="rep-name-name">小林 知直</span>
             </div>
             <div class="divider-line" style="margin: 4px 0;"></div>
@@ -1159,7 +1167,7 @@
     <div class="company-table stagger-up">
       <div class="company-row">
         <div class="company-label">屋号</div>
-        <div class="company-value">会計事務所 経理インテグレート</div>
+        <div class="company-value">会計事務所 経理インテグレート（小林知直公認会計士事務所）</div>
       </div>
       <div class="company-row">
         <div class="company-label">代表者</div>
@@ -1235,7 +1243,7 @@
       <a href="./privacy.html" class="footer-privacy">プライバシーポリシー</a>
     </nav>
   </div>
-  <p class="footer-copy">© 2026 会計事務所 経理インテグレート All Rights Reserved.</p>
+  <p class="footer-copy">© 2026 会計事務所 経理インテグレート（小林知直公認会計士事務所） All Rights Reserved.</p>
 </footer>
 
 <script>

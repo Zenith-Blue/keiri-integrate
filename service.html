@@ -130,7 +130,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 1400px;
+      width: calc(100% - 30px);
       height: 255px;
       border-radius: 40px;
       overflow: hidden;
@@ -149,7 +149,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 1400px;
+      width: calc(100% - 30px);
       height: 255px;
       border-radius: 40px;
       background: linear-gradient(82.41deg, rgba(0,98,47,0.6) 28.787%, rgba(0,98,47,0.2) 97.41%);
@@ -748,8 +748,8 @@
       .hamburger-btn { display: flex; }
 
       .hero { width: 100%; }
-      .hero-photo { width: calc(100% - 40px); }
-      .hero-gradient { width: calc(100% - 40px); }
+      .hero-photo { width: calc(100% - 30px); }
+      .hero-gradient { width: calc(100% - 30px); }
       .hero-text { left: 40px; }
       .hero-subtitle { left: 50%; transform: translate(-50%,-50%); }
 
@@ -771,20 +771,31 @@
 
     /* ══ RESPONSIVE 800-1023px (keep service rows + flow PC layout, fit-to-width) ══ */
     @media (min-width: 800px) and (max-width: 1023px) {
+      /* Text scales fluidly: 0.85x at 800px → 1.0x at 1023px (relative to SP-base sizes) */
+      body { --t-scale: clamp(0.85, calc(0.85 + (100vw - 800px) * 0.15 / 223px), 1); }
+
+      /* service intro headline */
+      .service-intro-headline { font-size: calc(24px * var(--t-scale)); }
+
       /* service rows: image+text side-by-side, scaled */
       .service-row { gap: 40px; }
       .service-row-1 { padding-right: 40px; }
       .service-row-2 { padding-left: 40px; }
       .service-img { width: 45%; height: auto; aspect-ratio: 720 / 500; }
       .service-text { gap: 24px; padding: 0; }
-      .service-title { font-size: 24px; letter-spacing: 1.2px; }
+      .service-label-en { font-size: calc(16px * var(--t-scale)); }
+      .service-title { font-size: calc(24px * var(--t-scale)); letter-spacing: calc(1.2px * var(--t-scale)); }
+      .service-body { font-size: calc(16px * var(--t-scale)); letter-spacing: calc(0.8px * var(--t-scale)); line-height: 2; }
+      .service-tag { font-size: calc(15px * var(--t-scale)); padding: calc(12px * var(--t-scale)) calc(24px * var(--t-scale)); }
 
       /* flow: keep 4 cards + 3 arrows in a row, scaled */
+      .flow-title-ja { font-size: calc(28px * var(--t-scale)); letter-spacing: calc(5.6px * var(--t-scale)); }
+      .flow-title-en { font-size: calc(16px * var(--t-scale)); }
       .flow-cards { flex-wrap: nowrap; gap: 12px; }
       .flow-card-wrap { flex: 1 1 0; }
       .flow-card { padding: 24px 16px; }
-      .flow-card-title { font-size: 16px; letter-spacing: 0.8px; }
-      .flow-card-desc { font-size: 13px; }
+      .flow-card-title { font-size: calc(16px * var(--t-scale)); letter-spacing: calc(0.8px * var(--t-scale)); }
+      .flow-card-desc { font-size: calc(13px * var(--t-scale)); }
       .flow-arrow { display: flex; flex: 0 0 auto; }
       .flow-arrow img { width: 24px; height: auto; }
     }
@@ -815,9 +826,9 @@
 
       /* Hero SP */
       .hero { height: 200px; overflow: hidden; }
-      .hero-photo { height: 180px; width: 355px; border-radius: 20px; filter: blur(1px); }
+      .hero-photo { height: 180px; width: calc(100% - 30px); border-radius: 20px; filter: blur(1px); }
       .hero-photo img { height: 100%; left: -22.62%; top: -0.03%; width: 140.45%; }
-      .hero-gradient { height: 180px; width: 355px; border-radius: 20px; background: linear-gradient(53.81deg, rgba(0,98,47,0.6) 40%, rgba(0,98,47,0.2) 95.83%); }
+      .hero-gradient { height: 180px; width: calc(100% - 30px); border-radius: 20px; background: linear-gradient(53.81deg, rgba(0,98,47,0.6) 40%, rgba(0,98,47,0.2) 95.83%); }
       .hero-text { left: 40px; top: 50%; transform: translateY(calc(-50% + 7.5px)); }
       .hero-title-row { flex-direction: column; gap: 0; align-items: flex-start; }
       .hero-title-ja { font-size: 28px; letter-spacing: 1.4px; line-height: 1.33; }
@@ -1111,7 +1122,7 @@
       <a href="./privacy.html" class="footer-privacy">プライバシーポリシー</a>
     </nav>
   </div>
-  <p class="footer-copy">© 2026 会計事務所 経理インテグレート All Rights Reserved.</p>
+  <p class="footer-copy">© 2026 会計事務所 経理インテグレート（小林知直公認会計士事務所） All Rights Reserved.</p>
 </footer>
 
 <script>
